@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title> 小冉</title>
+      <title>Java 学习笔记 |  小冉</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,17 +56,27 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Java八股自总结："
+  id="post-Java学习笔记"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Java 学习笔记
+</h1>
+ 
+
+      
+    </header>
      
     <div class="article-meta">
-      <a href="/2023/10/03/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A/" class="article-date">
-  <time datetime="2023-10-03T03:38:58.207Z" itemprop="datePublished">2023-10-03</time>
+      <a href="/2023/10/03/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2023-10-03T05:47:00.312Z" itemprop="datePublished">2023-10-03</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
@@ -97,14 +107,14 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="我是二级标题"><a href="#我是二级标题" class="headerlink" title="我是二级标题"></a>我是二级标题</h2><h1 id="Java八股自总结："><a href="#Java八股自总结：" class="headerlink" title="#Java八股自总结："></a>#Java八股自总结：</h1><h2 id="背景问题："><a href="#背景问题：" class="headerlink" title="背景问题："></a>背景问题：</h2><h4 id="自我介绍："><a href="#自我介绍：" class="headerlink" title="自我介绍："></a>自我介绍：</h4><p>面试官，您好，我是四川大学计算机专业21级学生冉秀情，在校期间积累了坚实的编程基础，特别是在Java方面。我掌握Java语言的相关技术栈，与贵公司的岗位较为匹配，期待能加入贵公司，作为一名Java实习生，我会将我扎实的编程知识和团队合作精神应用到实际工作中，同时也希望通过这个机会，不断提升自己的技术。</p>
+  <h1 id="Java八股自总结："><a href="#Java八股自总结：" class="headerlink" title="Java八股自总结："></a>Java八股自总结：</h1><h2 id="背景问题："><a href="#背景问题：" class="headerlink" title="背景问题："></a>背景问题：</h2><h4 id="自我介绍："><a href="#自我介绍：" class="headerlink" title="自我介绍："></a>自我介绍：</h4><p>面试官，您好，我是四川大学计算机专业21级学生冉秀情，在校期间积累了坚实的编程基础，特别是在Java方面。我掌握Java语言的相关技术栈，与贵公司的岗位较为匹配，期待能加入贵公司，作为一名Java实习生，我会将我扎实的编程知识和团队合作精神应用到实际工作中，同时也希望通过这个机会，不断提升自己的技术。</p>
 <h4 id="实习时间"><a href="#实习时间" class="headerlink" title="实习时间"></a>实习时间</h4><p>能够长期实习，课程不多，且与老师沟通过，不影响正常打卡上班</p>
 <h4 id="加入原因："><a href="#加入原因：" class="headerlink" title="加入原因："></a>加入原因：</h4><p>1.看好贵公司的发展，同时贵公司的技术氛围和。。。的公司理念我很喜欢,如果能加入，会对我的技术和能力有很大提升</p>
 <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><p><strong>String str &#x3D; “abc” 和String str &#x3D; new String(“abc”)的区别</strong></p>
 <p><code>String str =&quot;abc&quot;</code>的原理，采用字面值的方式创建时，<code>JVM</code>会先去字符串常量池中去查找是否存在”abc”这个对象，如果不存在就创建这个字符串，并把地址返回给<code>str</code>。如果存在则直接把”abc”这个字符串的地址返回给<code>str</code>。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/16e1f7c1f13d9561tplv-t2oaga2asx-jj-mark3024000q75-1696302993864-1.webp" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/16e1f7c1f13d9561tplv-t2oaga2asx-jj-mark3024000q75-1696302993864-1.webp" alt="img"></p>
 <p><code>String str = new String(&quot;abc&quot;)</code>采用<code>new</code>关键字的方式创建，<code>JVM</code>也会去字符串常量池中查找有没有这个字符串，如果没有的话，就先在字符串常量池里创建”abc”这个字符串，然后再复制一份放在堆里并把地址返回给<code>str</code>。如果字符串常量池里存在该字符串，那么就直接复制一份放在堆里并把地址返回给<code>str</code>。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/16e1f8c6aa324edetplv-t2oaga2asx-jj-mark3024000q75-1696303002110-3.webp" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/16e1f8c6aa324edetplv-t2oaga2asx-jj-mark3024000q75-1696303002110-3.webp" alt="img"></p>
 <h4 id="equals-的底层代码是什么"><a href="#equals-的底层代码是什么" class="headerlink" title="equals 的底层代码是什么?"></a>equals 的底层代码是什么?</h4><ol>
 <li>先使用&#x3D;&#x3D; 进行地址值的判断  </li>
 <li>判断equals()中的值是否为字符串  </li>
@@ -133,7 +143,7 @@
 
 <p>执行第一句代码的时候，系统为我们执行了：<br>Integer A &#x3D; Integer.valueOf(199);<br>执行第二句代码的时候，系统为我们执行了：<br>int a &#x3D; A.intValue();</p>
 <h4 id="object类中的常用方法的用处："><a href="#object类中的常用方法的用处：" class="headerlink" title="object类中的常用方法的用处："></a>object类中的常用方法的用处：</h4><p>1、 getClass()：获取类的class对象。<br>2、 hashCode:获取对象的hashCode值<br>3、 equals():比较对象是否相等，比较的是值和地址，子类可重写以自定义。<br>4、 clone()：克隆方法。<br>5、 toString():如果没有重写，应用对象将打印的是地址值。<br>6、 notify():随机选择一个在该对象上调用wait方法的线程，解除其阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>7、 notifyall():解除所有那些在该对象上调用wait方法的线程的阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>8、 wait():导致线程进入等待状态，直到它被其他线程通过notify()或者notifyAll唤醒。该方法只能在同步方法中调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>9、 finalize()：对象回收时调用</p>
-<h4 id="包装类的缓存"><a href="#包装类的缓存" class="headerlink" title="包装类的缓存"></a>包装类的缓存</h4><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111615708.png" alt="image-20231003111615708"></p>
+<h4 id="包装类的缓存"><a href="#包装类的缓存" class="headerlink" title="包装类的缓存"></a>包装类的缓存</h4><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111615708.png" alt="image-20231003111615708"></p>
 <h4 id="数组和链表的不同"><a href="#数组和链表的不同" class="headerlink" title="数组和链表的不同"></a>数组和链表的不同</h4><table>
 <thead>
 <tr>
@@ -190,11 +200,11 @@
 </li>
 <li><p><strong>第三种</strong> 静态变量：</p>
 <p>​	静态变量随着类的加载而存在，是存储在方法区（Method Area）中的，而不是存储在栈或堆上，所以它的生命周期与程序的生命周期一样长。</p>
-<p><img src="/./Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MjcxMjE2,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MjcxMjE2,size_16,color_FFFFFF,t_70.png" alt="img"></p>
 </li>
 </ul>
 <h4 id="浅拷贝和深拷贝的区别"><a href="#浅拷贝和深拷贝的区别" class="headerlink" title="浅拷贝和深拷贝的区别"></a>浅拷贝和深拷贝的区别</h4><p>深拷贝和浅拷贝是只针对引用数据类型的</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111707252.png" alt="image-20231003111707252"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111707252.png" alt="image-20231003111707252"></p>
 <p>浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存（分支）。</p>
 <p>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。<br>如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
 <p>深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象，是“值”而不是“引用”（不是分支）</p>
@@ -202,17 +212,17 @@
 <p><strong>引用拷贝</strong>: 引用拷贝就是直接赋值，只在栈中创建一个新的引用，拷贝引用的地址，所以指向的是堆中同一个对象。</p>
 <p><strong>浅拷贝</strong>：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p>
 <p><strong>深拷贝</strong>：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111716166.png" alt="image-20231003111716166"></p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111721557.png" alt="image-20231003111721557"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111716166.png" alt="image-20231003111716166"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111721557.png" alt="image-20231003111721557"></p>
 <h4 id="强引用、弱引用、软引用、虚引用的区别"><a href="#强引用、弱引用、软引用、虚引用的区别" class="headerlink" title="强引用、弱引用、软引用、虚引用的区别"></a>强引用、弱引用、软引用、虚引用的区别</h4><p>在Java中提供了四个级别的引用：<strong>强引用</strong>，<strong>软引用</strong>，<strong>弱引用</strong>和<strong>虚引用</strong>。在这四个引用类型中，只有强引用FinalReference类是包内可见，其他三种引用类型均为public，可以在应用程序中直接使用。引用类型的类结构如图所示。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111728261.png" alt="image-20231003111728261"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111728261.png" alt="image-20231003111728261"></p>
 <h5 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a><strong>强引用</strong></h5><p>Java中默认声明的就是强引用，例如以下代码，如果M对象被回收了，会打印 finalize() 方法中的内容：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">M</span> <span class="variable">m</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">M</span>();  <span class="comment">//只要m还指向M对象，M对象就不会被回收</span></span><br><span class="line">        <span class="comment">// m = null;   //手动置null</span></span><br><span class="line">        System.gc();  <span class="comment">// 进行垃圾回收</span></span><br><span class="line"> </span><br><span class="line">        System.in.read();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">M</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;对象被回收了...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/v2-e5f1836efa6748c371bcd126823414f7_1440w-1696303052906-5.webp" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/v2-e5f1836efa6748c371bcd126823414f7_1440w-1696303052906-5.webp" alt="img"></p>
 <p>只要强引用存在，垃圾收集器将永远不会回收被引用的对象，哪怕<strong>内存不足</strong>时，JVM也会直接抛出OutOfMemoryError，<strong>不会去回收</strong>。如果想中断强引用与对象之间的联系，可以显示的将强引用赋值为null，这样一来，JVM就可以适时的回收对象了。例如上面的代码，将 m &#x3D; null; 注释放开时，运行结果如下：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111738987.png" alt="image-20231003111738987"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111738987.png" alt="image-20231003111738987"></p>
 <h5 id="3、软引用"><a href="#3、软引用" class="headerlink" title="3、软引用"></a>3、<strong>软引用</strong></h5><p>软引用是用来描述一些非必需但仍有用的对象。在内存足够的时候，软引用对象不会被回收，只有在<strong>内存不足</strong>时，系统则<strong>会回收</strong>软引用对象，如果回收了软引用对象之后仍然没有足够的内存，才会抛出OutOfMemoryError。这种特性常常被用来实现<strong>缓存技术</strong>，比如网页缓存，图片缓存等。</p>
 <p>在 JDK1.2 之后，用 SoftReference 类来表示软引用。下面以一个例子来进一步说明强引用和软引用的区别。</p>
 <p>在运行下面的Java代码之前，需要先配置参数 -Xms2M -Xmx2M，将 JVM 的初始内存设为2M，最大可用内存为 2M。</p>
@@ -220,26 +230,26 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 当 new byte为 1M 时，程序运行正常</span></span><br><span class="line">        <span class="type">byte</span>[] buff1 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// byte[] buff2 = new byte[1024 * 1024 * 1];</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>但是如果我们再创建一个1M大小的 byte数组时，则内存不够使用，程序直接报错。因为强引用不会被回收。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111745645.png" alt="image-20231003111745645"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111745645.png" alt="image-20231003111745645"></p>
 <p>接着来看一下软引用会有什么不一样，在下面的示例中先创建一个大小为 1M 的软引用对象，打印m的地址，然后进行垃圾回收，休眠500ms后打印m的地址。最后又创建了一个1M的字节数组，打印m的地址。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SoftReference&lt;<span class="type">byte</span>[]&gt; m = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>]);</span><br><span class="line"> </span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">        <span class="comment">// 再分配一个数组，heap将装不下，</span></span><br><span class="line">        <span class="comment">// 这时系统会进行垃圾回收，如果内存不够，会把软引用干掉</span></span><br><span class="line">        <span class="type">byte</span>[] b = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1</span>];</span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/v2-210fffb5827e8aea4115430e5b373238_1440w-1696303070608-7.webp" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/v2-210fffb5827e8aea4115430e5b373238_1440w-1696303070608-7.webp" alt="img"></p>
 <p>根据运行结果，我们可以看到，在内存不足的情况下，软引用才会被回收。</p>
 <h5 id="4、弱引用"><a href="#4、弱引用" class="headerlink" title="4、弱引用"></a>4、<strong>弱引用</strong></h5><p>弱引用的引用强度比软引用要更弱一些，<strong>无论内存是否足够</strong>，只要 JVM 开始进行垃圾回收，那些被弱引用关联的对象<strong>都会被回收</strong>。在 JDK1.2 之后，用 WeakReference 来表示弱引用。</p>
 <p>我们以与软引用同样的方式来测试一下弱引用：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        WeakReference&lt;<span class="type">byte</span>[]&gt; m = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>]);</span><br><span class="line"> </span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111756526.png" alt="image-20231003111756526"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111756526.png" alt="image-20231003111756526"></p>
 <p>根据运行结果，可以发现垃圾回收后被弱引用关联的对象被回收了。</p>
 <p>在 Java 集合中有一种特殊的 Map 类型：<strong>WeakHashMap</strong>， 在这种 Map 中存放了键对象的弱引用，当一个键对象被垃圾回收，那么相应的值对象的引用会从 Map 中删除。WeakHashMap 能够节约存储空间，可用来缓存那些非必须存在的数据。</p>
 <h5 id="5、虚引用"><a href="#5、虚引用" class="headerlink" title="5、虚引用"></a>5、<strong>虚引用</strong></h5><p>虚引用是最弱的一种引用关系，如果一个对象仅持有虚引用，那么它就和没有任何引用一样，它随时可能会被回收。在 JDK1.2 之后，用 PhantomReference 类来表示，通过查看这个类的源码，发现它只有一个构造函数和一个 get() 方法，而且它的 get() 方法仅仅是返回一个null，也就是说将永远无法通过虚引用来获取对象。虚引用必须要和 ReferenceQueue 引用队列一起使用。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PhantomReference</span>&lt;T&gt; <span class="keyword">extends</span> <span class="title class_">Reference</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PhantomReference</span><span class="params">(T referent, ReferenceQueue&lt;? <span class="built_in">super</span> T&gt; q)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(referent, q);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Object&gt; LIST = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ReferenceQueue</span> <span class="variable">QUEUE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">M</span>(), QUEUE);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                LIST.add(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>]);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    Thread.currentThread().interrupt();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(m.get());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">Reference</span> <span class="variable">poll</span> <span class="operator">=</span> QUEUE.poll();</span><br><span class="line">                <span class="keyword">if</span>(poll != <span class="literal">null</span>) &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;虚引用对象：&quot;</span> + poll + <span class="string">&quot; 被jvm回收了&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">M</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;对象被回收了...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>运行结果：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/v2-db69836fc83d1e8d39f5088bc1a4b8a9_1440w-1696303085353-9.webp" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/v2-db69836fc83d1e8d39f5088bc1a4b8a9_1440w-1696303085353-9.webp" alt="img"></p>
 <p>当垃圾回收器准备回收一个对象时，如果发现它还有引用，那么就会在回收对象之前，把这个引用加入到与之关联的引用队列中去。主要用于<strong>清理堆外内存</strong>。</p>
 <h4 id="Java运行一个程序的过程？"><a href="#Java运行一个程序的过程？" class="headerlink" title="Java运行一个程序的过程？"></a>Java运行一个程序的过程？</h4><h4 id="静态变量在什么阶段分配内存？"><a href="#静态变量在什么阶段分配内存？" class="headerlink" title="静态变量在什么阶段分配内存？"></a>静态变量在什么阶段分配内存？</h4><p>Static：</p>
 <ul>
@@ -248,7 +258,7 @@
 <li>销毁：类被卸载时，静态变量被销毁，并释放内存空间。static变量的生命周期取决于类的生命周期</li>
 </ul>
 <h5 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h5><p>首先，我认为，之所以需要序列化，核心目的是为了解决网络通信之间的对象传输问题。<br>也就是说，如何把当前 JVM 进程里面的一个对象，跨网络传输到另外一个 JVM进程里面。<br>而序列化，就是把内存里面的对象转化为字节流，以便用来实现存储或者传输。<br>反序列化，就是根据从文件或者网络上获取到的对象的字节流，根据字节流里面保存的对象描述信息和状态。重新构建一个新的对象。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111810871.png" alt="image-20231003111810871"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111810871.png" alt="image-20231003111810871"></p>
 <p>其次呢，序列化的前提是保证通信双方对于对象的可识别性，所以很多时候，我们会把对象先转化为通用的解析格式，比如 json、xml 等。然后再把他们转化为数据流进行网络传输，从而实现跨平台和跨语言的可识别性。</p>
 <h4 id="Java反射有了解吗？举几个Java反射的应用案例"><a href="#Java反射有了解吗？举几个Java反射的应用案例" class="headerlink" title="Java反射有了解吗？举几个Java反射的应用案例"></a>Java反射有了解吗？举几个Java反射的应用案例</h4><p>反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候），获取任意一个类的成员变量、成员方法和属性,调用任意一个对象的方法和属性,，这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。</p>
 <ul>
@@ -288,7 +298,7 @@
 <h4 id="说说ArrayList"><a href="#说说ArrayList" class="headerlink" title="说说ArrayList"></a>说说ArrayList</h4><p>ArrayList 是一个数组结构的存储容器，所以ArrayList是支持随机存取的，默认情况下，数组的长度是 10.当然我们也可以在构建 ArrayList 对象的时候自己指定初始长度。随着在程序里面不断的往 ArrayList 中添加数据，当添加的数据达到 10 个的时候，ArrayList 就没有多余容量可以存储后续的数据。这个时候 ArrayList 会自动触发扩容。扩容的具体流程很简单：</p>
 <ol>
 <li>首先，创建一个新的数组，这个新数组的长度是原来数组长度的 1.5 倍。</li>
-<li>然后使用 Arrays.copyOf 方法把老数组里面的数据拷贝到新的数组里面。<br> 扩容完成后再把当前要添加的元素加入到新的数组里面，从而完成动态扩容的过程。</li>
+<li>然后使用 Arrays.copyOf 方法把老数组里面的数据拷贝到新的数组里面。<br>扩容完成后再把当前要添加的元素加入到新的数组里面，从而完成动态扩容的过程。</li>
 </ol>
 <h4 id="hash怎么扩容有了解吗？"><a href="#hash怎么扩容有了解吗？" class="headerlink" title="hash怎么扩容有了解吗？"></a>hash怎么扩容有了解吗？</h4><ul>
 <li>HashMap的底层是采用数组来存储数据，当 HashMap 中元素个数超过（大于）临界值时会自动触发扩容，这个临界值有一个计算公式。</li>
@@ -403,7 +413,7 @@
 </ul>
 <h5 id="JDK9新特性"><a href="#JDK9新特性" class="headerlink" title="JDK9新特性"></a>JDK9新特性</h5><ol>
 <li><p>JShell，为 Java 提供了类似于 Python 的实时命令行交互工具。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111847441.png" alt="image-20231003111847441"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111847441.png" alt="image-20231003111847441"></p>
 </li>
 <li><p>String 改为用byte[]存储。</p>
 </li>
@@ -432,7 +442,7 @@
 <li><p>使用 order by 对结果集进行排序。</p>
 </li>
 <li><p>limit限制查询数量、查询偏移量</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111856990.png" alt="image-20231003111856990"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111856990.png" alt="image-20231003111856990"></p>
 </li>
 </ol>
 <h4 id="事务的四大特性（ACID）："><a href="#事务的四大特性（ACID）：" class="headerlink" title="事务的四大特性（ACID）："></a>事务的四大特性（ACID）：</h4><ul>
@@ -444,20 +454,20 @@
 <p>而对于这四大特性，实际上分为两个部分。 其中的原子性、一致性、持久化，实际上是由InnoDB中的两份日志来保证的，</p>
 <p>一份是redo log日志，一份是undo log日志。 而持久性是通过数据库的锁，加上MVCC来保证的。</p>
 <h4 id="并发事务问题："><a href="#并发事务问题：" class="headerlink" title="并发事务问题："></a>并发事务问题：</h4><ol>
-<li><p>脏读：一个事务读到了另一个事务还没有提交的数据。<img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111916626.png" alt="image-20231003111916626"></p>
+<li><p>脏读：一个事务读到了另一个事务还没有提交的数据。<img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111916626.png" alt="image-20231003111916626"></p>
 </li>
 <li><p>不可重复读：一个事务先后读取同一条记录，但是两次读取的数据不同</p>
 </li>
 </ol>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111926058.png" alt="image-20231003111926058"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111926058.png" alt="image-20231003111926058"></p>
 <ol start="3">
-<li>幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了”幻影“;<img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111932452.png" alt="image-20231003111932452"></li>
+<li>幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了”幻影“;<img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111932452.png" alt="image-20231003111932452"></li>
 </ol>
-<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111936844.png" alt="image-20231003111936844"></p>
+<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111936844.png" alt="image-20231003111936844"></p>
 <h4 id="mysql执行流程"><a href="#mysql执行流程" class="headerlink" title="mysql执行流程"></a>mysql执行流程</h4><h4 id="B-Tree-与-B-Tree相比"><a href="#B-Tree-与-B-Tree相比" class="headerlink" title="B+Tree 与 B-Tree相比"></a>B+Tree 与 B-Tree相比</h4><ul>
 <li>所有的数据都会出现在叶子节点。</li>
 <li>叶子节点形成一个双向循环链表。</li>
-<li>非叶子节点仅仅起到索引数据作用，具体的数据都是在叶子节点存放的。<img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111941842.png" alt="image-20231003111941842"></li>
+<li>非叶子节点仅仅起到索引数据作用，具体的数据都是在叶子节点存放的。<img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111941842.png" alt="image-20231003111941842"></li>
 </ul>
 <h4 id="为什么InnoDB存储引擎选择使用B-tree索引结构"><a href="#为什么InnoDB存储引擎选择使用B-tree索引结构" class="headerlink" title="为什么InnoDB存储引擎选择使用B+tree索引结构?"></a>为什么InnoDB存储引擎选择使用B+tree索引结构?</h4><ol>
 <li>相对于二叉树，层级更少，搜索效率高；</li>
@@ -465,7 +475,7 @@
 <li>相对Hash索引，B+tree支持范围匹配及排序操作；</li>
 <li>数据都在叶子节点，搜索效率稳定，且叶子节点形成双向循环链表，便于范围查找和排序</li>
 </ol>
-<h4 id="聚集索引-二级索引"><a href="#聚集索引-二级索引" class="headerlink" title="聚集索引&amp;二级索引"></a>聚集索引&amp;二级索引</h4><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111945629.png" alt="image-20231003111945629"></p>
+<h4 id="聚集索引-二级索引"><a href="#聚集索引-二级索引" class="headerlink" title="聚集索引&amp;二级索引"></a>聚集索引&amp;二级索引</h4><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111945629.png" alt="image-20231003111945629"></p>
 <p>聚集索引选取规则:</p>
 <ul>
 <li><p>​	如果存在主键，主键索引就是聚集索引。</p>
@@ -473,7 +483,7 @@
 <li><p>​	如果不存在主键，将使用第一个唯一（UNIQUE）索引作为聚集索引。</p>
 </li>
 <li><p>​	如果表没有主键，或没有合适的唯一索引，则InnoDB会自动生成一个rowid作为隐藏的聚集索引。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003111949312.png" alt="image-20231003111949312"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003111949312.png" alt="image-20231003111949312"></p>
 </li>
 <li><p>聚集索引的叶子节点下挂的是这一行的数据 。</p>
 </li>
@@ -566,9 +576,9 @@
 </ol>
 <h4 id="怎么保证redis和DB的数据一致性"><a href="#怎么保证redis和DB的数据一致性" class="headerlink" title="怎么保证redis和DB的数据一致性"></a>怎么保证redis和DB的数据一致性</h4><h5 id="采用延时双删"><a href="#采用延时双删" class="headerlink" title="采用延时双删"></a>采用延时双删</h5><p>先删除缓存，再更新数据库，当更新数据后休眠一段时间通过定时任务（可通过整合定时任务框架、创建线程池，从中拿出一个线程休眠一段时间再启动）再删除一次缓存。</p>
 <h5 id="异步更新缓存-基于订阅binlog的同步机制"><a href="#异步更新缓存-基于订阅binlog的同步机制" class="headerlink" title="异步更新缓存(基于订阅binlog的同步机制)"></a>异步更新缓存(基于订阅binlog的同步机制)</h5><p>采用缓存淘汰策略，先更新数据库，再删除对应redis缓存后更新缓存。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112001061.png" alt="image-20231003112001061"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112001061.png" alt="image-20231003112001061"></p>
 <p>通过 Canal（消息推送工具也可以用kafka、rabbitMQ等来实现可靠性消息通信更新Redis。） 组件，（伪装成从节点）监控 Mysql 中 binlog（记录MySQL中新的写入、更新、删除等操作） 的日志，把更新后的数据同步到 Redis 里面，canal正是模仿了mysql的slave数据库的备份请求，使得Redis的数据更新达到了相同的效果。。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112007121.png" alt="image-20231003112007121"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112007121.png" alt="image-20231003112007121"></p>
 <p>因为这里是基于最终一致性来实现的，如果业务场景不能接受数据的短期不一致性，那就不能使用这个方案来做。</p>
 <h4 id="union和union-all的区别"><a href="#union和union-all的区别" class="headerlink" title="union和union all的区别"></a>union和union all的区别</h4><p>对于union查询，就是把多次查询的结果合并起来，形成一个新的查询结果集。<br>对于联合查询的多张表的列数必须保持一致，字段类型也需要保持一致。<br>union all 会将全部的数据直接合并在一起，union 会对合并之后的数据去重。</p>
 <h4 id="使用自增id还是UUID来当主键"><a href="#使用自增id还是UUID来当主键" class="headerlink" title="使用自增id还是UUID来当主键"></a>使用自增id还是UUID来当主键</h4><p>UUID。B+树使用双向链表来保存数据，所以使用自增id能够直接加到尾部，不需要页分裂，效率很高，且占用的空间小。但是如果一些敏感信息设置成自增就很容易被推理，暴露机密。</p>
@@ -587,7 +597,7 @@
 <h4 id="讲一讲mysql主从部署"><a href="#讲一讲mysql主从部署" class="headerlink" title="讲一讲mysql主从部署"></a>讲一讲mysql主从部署</h4><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>主从复制是指将主数据库的 DDL 和 DML 操作通过二进制日志传到从库服务器中，然后在从库上对这些日志重新执行（也叫重做），从而使得从库和主库的数据保持同步。</p>
 <p>MySQL 复制的优点主要包含以下三个方面：<br>主库出现问题，可以快速切换到从库提供服务。<br>实现读写分离，降低主库的访问压力。<br>可以在从库中执行备份，以避免备份期间影响主库服务。</p>
 <h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>MySQL主从复制的核心就是 二进制日志，具体的过程如下：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112012277.png" alt="image-20231003112012277"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112012277.png" alt="image-20231003112012277"></p>
 <p>从上图来看，复制分成三步：</p>
 <ol>
 <li>Master 主库在事务提交时，会把数据变更记录在二进制日志文件 Binlog 中。</li>
@@ -606,7 +616,7 @@
 <p>通过指令，查看二进制日志坐标</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status ;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112018880.png" alt="image-20231003112018880"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112018880.png" alt="image-20231003112018880"></p>
 <p>字段含义说明：<br>file : 从哪个日志文件开始推送日志文件<br>position ： 从哪个位置开始推送日志<br>binlog_ignore_db : 指定不需要同步的数据库</p>
 <h5 id="从库配置"><a href="#从库配置" class="headerlink" title="从库配置"></a>从库配置</h5><p>修改配置文件 &#x2F;etc&#x2F;my.cnf</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#mysql 服务ID，保证整个集群环境中唯一，取值范围：1 – 2^32-1，和主库不一样即可</span><br><span class="line">server-id=2</span><br><span class="line">#是否只读,1 代表只读, 0 代表读写</span><br><span class="line">read-only=1</span><br></pre></td></tr></table></figure>
@@ -623,11 +633,11 @@
 <p>查看主从同步状态</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show replica status ; #8.0.22之后</span><br><span class="line">show slave status ; #8.0.22之前</span><br></pre></td></tr></table></figure>
 
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112023725.png" alt="image-20231003112023725"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112023725.png" alt="image-20231003112023725"></p>
 <h4 id="mysql：死锁是什么？-实习中你有遇到死锁的情况吗"><a href="#mysql：死锁是什么？-实习中你有遇到死锁的情况吗" class="headerlink" title="mysql：死锁是什么？ 实习中你有遇到死锁的情况吗"></a>mysql：死锁是什么？ 实习中你有遇到死锁的情况吗</h4><p>简单来说就是两个或者两个以上的线程在执行的过程中，争夺同一个共享资源造成的相互等待的现象。如果没有外部干预，线程会一直阻塞无法往下执行，这些一直处于相互等待资源的线程就称为死锁线程。</p>
 <p>解决方法：尽量使用相同的顺序来访问索引记录和表，可以实现对数据排序，保证每个线程按照固定的顺序来处理。</p>
 <h4 id="MySQL三大范式"><a href="#MySQL三大范式" class="headerlink" title="MySQL三大范式"></a>MySQL三大范式</h4><ul>
-<li><h5 id="第一范式（1-NF）：字段不可再拆分。"><a href="#第一范式（1-NF）：字段不可再拆分。" class="headerlink" title="第一范式（1 NF）：字段不可再拆分。"></a>第一范式（1 NF）：字段不可再拆分。</h5><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112028615.png" alt="image-20231003112028615"></p>
+<li><h5 id="第一范式（1-NF）：字段不可再拆分。"><a href="#第一范式（1-NF）：字段不可再拆分。" class="headerlink" title="第一范式（1 NF）：字段不可再拆分。"></a>第一范式（1 NF）：字段不可再拆分。</h5><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112028615.png" alt="image-20231003112028615"></p>
 </li>
 <li><h5 id="第二范式（2-NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。"><a href="#第二范式（2-NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。" class="headerlink" title="第二范式（2 NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。"></a>第二范式（2 NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。</h5><ol>
 <li>造成整表的数据冗余。</li>
@@ -651,7 +661,7 @@
 <li>Undo log销毁：undo log在事务执行时产生，事务提交时，并不会立即删除undo log，因为这些日志可能还用于MVCC。</li>
 </ul>
 <h4 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h4><p>该日志文件由两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo logfile）,前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都存到该日志文件中, 用于在刷新脏页到磁盘,发生错误时, 进行数据恢复使用。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112038852.png" alt="image-20231003112038852"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112038852.png" alt="image-20231003112038852"></p>
 <p>有了redolog之后，当对缓冲区的数据进行增删改之后，会首先将操作的数据页的变化，记录在redolog buffer中。在事务提交时，会将redo log buffer中的数据刷新到redo log磁盘文件中。过一段时间之后，如果刷新缓冲区的脏页到磁盘时，发生错误，此时就可以借助于redo log进行数据恢复，这样就保证了事务的持久性。 而如果脏页成功刷新到磁盘 或 或者涉及到的数据已经落盘，此时redolog就没有作用了，就可以删除了，所以存在的两个redolog文件是循环写的。</p>
 <h4 id="MySQL如何解决幻读"><a href="#MySQL如何解决幻读" class="headerlink" title="MySQL如何解决幻读"></a>MySQL如何解决幻读</h4><p><strong>快照读</strong></p>
 <p>快照读，读取的是<strong>快照数据</strong>，不加锁的普通 SELECT 都属于快照读。</p>
@@ -672,18 +682,18 @@
 <p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7056583607929798692">MySQL 如何解决幻读（MVCC 原理分析） - 掘金 (juejin.cn)</a></p>
 <h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="MVCC机制"><a href="#MVCC机制" class="headerlink" title="MVCC机制"></a>MVCC机制</h4><p>详见<a target="_blank" rel="noopener" href="https://juejin.cn/post/7016165148020703246#heading-24">看一遍就理解：MVCC原理详解 - 掘金 (juejin.cn)</a></p>
 <p>InnoDB还会自动的给我们添加三个隐藏字段及其含义分别是</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112043284.png" alt="image-20231003112043284"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112043284.png" alt="image-20231003112043284"></p>
 <p>全称 Multi-Version Concurrency Control，多版本并发控制。指维护一个数据的多个版本，使得读写操作没有冲突，快照读为MySQL实现MVCC提供了一个非阻塞读功能。MVCC的具体实现，还需要依赖于数据库记录中的三个隐式字段、undo log日志、readView。</p>
 <p>当某个事务执行第一条修改语句时，会记录undo log日志，记录数据变更之前的样子; 然后更新记录，<br>并且记录本次操作的事务ID，回滚指针，回滚指针用来指定如果发生回滚，回滚到哪一个版本。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112046405.png" alt="image-20231003112046405"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112046405.png" alt="image-20231003112046405"></p>
 <p>最终我们发现，不同事务或相同事务对同一条记录进行修改，会导致该记录的undolog生成一条<br>记录版本链表，链表的头部是最新的旧记录，链表尾部是最早的旧记录。</p>
 <p>ReadView（读视图）是快照读 SQL执行时MVCC提取数据的依据，记录并维护系统当前活跃的事务（未提交的）id。</p>
 <p><strong>RC隔离级别下，在事务中每一次执行快照读时生成ReadView。</strong></p>
 <p><strong>RR隔离级别下，仅在事务中第一次执行快照读时生成ReadView，后续复用该ReadView</strong></p>
 <p>ReadView中包含了四个核心字段：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112049869.png" alt="image-20231003112049869"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112049869.png" alt="image-20231003112049869"></p>
 <p>而在readview中就规定了版本链数据的访问规则：<br>trx_id 代表当前undolog版本链对应事务ID。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112052634.png" alt="image-20231003112052634"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112052634.png" alt="image-20231003112052634"></p>
 <h4 id="MySQL-事务的可重复读和读已提交，Read-View-时机"><a href="#MySQL-事务的可重复读和读已提交，Read-View-时机" class="headerlink" title="MySQL 事务的可重复读和读已提交，Read View 时机"></a>MySQL 事务的可重复读和读已提交，Read View 时机</h4><ul>
 <li>READ COMMITTED ：在事务中每一次执行快照读时生成ReadView。</li>
 <li>REPEATABLE READ：仅在事务中第一次执行快照读时生成ReadView，后续复用该ReadView。</li>
@@ -772,7 +782,7 @@
 <li><p><strong>spring容器关闭，配置⽂件中destroy-method指定销毁⽅法。最后销毁bean</strong></p>
 </li>
 </ol>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112059255.png" alt="image-20231003112059255"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112059255.png" alt="image-20231003112059255"></p>
 <h4 id="Resource-和-Autowired注解的区别"><a href="#Resource-和-Autowired注解的区别" class="headerlink" title="@Resource 和 @Autowired注解的区别"></a>@Resource 和 @Autowired注解的区别</h4><p>@Resource注解也可以完成⾮简单类型注⼊。那它和@Autowired注解有什么区别？<br>@Resource注解是JDK扩展包中的，也就是说属于JDK的⼀部分。所以该注解是标准注解，更加具<br>有通⽤性。(JSR-250标准中制定的注解类型。JSR是Java规范提案。)<br>@Autowired注解是Spring框架⾃⼰的。<br><em><strong>@Resource注解默认根据名称装配byName，未指定name时，使⽤属性名作为name。通过name</strong></em><br><em><strong>找不到的话会⾃动启动通过类型byType装配。</strong></em><br><em><strong>@Autowired注解默认根据类型装配byType，如果想根据名称装配，需要配合@Qualifier注解⼀起</strong></em><br><em><strong>⽤。</strong></em><br>@Resource注解⽤在属性上、setter⽅法上。<br>@Autowired注解⽤在属性上、setter⽅法上、构造⽅法上、构造⽅法参数上</p>
 <h4 id="spring如何解决循环依赖问题"><a href="#spring如何解决循环依赖问题" class="headerlink" title="spring如何解决循环依赖问题"></a>spring如何解决循环依赖问题</h4><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7218080360403615804">浅谈 Spring 如何解决 Bean 的循环依赖问题 - 掘金 (juejin.cn)</a></p>
 <p>Spring为什么可以解决<strong>set + singleton</strong>模式下循环依赖？<br><strong>根本的原因在于：这种⽅式可以做到将“实例化Bean”和“给Bean属性赋值”这两个动作分开去完成</strong>。<br>实例化Bean的时候：调⽤⽆参数构造⽅法来完成。此时可以先不给属性赋值，可以<strong>提前</strong>将该<strong>Bean对象“曝光</strong>”给外界。<br>给Bean属性赋值的时候：调⽤set⽅法来完成。<br>两个步骤是完全可以分离开去完成的，并且这两步不要求在同⼀个时间点上完成。<br>也就是说，Bean都是单例的，我们可以<strong>先把所有的单例Bean实例化</strong>出来，放到⼀个集合当中（我们可以称之为缓存），所有的单例Bean全部实例化完成之后，以后我们<strong>再慢慢的调⽤setter⽅法给属性赋值</strong>，这样就解决了循环依赖的问题。</p>
@@ -795,21 +805,21 @@
 </ul>
 <p>在实际项目中一个 Service 类可能依赖了很多其他的类，假如我们需要实例化这个 Service，你可能要每次都要搞清这个 Service 所有底层类的构造函数，这可能会把人逼疯。如果利用 IoC 的话，你只需要配置好，然后在需要的地方引用就行了，这大大增加了项目的可维护性且降低了开发难度。</p>
 <h5 id="IOC的实现方式"><a href="#IOC的实现方式" class="headerlink" title="IOC的实现方式"></a>IOC的实现方式</h5><p>DI-依赖注入<br>在容器中建立bean与bean之间的依赖关系的整个过程叫做依赖注入<br>下方当中的业务层中代码想要正常运行还需要Book bookDao的实现,那么的话IOC把这种依赖关系也提供给业务层，这个过程叫依赖注入。那么这个注入指的就是属性的注入</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112104377.png" alt="image-20231003112104377"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112104377.png" alt="image-20231003112104377"></p>
 <h4 id="JDK和CGLib动态代理区别"><a href="#JDK和CGLib动态代理区别" class="headerlink" title="JDK和CGLib动态代理区别"></a><strong>JDK和CGLib动态代理区别</strong></h4><h5 id="JDK动态代理具体实现原理："><a href="#JDK动态代理具体实现原理：" class="headerlink" title="JDK动态代理具体实现原理："></a>JDK动态代理具体实现原理：</h5><p>JDK动态代理只能代理接口，Spring通过Java的反射机制生产被代理接口的新的匿名实现类，通过invoke方法来增强方法，重写了其中AOP的增强方法。</p>
 <h5 id="CGLib动态代理："><a href="#CGLib动态代理：" class="headerlink" title="CGLib动态代理："></a>CGLib动态代理：</h5><p>既可以代理接⼝，⼜可以代理类，通过修改代理对象类的字节码生成子类（也就是代理类）来处理，底层是通过继承的⽅式实现的，所以代理类不能被final修饰。性能⽐JDK动态代理要好。 </p>
 <h5 id="使用注意："><a href="#使用注意：" class="headerlink" title="使用注意："></a>使用注意：</h5><p>如果要被代理的对象是个实现类（有对应接口），那么Spring会使用JDK动态代理来完成操作（Spirng默认采用JDK动态代理实现机制）；</p>
 <p>如果要被代理的对象不是个实现类（没有代理接口），那么Spring会强制使用CGLib来实现动态代理。</p>
 <h4 id="AOP实际应用场景，好处，spring中如何实现？"><a href="#AOP实际应用场景，好处，spring中如何实现？" class="headerlink" title="AOP实际应用场景，好处，spring中如何实现？"></a>AOP实际应用场景，好处，spring中如何实现？</h4><p>AOP(Aspect-Oriented Programming:面向切面编程)能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任(交叉业务)（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可拓展性和可维护性。</p>
 <p>Spring AOP 就是基于动态代理的，如果要代理的对象，实现了某个接口，那么 Spring AOP 会使用 <strong>JDK Proxy</strong>，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候 Spring AOP 会使用 <strong>Cglib</strong> 生成一个被代理对象的子类来作为代理，如下图所示：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112107747.png" alt="image-20231003112107747"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112107747.png" alt="image-20231003112107747"></p>
 <p>⼀般⼀个系统当中都会有⼀些系统服务，例如：⽇志、事务管理、安全等。这些系统服务被称为：交叉业务<br>这些交叉业务⼏乎是通⽤的，不管你是做银⾏账户转账，还是删除⽤户数据。⽇志、事务管理、安全，这些都是需要做的。<br>如果在每⼀个业务处理过程当中，都掺杂这些交叉业务代码进去的话，存在两⽅⾯问题：</p>
 <ul>
 <li>第⼀：交叉业务代码在多个业务流程中反复出现，显然这个交叉业务代码没有得到复⽤。并且修改这些交叉业务代码的话，需要修改多处。</li>
 <li>第⼆：程序员⽆法专注核⼼业务代码的编写，在编写核⼼业务代码的同时还需要处理这些交叉业务。</li>
 </ul>
 <p>使⽤AOP可以很轻松的解决以上问题。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112111175.png" alt="image-20231003112111175"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112111175.png" alt="image-20231003112111175"></p>
 <p>⽤⼀句话总结AOP：将与核⼼业务⽆关的代码独⽴的抽取出来，形成⼀个独⽴的组件，然后以横向交叉<br>的⽅式应⽤到业务流程当中的过程被称为AOP。<br>AOP的优点：<br>第⼀：代码复⽤性增强。<br>第⼆：代码易维护。<br>第三：使开发者更关注业务逻辑。</p>
 <h4 id="Spring事务以及对应的传播机制。"><a href="#Spring事务以及对应的传播机制。" class="headerlink" title="Spring事务以及对应的传播机制。"></a>Spring事务以及对应的传播机制。</h4><h5 id="Spring-管理事务的方式有几种？"><a href="#Spring-管理事务的方式有几种？" class="headerlink" title="Spring 管理事务的方式有几种？"></a>Spring 管理事务的方式有几种？</h5><ul>
 <li><strong>编程式事务</strong>：在代码中硬编码(不推荐使用) : 通过 <code>TransactionTemplate</code>或者 <code>TransactionManager</code> 手动管理事务，实际应用中很少使用，但是对于你理解 Spring 事务管理原理有帮助。</li>
@@ -894,7 +904,7 @@
 <li><p>数据预热：数据预热的含义就是在正式部署之前，先把可能的数据先预先访问一遍，这样部分可能大量访问的数据就会加载到缓存中。</p>
 </li>
 </ol>
-<h4 id="zset底层用的什么数据结构，如何控制层高的"><a href="#zset底层用的什么数据结构，如何控制层高的" class="headerlink" title="zset底层用的什么数据结构，如何控制层高的."></a>zset底层用的什么数据结构，如何控制层高的.</h4><h4 id="项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）"><a href="#项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）" class="headerlink" title="项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）"></a>项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）</h4><h4 id="String能存多条数据吗？用什么存好（哈希或者set？）"><a href="#String能存多条数据吗？用什么存好（哈希或者set？）" class="headerlink" title="String能存多条数据吗？用什么存好（哈希或者set？）"></a>String能存多条数据吗？用什么存好（哈希或者set？）</h4><h4 id="哈希底层（忘了）"><a href="#哈希底层（忘了）" class="headerlink" title="哈希底层（忘了）"></a>哈希底层（忘了）</h4><h2 id="计算机网络："><a href="#计算机网络：" class="headerlink" title="计算机网络："></a>计算机网络：</h2><h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112121217.png" alt="image-20231003112121217"></p>
+<h4 id="zset底层用的什么数据结构，如何控制层高的"><a href="#zset底层用的什么数据结构，如何控制层高的" class="headerlink" title="zset底层用的什么数据结构，如何控制层高的."></a>zset底层用的什么数据结构，如何控制层高的.</h4><h4 id="项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）"><a href="#项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）" class="headerlink" title="项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）"></a>项目用的Redis什么数据结构，key是什么，value是什么（String，访客数据）</h4><h4 id="String能存多条数据吗？用什么存好（哈希或者set？）"><a href="#String能存多条数据吗？用什么存好（哈希或者set？）" class="headerlink" title="String能存多条数据吗？用什么存好（哈希或者set？）"></a>String能存多条数据吗？用什么存好（哈希或者set？）</h4><h4 id="哈希底层（忘了）"><a href="#哈希底层（忘了）" class="headerlink" title="哈希底层（忘了）"></a>哈希底层（忘了）</h4><h2 id="计算机网络："><a href="#计算机网络：" class="headerlink" title="计算机网络："></a>计算机网络：</h2><h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112121217.png" alt="image-20231003112121217"></p>
 <p>1、物理层：实现计算机节点之间比特流的透明传输，规定传输媒体接口的标准，屏蔽掉具体传输介质和物理设备的差异，使数据链路层不必关心网络的具体传输介质，按照物理层规定的标准传输数据就行</p>
 <p>2、数据链路层：通过差错控制、流量控制等方法，使有差错的物理线路变为无差错的数据链路。</p>
 <p>数据链路层的几个基本方法：数据封装成桢、透明传输、差错控制、流量控制。</p>
@@ -935,12 +945,12 @@
 <li><strong>第三次握手</strong>：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送、接收正常</li>
 </ol>
 <p>三次握手就能确认双方收发功能都正常，缺一不可。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112124898.png" alt="image-20231003112124898"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112124898.png" alt="image-20231003112124898"></p>
 <h5 id="第-2-次握手传回了-ACK，为什么还要传回-SYN？"><a href="#第-2-次握手传回了-ACK，为什么还要传回-SYN？" class="headerlink" title="第 2 次握手传回了 ACK，为什么还要传回 SYN？"></a>第 2 次握手传回了 ACK，为什么还要传回 SYN？</h5><p>服务端传回发送端所发送的 ACK 是为了告诉客户端：“我接收到的信息确实就是你所发送的信号了”，这表明从客户端到服务端的通信是正常的。回传 SYN 则是为了建立并确认从服务端到客户端的通信也是正常的。</p>
 <blockquote>
 <p>SYN 同步序列编号(Synchronize Sequence Numbers) 是 TCP&#x2F;IP 建立连接时使用的握手信号。在客户机和服务器之间建立正常的 TCP 网络连接时，客户机首先发出一个 SYN 消息，服务器使用 SYN-ACK 应答表示接收到了这个消息，最后客户机再以 ACK(Acknowledgement）消息响应。这样在客户机和服务器之间才能建立起可靠的 TCP 连接，数据才可以在客户机和服务器之间传递。</p>
 </blockquote>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112128868.png" alt="image-20231003112128868"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112128868.png" alt="image-20231003112128868"></p>
 <p>断开一个 TCP 连接则需要“四次挥手”，缺一不可：</p>
 <ol>
 <li><strong>第一次挥手</strong>：客户端发送一个 FIN（SEQ&#x3D;x） 标志的数据包-&gt;服务端，用来关闭客户端到服务器的数据传送。然后客户端进入 <strong>FIN-WAIT-1</strong> 状态。</li>
@@ -963,8 +973,8 @@
 <p><strong>流量控制</strong> : <strong>接收方根据自己接收缓冲的大小，可在设置确认报文字段的窗口字段，动态调整发送发发送窗口大小。</strong>TCP 连接的每一方都有固定大小的缓冲空间，TCP 的接收端只允许发送端发送接收端缓冲区能接纳的数据。当接收方来不及处理发送方的数据，能提示发送方降低发送的速率，防止包丢失。TCP 使用的流量控制协议是可变大小的滑动窗口协议（TCP 利用滑动窗口实现流量控制）。</p>
 <p><strong>拥塞控制</strong> : 当网络拥塞时（发送方的数据迟迟无法到达接收方），发送方估算网络拥堵程度减少数据的发送。</p>
 <p>TCP 在传递数据之前，会有三次握手来建立连接，而且在数据传递时，有确认、窗口、重传、拥塞控制机制</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112134508.png" alt="image-20231003112134508"></p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112139329.png" alt="image-20231003112139329"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112134508.png" alt="image-20231003112134508"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112139329.png" alt="image-20231003112139329"></p>
 <p>udp第四个字段为17</p>
 <h4 id="Http状态码"><a href="#Http状态码" class="headerlink" title="Http状态码"></a>Http状态码</h4><h5 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX 成功"></a>2XX 成功</h5><p>200 ok（请求成功）<br>204 no content （请求成功，但是没有结果返回）<br>206 partial content （客户端请求一部分资源，服务端成功响应，返回一范围资源）</p>
 <h5 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX 重定向"></a>3XX 重定向</h5><p>301 move permanently （永久性重定向）<br>302 found （临时性重定向）<br>303 see other （示由于请求对应的资源存在着另一个 URI，应使用 GET方法定向获取请求的资源）<br>304 not modified （表示在客户端采用带条件的访问某资源时，服务端找到了资源，但是这个请求的条件不符合。跟重定向无关）<br>307 temporary redirect （跟302一个意思）</p>
@@ -1007,7 +1017,7 @@
 <li><strong>发送响应</strong>：服务器将响应发送回客户端，响应通常包括状态码、响应头和响应体。</li>
 <li><strong>关闭连接</strong>：连接在请求和响应之后通常会被关闭，但HTTP&#x2F;1.1引入了持久连接以改善性能。</li>
 </ol>
-<h4 id="讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗"><a href="#讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗" class="headerlink" title="讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗"></a>讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗</h4><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112148772.png" alt="image-20231003112148772"></p>
+<h4 id="讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗"><a href="#讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗" class="headerlink" title="讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗"></a>讲讲TCP的表头有哪些字段，这些字段你是背的还是了解过有什么作用，有过对每个字段的功能的测试吗</h4><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112148772.png" alt="image-20231003112148772"></p>
 <ol>
 <li><p>源端口和目的端口       各占2个字节，分别写入源端口和目的端口。</p>
 </li>
@@ -1066,7 +1076,7 @@
 <p>网站在使用HTTPS前，需要向<strong>CA机构</strong>申领一份<strong>数字证书</strong>，数字证书里含有证书持有者信息、公钥信息等。服务器把证书传输给浏览器，浏览器从证书里获取公钥就行了，证书就如身份证，证明“该公钥对应该网站”。而这里又有一个显而易见的问题，“<strong>证书本身的传输过程中，如何防止被篡改”</strong>？即如何证明证书本身的真实性？身份证运用了一些防伪技术，而数字证书怎么防伪呢？解决这个问题我们就接近胜利了！</p>
 <h5 id="如何放防止数字证书被篡改？"><a href="#如何放防止数字证书被篡改？" class="headerlink" title="如何放防止数字证书被篡改？"></a><strong>如何放防止数字证书被篡改？</strong></h5><p>我们把证书原本的内容生成一份“签名”，比对证书内容和签名是否一致就能判别是否被篡改。这就是数字证书的“防伪技术”，这里的“签名”就叫<code>数字签名</code>：</p>
 <h5 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a><strong>数字签名</strong></h5><p>这部分内容建议看下图并结合后面的文字理解，图中左侧是数字签名的制作过程，右侧是验证过程：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/v2-7c78935389af46e197e96d9cd91c06dd_1440w-1696303314365-11.webp" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/v2-7c78935389af46e197e96d9cd91c06dd_1440w-1696303314365-11.webp" alt="img"></p>
 <p>数字签名的生成与验证（<a target="_blank" rel="noopener" href="https://cheapsslsecurity.com/blog/digital-signature-vs-digital-certificate-the-difference-explained/%EF%BC%89">https://cheapsslsecurity.com/blog/digital-signature-vs-digital-certificate-the-difference-explained/）</a></p>
 <p>数字签名的制作过程：</p>
 <ol>
@@ -1092,7 +1102,7 @@
 <h4 id="cookie与session"><a href="#cookie与session" class="headerlink" title="cookie与session"></a>cookie与session</h4><h5 id="Cookie：客户端浏览器用来保存服务端数据的一种机制。"><a href="#Cookie：客户端浏览器用来保存服务端数据的一种机制。" class="headerlink" title="Cookie：客户端浏览器用来保存服务端数据的一种机制。"></a>Cookie：客户端浏览器用来保存服务端数据的一种机制。</h5><p>当通过浏览器进行网页访问的时候，服务器可以把某一些状态数据以 key-value 的方式写入到 Cookie 里面存储到客户端浏览器。<br>然后客户端下一次再访问服务器的时候，就可以携带这些状态数据发送到服务器端，服务端可以根据 Cookie 里面携带的内容来识别使用者。</p>
 <h5 id="Session-表示一个会话，它是属于服务器端的容器对象"><a href="#Session-表示一个会话，它是属于服务器端的容器对象" class="headerlink" title="Session 表示一个会话，它是属于服务器端的容器对象"></a>Session 表示一个会话，它是属于服务器端的容器对象</h5><p>默认情况下，针对每一个浏览器的请求。Servlet 容器都会分配一个 Session。<br>Session 本质上是一个 ConcurrentHashMap，可以存储当前会话产生的一些状态数据。<br>我们都知道，Http 协议本身是一个无状态协议，也就是服务器并不知道客户端发送过来的多次请求是属于同一个用户。<br>所以 Session 是用来弥补 Http 无状态的不足，简单来说，服务器端可以利用 session来存储客户端在同一个会话里面的多次请求记录。<br>基于服务端的 session 存储机制，再结合客户端的 Cookie 机制，就可以实现有状态的Http 协议。</p>
 <p>具体的工作原理是：<br>客户端第一次访问服务端的时候，服务端会针对这次请求创建一个会话，并生成一个唯一的 sessionId 来标注这个会话。<br>然后服务端把这个 sessionid 写入到客户端浏览器的 cookie 里面，用来实现客户端状态的保存。<br>在后续的请求里面，每次都会携带 sessionid，服务器端就可以根据这个 sessionid 来识别当前的会话状态。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112158828.png" alt="image-20231003112158828"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112158828.png" alt="image-20231003112158828"></p>
 <p>所以，总的来看，Cookie 是客户端的存储机制，Session 是服务端的存储机制。<br>这两者结合使用，来实现会话状态的存储，以上就是我对这个问题的理解！</p>
 <h4 id="如何实现Session共享？用户A-访问服务器A-在A中存储了你的session-但是A再次访问的时候访问了B服务器-如何保证你的session共享给B"><a href="#如何实现Session共享？用户A-访问服务器A-在A中存储了你的session-但是A再次访问的时候访问了B服务器-如何保证你的session共享给B" class="headerlink" title="如何实现Session共享？用户A 访问服务器A 在A中存储了你的session  但是A再次访问的时候访问了B服务器  如何保证你的session共享给B"></a>如何实现Session共享？用户A 访问服务器A 在A中存储了你的session  但是A再次访问的时候访问了B服务器  如何保证你的session共享给B</h4><h5 id="1-Nginx的-IP-Hash-策略（可以使⽤）"><a href="#1-Nginx的-IP-Hash-策略（可以使⽤）" class="headerlink" title="1.Nginx的 IP_Hash 策略（可以使⽤）"></a>1.<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Nginx&spm=1001.2101.3001.7020">Nginx</a>的 IP_Hash 策略（可以使⽤）</h5><p>同⼀个客户端IP的请求都会被路由到同⼀个⽬标服务器，也叫做会话粘滞<br><strong>优点：</strong></p>
 <ul>
@@ -1108,7 +1118,7 @@
 <h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><p>进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。</p>
 <p>线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器（</strong>线程切换后能恢复到正确的执行位置<strong>）</strong>、<strong>虚拟机栈（</strong>保证线程中的局部变量不被别的线程访问到<strong>，虚拟机栈和本地方法栈是线程私有的）</strong>和<strong>本地方法栈</strong>（包含局部变量，本地方法），所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
 <p>Java 中，线程作为最小调度单位，进程作为资源分配的最小单位。 在 windows 中进程是不活动的，只是作为线程的容器<strong>。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。线程执行开销小，但不利于资源的管理和保护；而进程正相反。</strong></p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112203309.png" alt="image-20231003112203309"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112203309.png" alt="image-20231003112203309"></p>
 <ul>
 <li>堆是进程中最大的一块内存，主要用于存放新创建的对象 (几乎所有对象都在这里分配内存</li>
 <li>方法区主要用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li>
@@ -1133,7 +1143,7 @@
 <h2 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h2><h4 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h4><p>进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。</p>
 <p>线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器（</strong>线程切换后能恢复到正确的执行位置<strong>）</strong>、<strong>虚拟机栈（</strong>保证线程中的局部变量不被别的线程访问到<strong>，虚拟机栈和本地方法栈是线程私有的）</strong>和<strong>本地方法栈</strong>（包含局部变量，本地方法），所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</p>
 <p>Java 中，线程作为最小调度单位，进程作为资源分配的最小单位。 在 windows 中进程是不活动的，只是作为线程的容器<strong>。线程和进程最大的不同在于基本上各进程是独立的，而各线程则不一定，因为同一进程中的线程极有可能会相互影响。线程执行开销小，但不利于资源的管理和保护；而进程正相反。</strong></p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112209457.png" alt="image-20231003112209457"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112209457.png" alt="image-20231003112209457"></p>
 <ul>
 <li>堆是进程中最大的一块内存，主要用于存放新创建的对象 (几乎所有对象都在这里分配内存</li>
 <li>方法区主要用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。</li>
@@ -1158,7 +1168,7 @@
 
 <h4 id="Java内存区域，内存模型？"><a href="#Java内存区域，内存模型？" class="headerlink" title="Java内存区域，内存模型？"></a>Java内存区域，内存模型？</h4><p><strong>Java内存模型（JMM）</strong></p>
 <p>可以把 JMM 看作是 Java 定义的并发编程相关的一组规范，除了抽象了线程和主内存之间的关系之外，其还规定了从 Java 源代码到 CPU 可执行指令的这个转化过程要遵守哪些和并发相关的原则和规范，其主要目的是为了简化多线程编程，增强程序可移植性的。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112214089.png" alt="image-20231003112214089"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112214089.png" alt="image-20231003112214089"></p>
 <p>在当前的 Java 内存模型下，线程可以把变量保存 <strong>本地内存</strong> （比如机器的寄存器）中，而不是直接在主存中进行读写。这就可能造成一个线程在主存中修改了一个变量的值，而另外一个线程还继续使用它在寄存器中的变量值的拷贝，造成数据的不一致。</p>
 <p><strong>Java内存区域</strong></p>
 <p>Java的内存区域和内存模型是不一样的东西，内存区域是指 JVM 运行时将数据分区域存储，强调对内存空间的划分。</p>
@@ -1168,7 +1178,7 @@
 <p><strong>方法区</strong>：保存在着被加载过的每一个类的信息，包括类的方法、构造器，成员方法，属性等，这些信息由<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%8A%A0%E8%BD%BD&spm=1001.2101.3001.7020">类加载</a>器在加载类时，从类的源文件中抽取出来；<strong>运行时常量池</strong>：当该类被加载时，它的常量池信息就会放入运行时常量池，并把里面的符号地址转换为真实地址。</p>
 <p><strong>程序计数器：</strong>每个线程都有一个独立的程序计数器，记录下一条JVM指令的执行地址</p>
 <p><strong>本地方法栈：</strong>调用本地方法（由C或者C++编写的底层的方法，与操作系统的底层API打交道）时给本地方法提供的内存空间</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112225692.png" alt="image-20231003112225692"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112225692.png" alt="image-20231003112225692"></p>
 <h4 id="线程的上下文切换是什么"><a href="#线程的上下文切换是什么" class="headerlink" title="线程的上下文切换是什么"></a>线程的上下文切换是什么</h4><p>因为以下一些原因导致 cpu 不再执行当前的线程，转而执行另一个线程的代码</p>
 <ul>
 <li>线程的 CPU 时间片用完</li>
@@ -1180,7 +1190,7 @@
 <p>线程切换意味着需要保存当前线程的上下文，留待线程下次占用 CPU 的时候恢复现场。并加载下一个将要占用 CPU 的线程上下文。这就是所谓的 <strong>上下文切换</strong>。</p>
 <p>当 Context Switch 发生时，需要由操作系统保存当前线程的状态，并恢复另一个线程的状态，Java 中对应的概念<br>就是程序计数器（Program Counter Register），它的作用是记住下一条 jvm 指令的执行地址，是线程私有的</p>
 <p>状态包括程序计数器、虚拟机栈中每个栈帧的信息，如局部变量、操作数栈、返回地址等<br>Context Switch 频繁发生会影响性能</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112229884.png" alt="image-20231003112229884"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112229884.png" alt="image-20231003112229884"></p>
 <h4 id="什么是线程死锁"><a href="#什么是线程死锁" class="headerlink" title="什么是线程死锁"></a>什么是线程死锁</h4><p>多个线程同时被阻塞，处于相互等待的状态，如果没有外界干预，线程会被无限期地阻塞，因此程序不可能正常终止</p>
 <h5 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h5><p>互斥条件：该资源任意一个时刻只由一个线程占用。</p>
 <p>请求与保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</p>
@@ -1202,7 +1212,7 @@
 </ul>
 <p>new 一个 <code>Thread</code>，线程进入了新建状态。调用 <code>start()</code>方法，会启动一个线程并使线程进入了就绪状态，当分配到时间片后就可以开始运行了。 <code>start()</code> 会执行线程的相应准备工作，然后自动执行 <code>run()</code> 方法的内容，这是真正的多线程工作。 但是，直接执行 <code>run()</code> 方法，会把 <code>run()</code> 方法当成一个 main 线程下的普通方法去执行，并不会在某个线程中执行它，所以这并不是多线程工作。</p>
 <p><strong>总结：调用 <code>start()</code> 方法方可启动线程并使线程进入就绪状态，直接执行 <code>run()</code> 方法的话不会以多线程的方式执行。</strong></p>
-<h4 id="java里面线程有几种状态？"><a href="#java里面线程有几种状态？" class="headerlink" title="java里面线程有几种状态？"></a>java里面线程有几种状态？</h4><h5 id="操作系统-层面来描述"><a href="#操作系统-层面来描述" class="headerlink" title="操作系统 层面来描述"></a>操作系统 层面来描述</h5><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112235300.png" alt="image-20231003112235300"></p>
+<h4 id="java里面线程有几种状态？"><a href="#java里面线程有几种状态？" class="headerlink" title="java里面线程有几种状态？"></a>java里面线程有几种状态？</h4><h5 id="操作系统-层面来描述"><a href="#操作系统-层面来描述" class="headerlink" title="操作系统 层面来描述"></a>操作系统 层面来描述</h5><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112235300.png" alt="image-20231003112235300"></p>
 <ul>
 <li>【初始状态】仅是在语言层面创建了线程对象，还未与操作系统线程关联</li>
 <li>【可运行状态】（就绪状态）指该线程已经被创建（与操作系统线程关联），可以由 CPU 调度执行</li>
@@ -1211,7 +1221,7 @@
 <li>【阻塞状态】：等 BIO 操作完毕，会由操作系统唤醒阻塞的线程，转换至【可运行状态】与【可运行状态】的区别是，对【阻塞状态】的线程来说只要它们一直不唤醒，调度器就一直不会考虑调度它们</li>
 <li>【终止状态】表示线程已经执行完毕，生命周期已经结束，不会再转换为其它状态</li>
 </ul>
-<h5 id="Java-API-层面来描述"><a href="#Java-API-层面来描述" class="headerlink" title="Java API 层面来描述"></a>Java API 层面来描述</h5><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112238774.png" alt="image-20231003112238774"></p>
+<h5 id="Java-API-层面来描述"><a href="#Java-API-层面来描述" class="headerlink" title="Java API 层面来描述"></a>Java API 层面来描述</h5><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112238774.png" alt="image-20231003112238774"></p>
 <ul>
 <li><p>NEW: 初始状态，线程被创建出来但没有被调用 <code>start()</code> 。</p>
 <p>RUNNABLE: 运行状态，线程被调用了 <code>start()</code>等待运行的状态。</p>
@@ -1219,7 +1229,7 @@
 <p>WAITING：等待状态，表示该线程需要等待其他线程做出一些特定动作（通知或中断）。</p>
 <p>TIME_WAITING：超时等待状态，可以在指定的时间后自行返回而不是像 WAITING 那样一直等待。</p>
 <p>TERMINATED：终止状态，表示该线程已经运行完毕.</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112242092.png" alt="image-20231003112242092"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112242092.png" alt="image-20231003112242092"></p>
 </li>
 </ul>
 <h4 id="阻塞和等待有什么区别？"><a href="#阻塞和等待有什么区别？" class="headerlink" title="阻塞和等待有什么区别？"></a>阻塞和等待有什么区别？</h4><p>阻塞会持有临界资源并等待，等待会释放临界资源，不过概念还是比较模糊</p>
@@ -1256,7 +1266,7 @@
 <h4 id="说一下synchronized关键字底层原理"><a href="#说一下synchronized关键字底层原理" class="headerlink" title="说一下synchronized关键字底层原理"></a>说一下synchronized关键字底层原理</h4><p>synchronized的底层是通过monitor对象来实现的。</p>
 <p>Java对象在内存中的布局大致可以分为三部分：<strong>对象头</strong>、<strong>实例数据</strong>和<strong>填充对齐</strong>。因为<code>synchronized</code>用的锁是存在对象头里的，这里我们需要重点了解对象头。如果对象头是数组类型，则对象头由<strong>Mark Word</strong>、<strong>Class MetadataAddress</strong>和<strong>Array length</strong>组成，如果对象头非数组类型，对象头则由<strong>Mark Word</strong>和<strong>Class MetadataAddress</strong>组成。</p>
 <p>每个 Java 对象都可以关联一个 Monitor 对象，如果使用 synchronized 给对象上锁（重量级）之后，该对象头的Mark Word 中就被设置指向 Monitor 对象的指针</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112246654.png" alt="image-20231003112246654"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112246654.png" alt="image-20231003112246654"></p>
 <p>monitor对象中有owner用来指示拥有锁的对象，entrylist来存放阻塞的线程（竞争失败的线程），waitSet来存放wating的线程（wait()方法），初始时，Monitor中的Owner为null，当第一个竞争锁的线程获得锁，其他的竞争这个锁的线程就会被放入EntryList等待，当获得锁的线程执行完同步代码块中的内容，就会唤醒EntryList中等待的线程，发生非公平竞争这个锁。<br>注意：<br>synchronized 必须是进入同一个对象的 monitor 才有上述的效果</p>
 <p><strong><code>synchronized</code> 同步语句块的实现使用的是 <code>monitorenter</code> 和 <code>monitorexit</code> 指令，其中 <code>monitorenter</code> 指令指向同步代码块的开始位置，<code>monitorexit</code> 指令则指明同步代码块的结束位置。</strong></p>
 <p>上面的字节码中包含一个 <code>monitorenter</code> 指令以及两个 <code>monitorexit</code> 指令，这是为了保证锁在同步代码块代码正常执行以及出现异常的这两种情况下都能被正确释放。</p>
@@ -1264,9 +1274,9 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在 Java 虚拟机(HotSpot)中，Monitor 是基于 C++实现的，由[ObjectMonitoropen in new window](https://github.com/openjdk-mirror/jdk7u-hotspot/blob/50bdefc3afe944ca74c3093e7448d6b889cd20d1/src/share/vm/runtime/objectMonitor.cpp)实现的。每个对象中都内置了一个 `ObjectMonitor`对象。</span><br><span class="line"></span><br><span class="line">另外，`wait/notify`等方法也依赖于`monitor`对象，这就是为什么只有在同步的块或者方法中才能调用`wait/notify`等方法，否则会抛出`java.lang.IllegalMonitorStateException`的异常的原因。</span><br></pre></td></tr></table></figure>
 
 <p>在执行<code>monitorenter</code>时，会尝试获取对象的锁，如果锁的计数器为 0 则表示锁可以被获取，获取后将锁计数器设为 1 也就是加 1。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112249933.png" alt="image-20231003112249933"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112249933.png" alt="image-20231003112249933"></p>
 <p>对象锁的的拥有者线程才可以执行 <code>monitorexit</code> 指令来释放锁。在执行 <code>monitorexit</code> 指令后，将锁计数器设为 0，表明锁被释放，其他线程可以尝试获取锁。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112256314.png" alt="image-20231003112256314"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112256314.png" alt="image-20231003112256314"></p>
 <p>如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
 <h5 id="synchronized-修饰方法的的情况"><a href="#synchronized-修饰方法的的情况" class="headerlink" title="synchronized 修饰方法的的情况"></a>synchronized 修饰方法的的情况</h5><p><code>synchronized</code> 修饰的方法并没有 <code>monitorenter</code> 指令和 <code>monitorexit</code> 指令，取得代之的确实是 <code>ACC_SYNCHRONIZED</code> 标识，该标识指明了该方法是一个同步方法。JVM 通过该 <code>ACC_SYNCHRONIZED</code> 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。</p>
 <p>如果是实例方法，JVM 会尝试获取实例对象的锁。如果是静态方法，JVM 会尝试获取当前 class 的锁。</p>
@@ -1274,7 +1284,7 @@
 <p><code>synchronized</code> 修饰的方法并没有 <code>monitorenter</code> 指令和 <code>monitorexit</code> 指令，取得代之的确实是 <code>ACC_SYNCHRONIZED</code> 标识，该标识指明了该方法是一个同步方法。</p>
 <p><strong>不过两者的本质都是对对象监视器 monitor 的获取。</strong></p>
 <h4 id="为什么wait和notify方法要写在synchronized同步代码块中？"><a href="#为什么wait和notify方法要写在synchronized同步代码块中？" class="headerlink" title="为什么wait和notify方法要写在synchronized同步代码块中？"></a>为什么wait和notify方法要写在synchronized同步代码块中？</h4><p>这是Java设计者为了避免使用者出现lost wake up问题而搞出来的</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112303623.png" alt="image-20231003112303623"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112303623.png" alt="image-20231003112303623"></p>
 <p>问题的根源在于，消费者在检查count到调用wait()之间，count就可能被改掉了。</p>
 <p>常见的解决方式是加锁</p>
 <h4 id="jdk1-7对synchorinzed的优化？"><a href="#jdk1-7对synchorinzed的优化？" class="headerlink" title="jdk1.7对synchorinzed的优化？"></a>jdk1.7对synchorinzed的优化？</h4><h5 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h5><p>轻量级锁的使用场景：如果一个对象虽然有多线程要加锁，但加锁的时间是错开的（也就是没有竞争），那么可以<br>使用轻量级锁来优化。</p>
@@ -1302,9 +1312,9 @@
 </ul>
 <h4 id="volatile关键字的原理？怎么用？是否保证原子性？"><a href="#volatile关键字的原理？怎么用？是否保证原子性？" class="headerlink" title="volatile关键字的原理？怎么用？是否保证原子性？"></a>volatile关键字的原理？怎么用？是否保证原子性？</h4><p>由于JVM缓存优化，线程读变量值时，可能会到自己的工作缓存去读而不是到内存，所以当一个线程对变量执行写操作到内存，可能其他线程无法读到最新的变量值。</p>
 <p>用法：在多线程读，一线程写的情况下，用来修饰成员变量和静态成员变量，这就指示 JVM，这个变量是共享且不稳定的，他可以避免线程从自己的工作缓存中查找变量的值，必须到主存中获取它的值，线程操作 volatile 变量都是直接操作主存。</p>
-<h5 id="如何保证可见性"><a href="#如何保证可见性" class="headerlink" title="如何保证可见性"></a>如何保证可见性</h5><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112310433.png" alt="image-20231003112310433"></p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112313979.png" alt="image-20231003112313979"></p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112317775.png" alt="image-20231003112317775"></p>
+<h5 id="如何保证可见性"><a href="#如何保证可见性" class="headerlink" title="如何保证可见性"></a>如何保证可见性</h5><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112310433.png" alt="image-20231003112310433"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112313979.png" alt="image-20231003112313979"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112317775.png" alt="image-20231003112317775"></p>
 <p>Volatile关键字底层实现主要是通过汇编lock指令，当某个CPU修改了缓存里面的数据，该数据会马上通过总线同步回主存，（lock指令开启其他CPU的总线嗅探机制）其他CPU通过一个<strong>总线嗅探机制</strong>来感知数据的变化从而将自己缓存里面的数据失效，需要使用这个数据，必须重新去内存中获取最新的数据，来保证数据的可见性。</p>
 <ul>
 <li>写屏障（sfence）保证在该屏障之前的，对共享变量的改动，都同步到主存当中</li>
@@ -1329,7 +1339,7 @@
 <p>同样的道理monitorexit指令也具有Store屏障的作用，也就是让synchronized代码块内的共享变量，如果数据有变更的，强制刷新回主内存。</p>
 <p>这样通过这种方式，数据修改之后立即刷新回主内存，其他线程进入synchronized代码块后，使用共享变量的时候强制读取主内存的数据，上一个线程对共享变量的变更操作，它就能立即看到了。</p>
 <p>同时synchronized加的内存屏障也能保证内部代码的有序性</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112322766.png" alt="image-20231003112322766"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112322766.png" alt="image-20231003112322766"></p>
 <h4 id="为什么单线程不需要这个volatile关键字多线程需要"><a href="#为什么单线程不需要这个volatile关键字多线程需要" class="headerlink" title="为什么单线程不需要这个volatile关键字多线程需要"></a>为什么单线程不需要这个volatile关键字多线程需要</h4><p>因为在单线程的环境下，只有一个线程会使用修改的变量，变量不存在可见性问题。同时，单线程下，JVM的指令重排序也不会改变执行结果。</p>
 <h4 id="为什么会出现指令重排序："><a href="#为什么会出现指令重排序：" class="headerlink" title="为什么会出现指令重排序："></a>为什么会出现指令重排序：</h4><p>指令还可以再划分成一个个更小的阶段，在不改变程序结果的前提下，这些指令的各个阶段可以通过重排序和组合来实现指令级并行，从而提高CPU的吞吐率。</p>
 <h4 id="多线程通信方式"><a href="#多线程通信方式" class="headerlink" title="多线程通信方式"></a>多线程通信方式</h4><p>在Java中，多线程通信是通过一些机制和方法来实现的，以确保不同线程之间能够协同工作。以下是一些常见的多线程通信方式：</p>
@@ -1408,7 +1418,7 @@
 </ul>
 <p>线程池状态</p>
 <p>ThreadPoolExecutor 使用 int 的高 3 位来表示线程池状态，低 29 位表示线程数量</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112330381.png" alt="image-20231003112330381"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112330381.png" alt="image-20231003112330381"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// c 为旧值， ctlOf 返回结果为新值</span></span><br><span class="line">ctl.compareAndSet(c, ctlOf(targetState, workerCountOf(c))));</span><br><span class="line"><span class="comment">// rs 为高 3 位代表线程池状态， wc 为低 29 位代表线程个数，ctl 是合并它们</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">ctlOf</span><span class="params">(<span class="type">int</span> rs, <span class="type">int</span> wc)</span> &#123; <span class="keyword">return</span> rs | wc; &#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -1467,8 +1477,8 @@
 <p><code>AQS</code>根据资源互斥级别提供了<strong>独占和共享</strong>两种资源访问模式；同时其定义<code>Condition</code>结构提供了<code>wait/signal</code>等待唤醒机制。</p>
 <h5 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h5><p><code>AQS</code>的原理并不复杂，<code>AQS</code>维护了一个<code>volatile int state</code>变量和一个<code>CLH(三个人名缩写)先进先出的双向队列</code>，队列中的节点持有线程引用，每个节点均可通过<code>getState()</code>、<code>setState()</code>和<code>compareAndSetState()</code>对<code>state</code>进行修改和访问。具有条件变量来实现等待、唤醒机制，支持多个条件变量，类似于 Monitor 的 WaitSet。</p>
 <p>在<code>JUC</code>中，诸如<code>ReentrantLock</code>、<code>CountDownLatch</code>等都基于<code>AQS</code>实现。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112335241.png" alt="image-20231003112335241"></p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/e22dfb7003ee44afb6f80ddfbce68a93tplv-k3u1fbpfcp-zoom-in-crop-mark1512000-1696303417939-13.webp" alt="img"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112335241.png" alt="image-20231003112335241"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/e22dfb7003ee44afb6f80ddfbce68a93tplv-k3u1fbpfcp-zoom-in-crop-mark1512000-1696303417939-13.webp" alt="img"></p>
 <p>子类主要实现这样一些方法（默认抛出 UnsupportedOperationException）</p>
 <ul>
 <li>tryAcquire</li>
@@ -1506,12 +1516,12 @@
 <li><p><code>nextWaiter</code>：<code>condition</code>条件队列。(见<code>ConditionObject</code>)</p>
 </li>
 </ul>
-<h4 id="ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？"><a href="#ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？" class="headerlink" title="ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？"></a>ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？</h4><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112342131.png" alt="image-20231003112342131"></p>
+<h4 id="ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？"><a href="#ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？" class="headerlink" title="ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？"></a>ThreadLocal是什么？怎么用？内存泄漏？在项目中的运用？</h4><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112342131.png" alt="image-20231003112342131"></p>
 <p>threadLocal 是一个用来解决线程安全性问题的工具。它相当于让每个线程都开辟一块内存空间，用来存储共享变量的副本。<br>然后每个线程只需要访问和操作自己的共享变量副本即可，从而避免多线程竞争同一个共享资源。<br>它的工作原理很简单（如图）</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112345346.png" alt="image-20231003112345346"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112345346.png" alt="image-20231003112345346"></p>
 <p>每个线程里面有一个成员变量 ThreadLocalMap,<br>当线程访问用 ThreadLocal 修饰的共享数据的时候<br>这个线程就会在自己成员变量 ThreadLocalMap 里面保存一份数据副本。<br>key 指向 ThreadLocal 这个引用，并且是弱引用关系，而 value 保存的是共享数据的副本。<br>因为每个线程都持有一个副本，所以就解决了线程安全性问题。</p>
 <p>ThreadLocal的实现原理，每一个Thread维护一个ThreadLocalMap，key为使用<strong>弱引用</strong>的ThreadLocal实例，value为线程变量的副本。这些对象之间的引用关系如下,</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112348542.png" alt="image-20231003112348542"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112348542.png" alt="image-20231003112348542"></p>
 <blockquote>
 <p>实心箭头表示强引用，空心箭头表示弱引用</p>
 </blockquote>
@@ -1532,7 +1542,7 @@
 <p><strong>方法区</strong>：保存在着被加载过的每一个类的信息，包括类的方法、构造器，成员方法，属性等，这些信息由<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%8A%A0%E8%BD%BD&spm=1001.2101.3001.7020">类加载</a>器在加载类时，从类的源文件中抽取出来；<strong>运行时常量池</strong>：当该类被加载时，它的常量池信息就会放入运行时常量池，并把里面的符号地址转换为真实地址。</p>
 <p><strong>程序计数器：</strong>每个线程都有一个独立的程序计数器，记录下一条JVM指令的执行地址</p>
 <p><strong>本地方法栈：</strong>调用本地方法（由C或者C++编写的底层的方法，与操作系统的底层API打交道）时给本地方法提供的内存空间</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112352559.png" alt="image-20231003112352559"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112352559.png" alt="image-20231003112352559"></p>
 <p><strong>直接内存：</strong>操作系统的内存，分配回收成本较高，读写性能高，不受JVM内存回收管理</p>
 <h4 id="假如让你设计一个malloc-，和free-你会怎么做？"><a href="#假如让你设计一个malloc-，和free-你会怎么做？" class="headerlink" title="假如让你设计一个malloc()，和free()你会怎么做？"></a>假如让你设计一个malloc()，和free()你会怎么做？</h4><h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h2 id="项目："><a href="#项目：" class="headerlink" title="项目："></a>项目：</h2><h4 id="你觉得秒杀模块的关键模块和关键设计是什么："><a href="#你觉得秒杀模块的关键模块和关键设计是什么：" class="headerlink" title="你觉得秒杀模块的关键模块和关键设计是什么："></a>你觉得秒杀模块的关键模块和关键设计是什么：</h4><p>最关键的模块：防止超卖和一人一单的校验</p>
 <p>关键设计：CAS 和 分布式锁</p>
@@ -1562,13 +1572,13 @@
 </ul>
 <p>例子：</p>
 <p>比如我们一共有3个key，我们对这3个key分别进行3次hash运算，key1经过三次hash运算后的结果分别为2&#x2F;6&#x2F;10，那么就把布隆过滤器中下标为2&#x2F;6&#x2F;10的元素值更新为1，然后再分别对key2和key3做同样操作，结果如下图：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112356582.png" alt="image-20231003112356582"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112356582.png" alt="image-20231003112356582"></p>
 <p>这样，当客户端查询时，也对查询的key做3次hash运算得到3个位置，然后看布隆过滤器中对应位置元素的值是否为1，如果所有对应位置元素的值都为1，就证明key在库中存在，则继续向下查询；如果3个位置中有任意一个位置的值不为1，那么就证明key在库中不存在，直接返回客户端空即可。如下图：</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112359294.png" alt="image-20231003112359294"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112359294.png" alt="image-20231003112359294"></p>
 <p>当客户端查询key4时，key4的3次hash运算中，有一个位置8的值为0，就说明key4在库中不存在，直接返回客户端空即可。</p>
 <p>所以，布隆过滤器就相当于一个位于客户端与缓存层中间的拦截器一样，负责判断key是否在集合中存在。如下图：</p>
 <p>布隆过滤器优缺点：<br>布隆过滤器的优点包括：</p>
-<p>1.时间和空间效率高：布隆过滤器的时间复杂度和空间复杂度都是O(k)，其中k为哈希函数的数量。因此，它可以在较小的空间内快速判断某个元素是否在集合中。<img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112407380.png" alt="image-20231003112407380"></p>
+<p>1.时间和空间效率高：布隆过滤器的时间复杂度和空间复杂度都是O(k)，其中k为哈希函数的数量。因此，它可以在较小的空间内快速判断某个元素是否在集合中。<img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112407380.png" alt="image-20231003112407380"></p>
 <p>2.误判率低：布隆过滤器虽然可能出现误判，但是误判率可以通过调整哈希函数数量和位数组大小来控制，可以根据实际需求进行调整。</p>
 <p>3.支持高并发：布隆过滤器支持并发查询和添加数据，可以在多线程环境下使用。</p>
 <p>4.易于实现：布隆过滤器的实现比较简单，只需要实现几个哈希函数和一个位数组即可。</p>
@@ -1626,7 +1636,7 @@
 <li><p>可重试 获取锁失败后可重试（获取锁的时候可以设置等待时间，在时间内获取失败可以订阅当前 锁释放的消息， 等锁释放了再尝试获取锁）</p>
 </li>
 <li><p>超时释放：虽然可以避免死锁，但如果是业务执行耗时较长，也会导致锁释放，存在安全隐患，主从一致性（当锁有效期设置为-1，当任务执行时，通过定时任务来动态重置锁的有效期，避免锁超时释放，这就是看门狗机制），在释放锁时，会发送释放锁的消息，取消这个watchDog</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112419357.png" alt="image-20231003112419357"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112419357.png" alt="image-20231003112419357"></p>
 </li>
 <li><p>在获取锁方法中，setnx的value需要设置为UUID + 线程ID，在集群环境下可能会存在线程ID相同的问题。这样在删除锁的时候线程需要先根据value值判断是不是自己加的锁，如果不是则说明其他线程已经获取到锁，那么自己执行的业务就应该回滚。如果是自己的锁那么可以直接释放。利用Redis的setnx方法当多个线程进入时只有一个线程能够执行setnx方法返回值为true，其余线程因为key已经存在返回的都是false这就实现互斥。</p>
 </li>
@@ -1663,9 +1673,9 @@
 </ul>
 <h4 id="redis缓存的数据和数据库的数据，怎么保证一致性？"><a href="#redis缓存的数据和数据库的数据，怎么保证一致性？" class="headerlink" title="redis缓存的数据和数据库的数据，怎么保证一致性？"></a>redis缓存的数据和数据库的数据，怎么保证一致性？</h4><h5 id="采用延时双删-1"><a href="#采用延时双删-1" class="headerlink" title="采用延时双删"></a>采用延时双删</h5><p>先删除缓存，再更新数据库，当更新数据后休眠一段时间通过定时任务（可通过整合定时任务框架、创建线程池，从中拿出一个线程休眠一段时间再启动）再删除一次缓存。</p>
 <h5 id="异步更新缓存-基于订阅binlog的同步机制-1"><a href="#异步更新缓存-基于订阅binlog的同步机制-1" class="headerlink" title="异步更新缓存(基于订阅binlog的同步机制)"></a>异步更新缓存(基于订阅binlog的同步机制)</h5><p>采用缓存淘汰策略，先更新数据库，再删除对应redis缓存后更新缓存。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112424781.png" alt="image-20231003112424781"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112424781.png" alt="image-20231003112424781"></p>
 <p>通过 Canal（消息推送工具也可以用kafka、rabbitMQ等来实现可靠性消息通信更新Redis。） 组件，监控 Mysql 中 binlog（记录MySQL中新的写入、更新、删除等操作） 的日志，把更新后的数据同步到 Redis 里面，canal正是模仿了mysql的slave数据库的备份请求，使得Redis的数据更新达到了相同的效果。。</p>
-<p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112435565.png" alt="image-20231003112435565"></p>
+<p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112435565.png" alt="image-20231003112435565"></p>
 <p>因为这里是基于最终一致性来实现的，如果业务场景不能接受数据的短期不一致性，那就不能使用这个方案来做。</p>
 <h4 id="关于好友点赞和好友关注你是如何实现的"><a href="#关于好友点赞和好友关注你是如何实现的" class="headerlink" title="关于好友点赞和好友关注你是如何实现的"></a>关于好友点赞和好友关注你是如何实现的</h4><h5 id="好友点赞"><a href="#好友点赞" class="headerlink" title="好友点赞"></a>好友点赞</h5><p>好友点赞的问题应该保证一个好友一个笔记只能点赞一次，而且点赞应该是一个比较频繁的操作，因此考虑使用Redis中的set集合实现这个功能。</p>
 <p>在Redis中建立Zset集合，每一个帖子对应一个Zset集合，set集合中保存的数据就是用户点赞的用户id这样在用户点赞的时候就可以先查询一下是否点过赞，如果点过赞则返回已经点赞，否则则将用户id记录到set集合中。Zset的分数就是时间戳，这样就可以根据时间戳的大小实现按照点赞时间排序。</p>
@@ -1698,7 +1708,7 @@
 
 <p>当用户量很大的时候，比如千万级用户量的情况下，一个用户的bitmap需要消耗的内存为：10000000&#x2F;8&#x2F;1024&#x2F;1024&#x3D;1.19MB，当bitmap数量较多的时候，内存占用还是很可观的。不过在用户量较少的时候这种方案还是不错的</p>
 <h4 id="取消订单的逻辑"><a href="#取消订单的逻辑" class="headerlink" title="取消订单的逻辑"></a>取消订单的逻辑</h4><p>我的项目并没有取消订单这个功能，如果让我来设计的话，我会先查询数据库中的订单表中优惠券的id，通过CAS对相应的优惠券库存+1，成功后把这个订单设置为逻辑过期。</p>
-<h4 id="拦截器过滤器的作用"><a href="#拦截器过滤器的作用" class="headerlink" title="拦截器过滤器的作用"></a>拦截器过滤器的作用</h4><p><img src="/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A.assets/image-20231003112444100.png" alt="image-20231003112444100"></p>
+<h4 id="拦截器过滤器的作用"><a href="#拦截器过滤器的作用" class="headerlink" title="拦截器过滤器的作用"></a>拦截器过滤器的作用</h4><p><img src="/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.assets/image-20231003112444100.png" alt="image-20231003112444100"></p>
 <ol>
 <li>运行顺序不同（如图）：过滤器是在 Servlet 容器接收到请求之后，但在 Servlet被调用之前运行的；而拦截器则是在 Servlet 被调用之后，但在响应被发送到客户端之前运行的。</li>
 <li>配置方式不同：过滤器是在 web.xml 中进行配置；而拦截器的配置则是在 Spring的配置文件中进行配置，或者使用注解进行配置。</li>
@@ -1802,7 +1812,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/03/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/03/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -1813,11 +1823,11 @@
    
   <nav class="article-nav">
     
-      <a href="/2023/10/03/1111/" class="article-nav-link">
+      <a href="/2023/10/03/hello-world%20-%20%E5%89%AF%E6%9C%AC/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            (no title)
+            个人简历
           
         </div>
       </a>
@@ -1917,27 +1927,11 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://docs.qq.com/pdf/DS3pCZGdHUXBHekhx?">个人简历</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
     </li>
     
   </ul>
@@ -2229,6 +2223,42 @@
 </style>
     
     
+<script>
+  const password = "121212";
+  const lock_password = window.sessionStorage.getItem("lock_password");
+  console.log(password, lock_password);
+  if (lock_password !== password) {
+    Swal.fire({
+      title: "Please enter password",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: false,
+      showLoaderOnConfirm: true,
+      allowOutsideClick: false,
+      confirmButtonText: "Ok",
+    }).then((result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+        console.log(password);
+        if (result.value === password) {
+          window.sessionStorage.setItem("lock_password", result.value);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Incorrect password, please try again",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+          }).then(() => {
+            window.location.reload();
+          });
+        }
+      }
+    });
+  }
+</script>
+
 
   </div>
 </body>

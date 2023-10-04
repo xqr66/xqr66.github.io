@@ -75,12 +75,6 @@
       </div>
       <div>
         
-        <img
-          src="true"
-          class="cover-logo"
-          alt="小冉"
-        />
-        
       </div>
     </div>
   </div>
@@ -101,9 +95,9 @@
       var typed = new Typed("#subtitle", {
         strings: ['勤学如春起之苗，不见其增，日有所长。辍学如磨刀之石，不见其损，日有所亏。', '雄关漫道真如铁，而今迈步从头越', '书山有路勤为径，学海无涯苦做舟'],
         startDelay: 0,
-        typeSpeed: 200,
+        typeSpeed: 100,
         loop: true,
-        backSpeed: 100,
+        backSpeed: 300,
         showCursor: true
       });
     } catch (err) {
@@ -163,17 +157,28 @@
     
     
     <article
-  id="post-1111"
+  id="post-hello-world - 副本"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/03/hello-world%20-%20%E5%89%AF%E6%9C%AC/"
+    >个人简历</a> 
+</h2>
+ 
+
+      
+    </header>
      
     <div class="article-meta">
-      <a href="/2023/10/03/1111/" class="article-date">
-  <time datetime="2023-10-03T04:09:58.023Z" itemprop="datePublished">2023-10-03</time>
+      <a href="/2023/10/03/hello-world%20-%20%E5%89%AF%E6%9C%AC/" class="article-date">
+  <time datetime="2023-10-03T05:55:12.971Z" itemprop="datePublished">2023-10-03</time>
 </a>    
     </div>
        
@@ -192,17 +197,28 @@
 
     
     <article
-  id="post-Java八股自总结："
+  id="post-Java学习笔记"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2023/10/03/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+    >Java 学习笔记</a> 
+</h2>
+ 
+
+      
+    </header>
      
     <div class="article-meta">
-      <a href="/2023/10/03/Java%E5%85%AB%E8%82%A1%E8%87%AA%E6%80%BB%E7%BB%93%EF%BC%9A/" class="article-date">
-  <time datetime="2023-10-03T03:38:58.207Z" itemprop="datePublished">2023-10-03</time>
+      <a href="/2023/10/03/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2023-10-03T05:47:00.312Z" itemprop="datePublished">2023-10-03</time>
 </a>    
     </div>
        
@@ -339,27 +355,11 @@
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://docs.qq.com/pdf/DS3pCZGdHUXBHekhx?">个人简历</a>
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" target="_blank" rel="noopener" href="http://shenyu-vip.lofter.com">摄影</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
     </li>
     
   </ul>
@@ -635,6 +635,42 @@
 </style>
     
     
+<script>
+  const password = "121212";
+  const lock_password = window.sessionStorage.getItem("lock_password");
+  console.log(password, lock_password);
+  if (lock_password !== password) {
+    Swal.fire({
+      title: "Please enter password",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: false,
+      showLoaderOnConfirm: true,
+      allowOutsideClick: false,
+      confirmButtonText: "Ok",
+    }).then((result) => {
+      console.log(result);
+      if (result.isConfirmed) {
+        console.log(password);
+        if (result.value === password) {
+          window.sessionStorage.setItem("lock_password", result.value);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Incorrect password, please try again",
+            confirmButtonText: "Ok",
+            allowOutsideClick: false,
+          }).then(() => {
+            window.location.reload();
+          });
+        }
+      }
+    });
+  }
+</script>
+
 
   </div>
 </body>
