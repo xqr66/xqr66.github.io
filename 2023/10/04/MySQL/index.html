@@ -123,7 +123,7 @@
 <li><p>使用 order by 对结果集进行排序。</p>
 </li>
 <li><p>limit限制查询数量、查询偏移量</p>
-<p><img src="/hello-world%20-%20%E5%89%AF%E6%9C%AC.assets/image-20231003111856990.png" alt="image-20231003111856990"></p>
+<p><img src="/image-20231006215903828.png" alt="image-20231006215903828"></p>
 </li>
 </ol>
 <h4 id="事务的四大特性（ACID）："><a href="#事务的四大特性（ACID）：" class="headerlink" title="事务的四大特性（ACID）："></a>事务的四大特性（ACID）：</h4><ul>
@@ -135,12 +135,12 @@
 <p>而对于这四大特性，实际上分为两个部分。 其中的原子性、一致性、持久化，实际上是由InnoDB中的两份日志来保证的，</p>
 <p>一份是redo log日志，一份是undo log日志。 而持久性是通过数据库的锁，加上MVCC来保证的。</p>
 <h4 id="并发事务问题："><a href="#并发事务问题：" class="headerlink" title="并发事务问题："></a>并发事务问题：</h4><ol>
-<li><p>脏读：一个事务读到了另一个事务还没有提交的数据。<img src="/hello-world%20-%20%E5%89%AF%E6%9C%AC.assets/image-20231003111916626.png" alt="image-20231003111916626"></p>
+<li><p>脏读：一个事务读到了另一个事务还没有提交的数据。<img src="/../MySQL/image-20231003111916626.png" alt="image-20231003111916626"></p>
 </li>
 <li><p>不可重复读：一个事务先后读取同一条记录，但是两次读取的数据不同</p>
 </li>
 </ol>
-<p><img src="/hello-world%20-%20%E5%89%AF%E6%9C%AC.assets/image-20231003111926058.png" alt="image-20231003111926058"></p>
+<p><img src="/../MySQL/image-20231003111926058.png" alt="image-20231003111926058"></p>
 <ol start="3">
 <li>幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了”幻影“;<img src="/hello-world%20-%20%E5%89%AF%E6%9C%AC.assets/image-20231003111932452.png" alt="image-20231003111932452"></li>
 </ol>
