@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="一个大三学生的简单个人博客" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Java基础 |  xqr的博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="xqr的博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Java基础"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Java基础
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/06/Java%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2023-10-06T14:16:07.000Z" itemprop="datePublished">2023-10-06</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">8.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">32 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><h4 id="java的访问权限有哪些"><a href="#java的访问权限有哪些" class="headerlink" title="java的访问权限有哪些"></a>java的访问权限有哪些</h4><h5 id="类的成员变量和方法访问权限"><a href="#类的成员变量和方法访问权限" class="headerlink" title="类的成员变量和方法访问权限"></a>类的成员变量和方法访问权限</h5><table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>类内部</th>
+<th>同包</th>
+<th>子类</th>
+<th>任何地方</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>包访问权限</td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>private</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="类的访问权限"><a href="#类的访问权限" class="headerlink" title="类的访问权限"></a>类的访问权限</h5><p>类的访问权限仅有<strong>public</strong>和<strong>包访问权限</strong>， 如果一个类声明的时候用了<strong>public</strong>，则该类的类名必须与文件名一致，包括大小写，如果不匹配，会有编译错误</p>
+<h4 id="String-str-“abc”-和String-str-new-String-“abc”-的区别"><a href="#String-str-“abc”-和String-str-new-String-“abc”-的区别" class="headerlink" title="String str &#x3D; “abc” 和String str &#x3D; new String(“abc”)的区别"></a><strong>String str &#x3D; “abc” 和String str &#x3D; new String(“abc”)的区别</strong></h4><p><code>String str =&quot;abc&quot;</code>的原理，采用字面值的方式创建时，<code>JVM</code>会先去字符串常量池中去查找是否存在”abc”这个对象，如果不存在就创建这个字符串，并把地址返回给<code>str</code>。如果存在则直接把”abc”这个字符串的地址返回给<code>str</code>。</p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/16e1f7c1f13d9561tplv-t2oaga2asx-jj-mark3024000q75-1696302993864-1-1696643234832-1.webp" alt="img"></p>
+<p><code>String str = new String(&quot;abc&quot;)</code>采用<code>new</code>关键字的方式创建，<code>JVM</code>也会去字符串常量池中查找有没有这个字符串，如果没有的话，就先在字符串常量池里创建”abc”这个字符串，然后再复制一份放在堆里并把地址返回给<code>str</code>。如果字符串常量池里存在该字符串，那么就直接复制一份放在堆里并把地址返回给<code>str</code>。</p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/16e1f8c6aa324edetplv-t2oaga2asx-jj-mark3024000q75-1696303002110-3-1696643254308-3.webp" alt="img"></p>
+<h4 id="equals-的底层代码是什么"><a href="#equals-的底层代码是什么" class="headerlink" title="equals 的底层代码是什么?"></a>equals 的底层代码是什么?</h4><ol>
+<li>先使用&#x3D;&#x3D; 进行地址值的判断  </li>
+<li>判断equals()中的值是否为字符串  </li>
+<li>判断字符串的长度是否相同  </li>
+<li>循环遍历进行判断两个字符串是否相同</li>
+</ol>
+<h4 id="object中的hashcode-方法是做什么用的"><a href="#object中的hashcode-方法是做什么用的" class="headerlink" title="object中的hashcode()方法是做什么用的"></a>object中的hashcode()方法是做什么用的</h4><p>这是因为在一些容器（比如 <code>HashMap</code>、<code>HashSet</code>）中，有了 <code>hashCode()</code> 之后，判断元素是否在对应容器中的效率会更高（参考添加元素进<code>HashSet</code>的过程）！</p>
+<p>我们在前面也提到了添加元素进<code>HashSet</code>的过程，如果 <code>HashSet</code> 在对比的时候，同样的 <code>hashCode</code> 有多个对象，它会继续使用 <code>equals()</code> 来判断是否真的相同。也就是说 <code>hashCode</code> 帮助我们大大缩小了查找成本。</p>
+<h5 id="那为什么不只提供-hashCode-方法呢？"><a href="#那为什么不只提供-hashCode-方法呢？" class="headerlink" title="那为什么不只提供 hashCode() 方法呢？"></a><strong>那为什么不只提供 <code>hashCode()</code> 方法呢？</strong></h5><p>这是因为两个对象的<code>hashCode</code> 值相等并不代表两个对象就相等。</p>
+<h5 id="那为什么两个对象有相同的-hashCode-值，它们也不一定是相等的？"><a href="#那为什么两个对象有相同的-hashCode-值，它们也不一定是相等的？" class="headerlink" title="那为什么两个对象有相同的 hashCode 值，它们也不一定是相等的？"></a><strong>那为什么两个对象有相同的 <code>hashCode</code> 值，它们也不一定是相等的？</strong></h5><p>因为 <code>hashCode()</code> 所使用的哈希算法也许刚好会让多个对象传回相同的哈希值。越糟糕的哈希算法越容易碰撞，但这也与数据值域分布的特性有关（所谓哈希碰撞也就是指的是不同的对象得到相同的 <code>hashCode</code> )。</p>
+<h4 id="为什么重写-equals-时必须重写-hashCode-方法？"><a href="#为什么重写-equals-时必须重写-hashCode-方法？" class="headerlink" title="为什么重写 equals() 时必须重写 hashCode() 方法？"></a>为什么重写 equals() 时必须重写 hashCode() 方法？</h4><p>因为两个相等的对象的 <code>hashCode</code> 值必须是相等。也就是说如果 <code>equals</code> 方法判断两个对象是相等的，那这两个对象的 <code>hashCode</code> 值也要相等。</p>
+<p>如果重写 <code>equals()</code> 时没有重写 <code>hashCode()</code> 方法的话就可能会导致 <code>equals</code> 方法判断是相等的两个对象，<code>hashCode</code> 值却不相等。</p>
+<p>再map集合中，如果只重写equals方法，那么两个相同对象hashcode可能不同，会存在多个key相同的情况。</p>
+<h4 id="基本类型和包装类型的区别"><a href="#基本类型和包装类型的区别" class="headerlink" title="基本类型和包装类型的区别"></a><strong>基本类型和包装类型的区别</strong></h4><h5 id="1-基本类型有初始值，而包装类型的默认值是null"><a href="#1-基本类型有初始值，而包装类型的默认值是null" class="headerlink" title="1.基本类型有初始值，而包装类型的默认值是null"></a>1.基本类型有初始值，而包装类型的默认值是null</h5><h5 id="2-包装类型可以为-null，而基本类型不可以"><a href="#2-包装类型可以为-null，而基本类型不可以" class="headerlink" title="2.包装类型可以为 null，而基本类型不可以"></a>2.包装类型可以为 null，而基本类型不可以</h5><p>数据库的查询结果可能是null，因为自动拆箱，用基本数据类型接收有<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=NPE&spm=1001.2101.3001.7020">NPE</a>（NullPointerException）风险。</p>
+<h5 id="3-存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用"><a href="#3-存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用" class="headerlink" title="3.存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用"></a>3.存储位置有所区别：基本类型是成员变量就存储在<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%A0%86%E5%86%85%E5%AD%98&spm=1001.2101.3001.7020">堆内存</a>里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用</h5><h5 id="4-包装类型可用于泛型，而基本类型不可以"><a href="#4-包装类型可用于泛型，而基本类型不可以" class="headerlink" title="4.包装类型可用于泛型，而基本类型不可以"></a>4.包装类型可用于泛型，而基本类型不可以</h5><p>如果我们这么写<br>List<int> a &#x3D; new ArrayList&lt;&gt;();<br>编译器会报错：Type argument cannot be of primitive type(类型参数不能为基本类型)<br>这是为什么呢？因为泛型信息只存在于代码编译阶段，在进入 JVM 之前，与泛型相关的信息会被擦除掉，专业术语叫做类型擦除，最后只保留原始类型，而原始类型只能是 Object 类及其子类。</p>
+<h5 id="5-在使用“-”进行判断的时候的不同"><a href="#5-在使用“-”进行判断的时候的不同" class="headerlink" title="5.在使用“&#x3D;&#x3D;”进行判断的时候的不同"></a>5.在使用“&#x3D;&#x3D;”进行判断的时候的不同</h5><ol start="6">
+<li>自动装箱和自动拆箱<br>把基本类型转换成包装类型的过程叫做装箱（boxing）。反之，把包装类型转换成基本类型的过程叫做拆箱（unboxing）。</li>
+</ol>
+<p>1）基本类型和包装类型进行 &#x3D;&#x3D; 比较，包装类型会自动拆箱，直接和基本类型比较值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int a = 9;</span><br><span class="line">Integer b = 9;</span><br><span class="line">System.out.println(a == b);</span><br></pre></td></tr></table></figure>
+
+
+<p>上述代码的结果为 true。</p>
+<p>2）当需要进行自动装箱时，如果数字在 -128 至 127 之间，会直接使用缓存中的对象，而不是重新创建一个对象。<br>这个知识我之前从未听闻，正是在写这篇文章的时候查看相关技术博客才了解到的，又学到了新知识！<br>我们先来看这么一段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer A = 199;  </span><br><span class="line">int a = A;  </span><br></pre></td></tr></table></figure>
+
+<p>执行第一句代码的时候，系统为我们执行了：<br>Integer A &#x3D; Integer.valueOf(199);<br>执行第二句代码的时候，系统为我们执行了：<br>int a &#x3D; A.intValue();</p>
+<h4 id="object类中的常用方法的用处："><a href="#object类中的常用方法的用处：" class="headerlink" title="object类中的常用方法的用处："></a>object类中的常用方法的用处：</h4><p>1、 getClass()：获取类的class对象。<br>2、 hashCode:获取对象的hashCode值<br>3、 equals():比较对象是否相等，比较的是值和地址，子类可重写以自定义。<br>4、 clone()：克隆方法。<br>5、 toString():如果没有重写，应用对象将打印的是地址值。<br>6、 notify():随机选择一个在该对象上调用wait方法的线程，解除其阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>7、 notifyall():解除所有那些在该对象上调用wait方法的线程的阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>8、 wait():导致线程进入等待状态，直到它被其他线程通过notify()或者notifyAll唤醒。该方法只能在同步方法中调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>9、 finalize()：对象回收时调用</p>
+<h4 id="包装类的缓存"><a href="#包装类的缓存" class="headerlink" title="包装类的缓存"></a>包装类的缓存</h4><p>1、前提：发生自动装箱的过程（基本类型–&gt;包装类型）<br>创建一个包装类对象有两种方法：<br>（1）构造器方法（就是new出来）；<br>（2）自动装箱（就是编译器自动调用包装类的valueOf方法）；</p>
+<h5 id="两种方法的区别："><a href="#两种方法的区别：" class="headerlink" title="两种方法的区别："></a>两种方法的区别：</h5><p>构造器方法：不论值的大小，返回的将都会是一个新对象；<br>自动装箱会先经过判断，再决定返回的是一个新对象还是常量池中已存在的对象。</p>
+<p>2、机制：当通过自动装箱机制创建包装类对象时，首先会判断数值是否在缓存范围内，如果满足条件，则会从  该包装类中的静态内部类xxCache包装类 类型数组（放在方法区的常量池）中寻找指定数值，并返回缓存的对象，否则创建一个新的对象返回。</p>
+<p>3、原理：<br>（1）当包装类加载时，该包装类中的内部类xxCache会初始化一个包装类类型数组，最小值（固定值）为-128,而最大值（默认值）为127【可修改】，是所有线程共享的。</p>
+<h5 id="缓存的作用"><a href="#缓存的作用" class="headerlink" title="缓存的作用"></a>缓存的作用</h5><p>在缓存值范围内的对象可以直接在常量池中取出，不用创建新的对象；<br>当需要频繁的使用同一对象的时候，如果有缓存，则可以避免重复创建同一对象，节省空间开销和时间消耗，提升了性能。</p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094746373.png" alt="image-20231007094746373"></p>
+<h4 id="数组和链表的不同"><a href="#数组和链表的不同" class="headerlink" title="数组和链表的不同"></a>数组和链表的不同</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>数组</th>
+<th>链表</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>逻辑结构</td>
+<td>（1）数组在内存中连续； (2)使用数组之前，必须事先固定数组长度，不支持动态改变数组大小；(3) 数组元素增加时，有可能会数组越界；(4) 数组元素减少时，会造成内存浪费；（5）数组增删时需要移动其它元素</td>
+<td>（1）链表采用动态内存分配的方式，在内存中不连续 (2)支持动态增加或者删除元素</td>
+</tr>
+<tr>
+<td>访问效率</td>
+<td>数组在内存中顺序存储，可通过下标访问，访问效率高</td>
+<td>链表访问效率低，如果想要访问某个元素，需要从头遍历</td>
+</tr>
+<tr>
+<td>越界问题</td>
+<td>数组的大小是固定的，所以存在访问越界的风险</td>
+<td>只要可以申请得到链表空间，链表就无越界风险</td>
+</tr>
+<tr>
+<td>使用场景</td>
+<td>存储的大小变化不大，且可以事先确定大小，主要是进行查找，很少插入和删除时</td>
+<td>长度变化较大时，事先无法估量数据规模，当线性表要求频繁插入和删除时</td>
+</tr>
+</tbody></table>
+<h4 id="抽象类接口什么不同"><a href="#抽象类接口什么不同" class="headerlink" title="抽象类接口什么不同"></a>抽象类接口什么不同</h4><p><strong>抽象类</strong>：在Java中被abstract关键字修饰的类称为抽象类，被abstract关键字修饰的方法称为抽象方法，抽象方法只有方法的声明，没有方法体。抽象类的特点：</p>
+<p>a、抽象类不能被实例化只能被继承；</p>
+<p>b、包含抽象方法的一定是抽象类，但是抽象类不一定含有抽象方法；</p>
+<p>c、抽象类中的抽象方法的修饰符只能为public或者protected，默认为public；</p>
+<p>d、一个子类继承一个抽象类，则子类必须实现父类抽象方法，否则子类也必须定义为抽象类；</p>
+<p>e、抽象类可以包含属性、方法、构造方法，但是构造方法不能用于实例化，主要用途是被子类调用。</p>
+<p>*<strong>接口*：</strong>Java中接口使用interface关键字修饰，特点为:</p>
+<p>a、接口可以包含变量、方法；变量被隐士指定为public static final，方法被隐士指定为public abstract（JDK1.8之前）；</p>
+<p>b、接口支持多继承，即一个接口可以extends多个接口，间接的解决了Java中类的单继承问题；</p>
+<p>c、一个类可以实现多个接口；</p>
+<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a><strong>相同点</strong></h5><p>（1）都不能被实例化 （2）接口的实现类或抽象类的子类都只有实现了接口或抽象类中的方法后才能实例化。</p>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a><strong>不同点</strong></h5><p>（1）接口只有定义，不能有方法的实现，java 1.8中可以定义default方法体，而抽象类可以有定义与实现，方法可在抽象类中实现。</p>
+<p>（2）实现接口的关键字为implements，继承抽象类的关键字为extends。一个类可以实现多个接口，但一个类只能继承一个抽象类。所以，使用接口可以间接地实现多重继承。</p>
+<p>（3）接口强调特定功能的实现，而抽象类强调所属关系。</p>
+<h4 id="Java的基本类型的成员变量在栈还是堆？"><a href="#Java的基本类型的成员变量在栈还是堆？" class="headerlink" title="Java的基本类型的成员变量在栈还是堆？"></a><strong>Java的基本类型的成员变量在栈还是堆？</strong></h4><ul>
+<li><p><strong>第一种</strong>: 在方法中声明的变量，即该变量是局部变量，每当程序调用方法时，系统都会为该方法建立一个方法栈，其所在方法中声明的变量就放在方法栈中，当方法结束系统会释放方法栈，其对应在该方法中声明的变量随着栈的销毁而结束，这就局部变量只能在方法中有效的原因</p>
+<p>（1）当声明是基本类型的变量的时，其变量名及值（变量名及值是两个概念）是放在方法栈中</p>
+<p>（2）当声明的是引用变量时，所声明的变量（该变量实际上是在方法中存储的是内存地址值）是放在方法的栈中，该变量所指向的对象是放在堆类存中的。</p>
+</li>
+<li><p><strong>第二种</strong> 在类中声明的变量是成员变量(全局变量),放在堆中</p>
+<ol>
+<li>声明的是基本类型的变量,其变量名及其值放在堆内存中</li>
+<li>声明的是引用类型时，其声明的变量仍然会存储一个内存地址值，该内存地址值指向所引用的对象。引用变量名和对应的对象仍然存储在相应的堆中。但与对象中的普通成员变量（局部变量）不同的是，它们的生命周期是在对象销毁时才结束的</li>
+</ol>
+</li>
+<li><p><strong>第三种</strong> 静态变量：</p>
+<p>​	静态变量随着类的加载而存在，是存储在方法区（Method Area）中的，而不是存储在栈或堆上，所以它的生命周期与程序的生命周期一样长。</p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094805132.png" alt="image-20231007094805132"></p>
+</li>
+</ul>
+<h4 id="浅拷贝和深拷贝的区别"><a href="#浅拷贝和深拷贝的区别" class="headerlink" title="浅拷贝和深拷贝的区别"></a>浅拷贝和深拷贝的区别</h4><p>深拷贝和浅拷贝是只针对引用数据类型的</p>
+<p>浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存（分支）。</p>
+<p>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。<br>如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
+<p>深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象，是“值”而不是“引用”（不是分支）</p>
+<p>拷贝第一层级的对象属性或数组元素<br>递归拷贝所有层级的对象属性和数组元素<br>深拷贝会拷贝所有的属性,并拷贝属性指向的动态分配的内存。当对象和它所引用的对象一起拷贝时即发生深拷贝。深拷贝相比于浅拷贝速度较慢并且花销较大。</p>
+<p><strong>引用拷贝</strong>: 引用拷贝就是直接赋值，只在栈中创建一个新的引用，拷贝引用的地址，所以指向的是堆中同一个对象。</p>
+<p><strong>浅拷贝</strong>：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p>
+<p><strong>深拷贝</strong>：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。</p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094842954.png" alt="image-20231007094842954"></p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094847027.png" alt="image-20231007094847027"></p>
+<h4 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h4><p>首先，我认为，之所以需要序列化，核心目的是为了解决网络通信之间的对象传输问题。<br>也就是说，如何把当前 JVM 进程里面的一个对象，跨网络传输到另外一个 JVM进程里面。<br>而序列化，就是把内存里面的对象转化为字节流，以便用来实现存储或者传输。<br>反序列化，就是根据从文件或者网络上获取到的对象的字节流，根据字节流里面保存的对象描述信息和状态。重新构建一个新的对象。</p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094855585.png" alt="image-20231007094855585"></p>
+<p>其次呢，序列化的前提是保证通信双方对于对象的可识别性，所以很多时候，我们会把对象先转化为通用的解析格式，比如 json、xml 等。然后再把他们转化为数据流进行网络传输，从而实现跨平台和跨语言的可识别性。</p>
+<h4 id="Java反射有了解吗？举几个Java反射的应用案例"><a href="#Java反射有了解吗？举几个Java反射的应用案例" class="headerlink" title="Java反射有了解吗？举几个Java反射的应用案例"></a>Java反射有了解吗？举几个Java反射的应用案例</h4><p>反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候），获取任意一个类的成员变量、成员方法和属性,调用任意一个对象的方法和属性,，这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。</p>
+<ul>
+<li>获取任意类的名称、package信息、所有属性、方法、注解、类型、类加载器等</li>
+<li>获取任意对象的属性，并且能改变对象的属性</li>
+<li>调用任意对象的方法</li>
+<li>判断任意一个对象所属的类</li>
+<li>实例化任意一个类的对象</li>
+<li>通过反射我们可以实现动态装配，降低代码的耦合度,动态代理等。</li>
+</ul>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>可以增加程序的灵活性，在运行过程中可以动态堆类进行修改和操作</li>
+<li>提高代码复用率，比如动态代理</li>
+<li>可以在运行是轻松获取任意一个类的方法、属性、并且还能通过反射进行动态调用</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>使用反射后，可读性较差</li>
+<li>反射可以绕过一些限制访问的属性和方法，可能回导致一些安全性问题</li>
+<li>反射回设计动态类型的解析，所以JVM无法对这些代码进行优化，导致性能要比非反射调用更低</li>
+</ul>
+<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><ul>
+<li>AOP动态代理的场景中，使用动态生成的代理类来提升代码复用性。</li>
+<li>IOC：用反射来实例化bean对象等</li>
+</ul>
+<h4 id="String-、StringBuffer和StringBuilder的区别"><a href="#String-、StringBuffer和StringBuilder的区别" class="headerlink" title="String 、StringBuffer和StringBuilder的区别"></a>String 、StringBuffer和StringBuilder的区别</h4><h5 id="1-可变性"><a href="#1-可变性" class="headerlink" title="1.可变性"></a>1.可变性</h5><p>​	String 内部的 value 值是 final 修饰的，所以它是不可变类。所以每次修改 String 的值，都会产生一个新的对象。<br>​	StringBuffer 和 StringBuilder 是可变类，字符串的变更不会产生新的对象。</p>
+<h5 id="2-线程安全性"><a href="#2-线程安全性" class="headerlink" title="2.线程安全性"></a>2.线程安全性</h5><p>​	String 是不可变类，所以它是线程安全的。<br>​	StringBuffer 是线程安全的，因为它每个操作方法都加了 synchronized 同步关键字。<br>​	StringBuilder 不是线程安全的。所以在多线程环境下对字符串进行操作，应该使用 StringBuffer，否则使用StringBuilder</p>
+<h5 id="3-性能方面。"><a href="#3-性能方面。" class="headerlink" title="3.性能方面。"></a>3.性能方面。</h5><p>​	String 的性能是最低的，因为不可变意味着在做字符串拼接和修改的时候，需要重新创建新的对象以及分配内存。<br>​	其次是 StringBuffer 要比 String 性能高，因为它的可变性使得字符串可以直接被修改<br>​	最后是 StringBuilder，它比 StringBuffer 的性能高，因为 StringBuffer 加了同步锁。</p>
+<h5 id="4-存储方面。"><a href="#4-存储方面。" class="headerlink" title="4.存储方面。"></a>4.存储方面。</h5><p>​	String 存储在字符串常量池里面<br>​	StringBuffer 和 StringBuilder 存储在堆内存空间。</p>
+<h4 id="StringBuffer、StringBuilder的扩容原理"><a href="#StringBuffer、StringBuilder的扩容原理" class="headerlink" title="StringBuffer、StringBuilder的扩容原理"></a>StringBuffer、StringBuilder的扩容原理</h4><p>扩容原理：</p>
+<p><code>StringBuffer</code>的底层数组结构用的是<code>char</code>类型的数组如果没有指定大小，默认大小为16，指定了大小，默认大小为（16 + 指定大小）。</p>
+<p>所以，当我们使用<code>StringBuffer</code>对象的<code>append(...)</code>方法追加数据时，</p>
+<ul>
+<li>如果数组长度可以容纳追加的数据，就直接追加到数组</li>
+<li>如果char类型数组的长度无法容纳我们追加的数据，<code>StringBuffer</code>就会进行扩容。</li>
+<li>扩容时会用到<code>Arrays</code>类中的<code>copyOf(...)</code>方法，每次扩容的容量大小是原来的容量的2倍（通过无符号左移）加2。</li>
+</ul>
+<h4 id="说说ArrayList"><a href="#说说ArrayList" class="headerlink" title="说说ArrayList"></a>说说ArrayList</h4><p>ArrayList 是一个数组结构的存储容器，所以ArrayList是支持随机存取的，默认情况下，数组的长度是 10.当然我们也可以在构建 ArrayList 对象的时候自己指定初始长度。随着在程序里面不断的往 ArrayList 中添加数据，当添加的数据达到 10 个的时候，ArrayList 就没有多余容量可以存储后续的数据。这个时候 ArrayList 会自动触发扩容。扩容的具体流程很简单：</p>
+<ol>
+<li>首先，创建一个新的数组，这个新数组的长度是原来数组长度的 1.5 倍。</li>
+<li>然后使用 Arrays.copyOf 方法把老数组里面的数据拷贝到新的数组里面。<br>扩容完成后再把当前要添加的元素加入到新的数组里面，从而完成动态扩容的过程。</li>
+</ol>
+<h4 id="Map的遍历方式"><a href="#Map的遍历方式" class="headerlink" title="Map的遍历方式"></a>Map的遍历方式</h4><p>1）在 for 循环中使用 entries 实现 Map 的遍历（最常见和最常用的）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">&quot;Java入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/java/&quot;</span>);</span><br><span class="line">    map.put(<span class="string">&quot;C语言入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/c/&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">mapKey</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">        <span class="type">String</span> <span class="variable">mapValue</span> <span class="operator">=</span> entry.getValue();</span><br><span class="line">        System.out.println(mapKey + <span class="string">&quot;：&quot;</span> + mapValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2）使用 for-each 循环遍历 key 或者 values，一般适用于只需要 Map 中的 key 或者 value 时使用。性能上比 entrySet 较好。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br><span class="line">map.put(<span class="string">&quot;Java入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/java/&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;C语言入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/c/&quot;</span>);</span><br><span class="line"><span class="comment">// 打印键集合</span></span><br><span class="line"><span class="keyword">for</span> (String key : map.keySet()) &#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印值集合</span></span><br><span class="line"><span class="keyword">for</span> (String value : map.values()) &#123;</span><br><span class="line">    System.out.println(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3）使用迭代器（Iterator）遍历</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br><span class="line">map.put(<span class="string">&quot;Java入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/java/&quot;</span>);</span><br><span class="line">map.put(<span class="string">&quot;C语言入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/c/&quot;</span>);</span><br><span class="line">Iterator&lt;Entry&lt;String, String&gt;&gt; entries = map.entrySet().iterator();</span><br><span class="line"><span class="keyword">while</span> (entries.hasNext()) &#123;    </span><br><span class="line">    Entry&lt;String, String&gt; entry = entries.next();</span><br><span class="line">    <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">    <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> entry.getValue();</span><br><span class="line">    System.out.println(key + <span class="string">&quot;:&quot;</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4）通过键找值遍历，这种方式的效率比较低，因为本身从键取值是耗时的操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String key : map.keySet())&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">value</span> <span class="operator">=</span> map.get(key);</span><br><span class="line">    System.out.println(key+<span class="string">&quot;:&quot;</span>+value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="hash怎么扩容有了解吗？"><a href="#hash怎么扩容有了解吗？" class="headerlink" title="hash怎么扩容有了解吗？"></a>hash怎么扩容有了解吗？</h4><ul>
+<li>HashMap的底层是采用数组来存储数据，当 HashMap 中元素个数超过（大于）临界值时会自动触发扩容，这个临界值有一个计算公式。</li>
+<li>threashold&#x3D;loadFactor*capacity。loadFactor 的默认值是 0.75，capacity 的默认值是 16。当元素个数超过临界值就会触发Hash扩容（resize函数），默认扩容的大小是原来数组长度的 2 倍，HashMap 的最大容量是Integer.MAX_VALUE，也就是 2 的 31 次方-1。</li>
+<li>然后会进行数据迁移，会伴随着一次重新 hash 分配（reHash),是非常耗时的，并且会遍历 hash 表中所有的元素，HasMap让容量为2的幂次方，就是方便数据迁移，元素的位置是  元素的hash&amp;（n - 1），此时n是全为1的二进制数，那么元素根据hash值的的位置要么不变，要么加上原来的长度, 底层的行为都是给 table 赋值一个两倍长度的新数组。</li>
+</ul>
+<h4 id="为什么扩容因子是-0-75？"><a href="#为什么扩容因子是-0-75？" class="headerlink" title="为什么扩容因子是 0.75？"></a>为什么扩容因子是 0.75？</h4><p>扩容因子表示 Hash 表中元素的填充程度，扩容因子的值越大，那么触发扩容的元素个数更多，<br>虽然空间利用率比较高，但是 hash 冲突的概率会增加。<br>扩容因子的值越小，触发扩容的元素个数就越少，也意味着 hash 冲突的概率减少，<br>但是对内存空间的浪费就比较多，而且还会增加扩容的频率。<br>因此，扩容因子的值的设置，本质上就是在 冲突的概率 以及 空间利用率之间的平衡。<br>0.75 这个值的来源，和统计学里面的泊松分布有关。</p>
+<p>当扩容因子在 0.75 的时候，链表长度达到 8 的可能性几乎为 0，也就是比较好的达到了空间成本和时间成本的平衡。</p>
+<h4 id="HashMap的Hash值如何计算"><a href="#HashMap的Hash值如何计算" class="headerlink" title="HashMap的Hash值如何计算"></a>HashMap的Hash值如何计算</h4><p> <strong>h &#x3D; (key.hashCode ()) ^ (key.hashCode()&gt;&gt;16)</strong>,让hashCode的高16位和低16位进行异或，这样可以让hash值得散列度更高，尽可能区减少hash冲突的情况，从而去提升数据查找性能。</p>
+<h4 id="HashMap怎么解决hash冲突的"><a href="#HashMap怎么解决hash冲突的" class="headerlink" title="HashMap怎么解决hash冲突的"></a>HashMap怎么解决hash冲突的</h4><p>首先，HashMap 底层采用了数组的结构来存储数据元素，数组的默认长度是 16，当我们通过 put 方法添加数据的时候，HashMap 根据 Key 的 hash 值进行取模运算,最终保存到数组的指定位置。<br>但是这种设计会存在 hash 冲突问题，也就是两个不同 hash 值的 key，最终取模后会落到同一个数组下标。所以 HashMap 引入了链式寻址法来解决 hash 冲突问题， 对于存在冲突的key，HashMap 把这些 key 组成一个单向链表。然后采用尾插法把这个 key 保存到链表的尾部。另外，为了避免链表过长的问题，当链表长度大于 8 并且数组长度大于等于 64 的时候，HashMap 会把链表转化为红黑树,从而减少链表数据查询的时间复杂度问题，提升查询性能</p>
+<p>解决 hash 冲突问题的方法有很多，比如</p>
+<ul>
+<li>再 hash 法，就是如果某个 hash 函数产生了冲突，再用另外一个 hash 进行计算，</li>
+<li>开放寻址法，就是直接从冲突的数组位置往下寻找一个空的数组下标进行数据存储，(这个在 ThreadLocal 里面有使用到)。</li>
+<li>建立公共溢出区，也就是把存在冲突的 key 统一放在一个公共溢出区里面。</li>
+</ul>
+<h4 id="HashMap在多线程情况下会产生哪些问题？会产生死锁吗？"><a href="#HashMap在多线程情况下会产生哪些问题？会产生死锁吗？" class="headerlink" title="HashMap在多线程情况下会产生哪些问题？会产生死锁吗？"></a>HashMap在多线程情况下会产生哪些问题？会产生死锁吗？</h4><ul>
+<li>JDK1.7 及之前版本的 <code>HashMap</code> 在多线程环境下扩容操作可能存在死循环问题，这是由于当一个桶位中有多个元素需要进行扩容时，多个线程同时对链表进行操作，头插法可能会导致链表中的节点指向错误的位置，从而形成一个环形链表，进而使得查询元素的操作陷入死循环无法结束。</li>
+<li>为了解决这个问题，JDK1.8 版本的 HashMap 采用了尾插法而不是头插法来避免链表倒置，使得插入的节点永远都是放在链表的末尾，避免了链表中的环形结构。但是还是不建议在多线程下使用 <code>HashMap</code>，因为多线程下使用 <code>HashMap</code> 还是会存在数据覆盖的问题。并发环境下，推荐使用 <code>ConcurrentHashMap</code> 。</li>
+</ul>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><ul>
+<li><p>两个线程 1,2 同时进行 put 操作，并且发生了哈希冲突（hash 函数计算出的插入下标是相同的）。</p>
+<p>不同的线程可能在不同的时间片获得 CPU 执行的机会，当前线程 1 执行完哈希冲突判断后，由于时间片耗尽挂起。线程 2 先完成了插入操作。</p>
+<p>随后，线程 1 获得时间片，由于之前已经进行过 hash 碰撞的判断，所有此时会直接进行插入，这就导致线程 2 插入的数据被线程 1 覆盖了。</p>
+</li>
+<li><p>还有一种情况是这两个线程同时 <code>put</code> 操作导致 <code>size</code> 的值不正确，进而导致数据覆盖的问题：</p>
+<ol>
+<li>线程 1 执行 <code>if(++size &gt; threshold)</code> 判断时，假设获得 <code>size</code> 的值为 10，由于时间片耗尽挂起。</li>
+<li>线程 2 也执行 <code>if(++size &gt; threshold)</code> 判断，获得 <code>size</code> 的值也为 10，并将元素插入到该桶位中，并将 <code>size</code> 的值更新为 11。</li>
+<li>随后，线程 1 获得时间片，它也将元素放入桶位中，并将 size 的值更新为 11。</li>
+<li>线程 1、2 都执行了一次 <code>put</code> 操作，但是 <code>size</code> 的值只增加了 1，也就导致实际上只有一个元素被添加到了 <code>HashMap</code> 中。</li>
+</ol>
+</li>
+</ul>
+<h4 id="说一说HashMap-get元素的完整流程"><a href="#说一说HashMap-get元素的完整流程" class="headerlink" title="说一说HashMap get元素的完整流程"></a>说一说HashMap get元素的完整流程</h4><p>先计算key的hashcode值，然后计算key的hash值，通过（n - 1） &amp; hash 找到对应的桶的位置。</p>
+<ul>
+<li><p>如果位置上没有结点，直接返回null。</p>
+</li>
+<li><p>有结点，，判断头结点的hash值是否等于key的hash值</p>
+<ul>
+<li><p>hash值相等，继续用 “&#x3D;&#x3D;” 和equals（）判断key是否相等，相等就返回</p>
+</li>
+<li><p>hash值不相等，遍历整个链表或者红黑树结点，还是判断hash值和key是否相等</p>
+</li>
+<li><p>头结点hash值 &lt; 0, 说明map正在扩容，需要到新的table中用一个 find() 方法去查找</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="说一说HashMap-put元素的完整流程"><a href="#说一说HashMap-put元素的完整流程" class="headerlink" title="说一说HashMap put元素的完整流程"></a>说一说HashMap put元素的完整流程</h4><ol>
+<li>根据key的hashcode 获得hash值（hashcode ^ (hashcode  &gt;&gt;&gt; 16)）</li>
+<li>通过hash &amp; (n - 1) 找到对应桶的位置</li>
+<li>如果桶为空，就直接put</li>
+<li>如果桶不为空就遍历桶中所有元素，通过比较hashcode –&gt; “&#x3D;&#x3D;”判断 –&gt;equals 判断是否已存在，存在就更新value值， 不存在，就插入，size++     判断是否需要转化为红黑树      是否需要扩容</li>
+</ol>
+<h4 id="ConcurrentHashMap为什么能保证线程安全？"><a href="#ConcurrentHashMap为什么能保证线程安全？" class="headerlink" title="ConcurrentHashMap为什么能保证线程安全？"></a>ConcurrentHashMap为什么能保证线程安全？</h4><p>添加元素时首先会判断容器是否为空，</p>
+<ul>
+<li><p>如果为空则使用 volatile 加 CAS 来初始化，防止多个线程同时初始化，造成并发问题，</p>
+</li>
+<li><p>如果容器不为空，则根据存储的元素计算该位置是否为空。</p>
+<ul>
+<li><p>如果根据存储的元素计算结果桶为空，则利用 CAS 设置该节点，避免并发冲突；</p>
+</li>
+<li><p>如果根据存储的元素计算桶为空不为空，则使用 synchronized 锁住这个桶链表的头结点，然后，遍历桶中的数据，根据hash值与key，更新或新增节点到桶中，</p>
+</li>
+<li><p>如果桶中头结点的hash值为 MOVED（-1），就说明map正在进行扩容，此时会锁住这个桶中的链表来帮助扩容，避免扩容的并发问题，等待扩容完成再put入新的table</p>
+</li>
+<li><p>最后再判断是否需要转为红黑树。这样就能保证并发访问时的线程安全了。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>设置多个累加单元来计算size()的值，防止并发下计数错误。</p>
+<ul>
+<li>当线程竞争不激烈时，直接采用 CAS 对baseCount操作实现元素个数的原子递增。</li>
+<li>如果线程竞争激烈，使用一个数组来维护元素个数，如果要增加总的元素个数，则直接从数组中随机选择一个，再通过 CAS 实现原子递增，之后遍历数组中所有的值与baseCount累加。它的核心思想是引入了数组来实现对并发更新的负载。</li>
+</ul>
+<p>总结： ConcurrentHashMap 通过<strong>对数组头结点加锁</strong>和<strong>加CAS的初始化</strong>来保证线程安全的。</p>
+<h4 id="为什么-ConcurrentHashMap-不允许插入-null值？"><a href="#为什么-ConcurrentHashMap-不允许插入-null值？" class="headerlink" title="为什么 ConcurrentHashMap 不允许插入 null值？"></a>为什么 ConcurrentHashMap 不允许插入 null值？</h4><p><code>ConcurrentHashMap</code> 的 key 和 value 不能为 null 主要是为了避免二义性。null 是一个特殊的值，表示没有对象或没有引用。（如果你用 null 作为键，那么你就无法区分这个键是否存在于 <code>ConcurrentHashMap</code> 中，还是根本没有这个键。）同样，如果你用 null 作为值，那么你就无法区分这个值是否是真正存储<code>ConcurrentHashMap</code> 中的，还是因为找不到对应的键而返回的。</p>
+<p>拿 get 方法取值来说，返回的结果为 null 存在两种情况：</p>
+<ul>
+<li>值没有在集合中 ；</li>
+<li>值本身就是 null。</li>
+</ul>
+<p>这也就是二义性的由来。</p>
+<p>多线程环境下，存在一个线程操作该 <code>ConcurrentHashMap</code> 时，其他的线程将该 <code>ConcurrentHashMap</code> 修改的情况，所以无法通过 <code>containsKey(key)</code> 来判断否存在这个键值对，也就没办法解决二义性问题了。</p>
+<p>与此形成对比的是，<code>HashMap</code> 可以存储 null 的 key 和 value，但 null 作为键只能有一个，null 作为值可以有多个。如果传入 null 作为参数，就会返回 hash 值为 0 的位置的值。HashMap 的设计是给单线程使用的，所以如果取到 null（空） 值，我们可以通过HashMap 的 containsKey(key)方 法来区分这个 null（空） 值到底是插入值是 null（空），还是本就没有才返回的 null（空） 值。单线程环境下，不存在一个线程操作该 HashMap 时，其他的线程将该 <code>HashMap</code> 修改的情况，所以可以通过 <code>contains(key)</code>来做判断是否存在这个键值对，从而做相应的处理，也就不存在二义性问题。</p>
+<p>也就是说，多线程下无法正确判定键值对是否存在（存在其他线程修改的情况），单线程是可以的（不存在其他线程修改的情况）。</p>
+<p>如果你确实需要在 ConcurrentHashMap 中使用 null 的话，可以使用一个特殊的静态空对象来代替 null。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">NULL</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br></pre></td></tr></table></figure>
+
+<p>举个例子，现在有线程 T1 调用了 ConcurrentHashMap 的 containsKey(key) 方法，<br>我们期望返回的结果是 false，也就是说，T1 并没有往 ConcurrentHashMap 中 put null（空）值。<br>但是，恰恰出了个意外，在线程 T1 还没有得到返回结果之前，线程 T2 又调用了<br>ConcurrentHashMap 的 put() 方法，插入了一个 Key，并且存入的 Value 是 null（空） 值。那么，线程 T1 最终得到的返回结果就变成 true 了。</p>
+<h4 id="JDK新特性"><a href="#JDK新特性" class="headerlink" title="JDK新特性"></a>JDK新特性</h4><h5 id="JDK1-8的新特性-、"><a href="#JDK1-8的新特性-、" class="headerlink" title="JDK1.8的新特性:、"></a><strong>JDK1.8的新特性:、</strong></h5><ol>
+<li><p>stream流</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strings = Arrays.asList(&quot;abc&quot;, &quot;def&quot;, &quot;gkh&quot;, &quot;abc&quot;);</span><br><span class="line">    //返回符合条件的stream</span><br><span class="line">    Stream&lt;String&gt; stringStream = strings.stream().filter(s -&gt; &quot;abc&quot;.equals(s));</span><br><span class="line">    //计算流符合条件的流的数量</span><br><span class="line">    long count = stringStream.count();</span><br><span class="line"></span><br><span class="line">    //forEach遍历-&gt;打印元素</span><br><span class="line">    strings.stream().forEach(System.out::println);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>2、Lambda 表达式<br>在Java 8 中你就没必要使用这种传统的匿名对象的方式了，Java 8提供了更简洁的语法，lambda表达式：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Collections.sort(names, (String a, String b) -&gt; &#123;</span><br><span class="line">return b.compareTo(a);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>3、函数式接口</p>
+<p>Lambda表达式是如何在java的类型系统中表示的呢？每一个lambda表达式都对应一个类型，通常是接口类型。而“函数式接口”是指仅仅只包含一个抽象方法的接口，每一个该类型的lambda表达式都会被匹配到这个抽象方法。因为 默认方法 不算抽象方法，所以你也可以给你的函数式接口添加默认方法。</p>
+<p>4、方法与构造函数引用</p>
+<p>Java 8 允许你使用 :: 关键字来传递方法或者构造函数引用，上面的代码展示了如何引用一个静态方法，我们也可以引用一个对象的方法：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">converter = something::startsWith;</span><br><span class="line">String converted = converter.convert(&quot;Java&quot;);</span><br><span class="line">System.out.println(converted);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>日期 Date-timeAPI</li>
+</ol>
+<ul>
+<li>增强了时区处理</li>
+<li>增强各种格式化、和时间计算</li>
+</ul>
+<h5 id="JDK9新特性"><a href="#JDK9新特性" class="headerlink" title="JDK9新特性"></a>JDK9新特性</h5><ol>
+<li><p>JShell，为 Java 提供了类似于 Python 的实时命令行交互工具。</p>
+<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094914235.png" alt="image-20231007094914235"></p>
+</li>
+<li><p>String 改为用byte[]存储。</p>
+</li>
+</ol>
+<h5 id="jdk10新特性"><a href="#jdk10新特性" class="headerlink" title="jdk10新特性"></a>jdk10新特性</h5><p><strong>局部变量类型推断(var)</strong>***</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var id =0;</span><br><span class="line">var codefx =newURL(&quot;https://mp.weixin.qq.com/&quot;);</span><br><span class="line">var list =newArrayList&lt;&gt;();</span><br><span class="line">var list =List.of(1,2,3);</span><br></pre></td></tr></table></figure>
+
+<h5 id="JDK11新特性"><a href="#JDK11新特性" class="headerlink" title="JDK11新特性"></a>JDK11新特性</h5><h5 id="String增强"><a href="#String增强" class="headerlink" title="String增强"></a>String增强</h5><p>增加了一系列的字符串处理方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//判断字符串是否为空</span></span><br><span class="line"><span class="string">&quot; &quot;</span>.isBlank();<span class="comment">//true</span></span><br><span class="line"><span class="comment">//去除字符串首尾空格</span></span><br><span class="line"><span class="string">&quot; Java &quot;</span>.strip();<span class="comment">// &quot;Java&quot;</span></span><br><span class="line"><span class="comment">//去除字符串首部空格</span></span><br><span class="line"><span class="string">&quot; Java &quot;</span>.stripLeading();   <span class="comment">// &quot;Java &quot;</span></span><br><span class="line"><span class="comment">//去除字符串尾部空格</span></span><br><span class="line"><span class="string">&quot; Java &quot;</span>.stripTrailing();  <span class="comment">// &quot; Java&quot;</span></span><br><span class="line"><span class="comment">//重复字符串多少次</span></span><br><span class="line"><span class="string">&quot;Java&quot;</span>.repeat(<span class="number">3</span>);             <span class="comment">// &quot;JavaJavaJava&quot;</span></span><br><span class="line"><span class="comment">//返回由行终止符分隔的字符串集合。</span></span><br><span class="line"><span class="string">&quot;A\nB\nC&quot;</span>.lines().count();    <span class="comment">// 3</span></span><br><span class="line"><span class="string">&quot;A\nB\nC&quot;</span>.lines().collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/06/Java%E5%9F%BA%E7%A1%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/10/06/JUC/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            JUC
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/10/03/hello-world/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Hello World</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2016-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="xqr的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

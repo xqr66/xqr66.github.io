@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="一个大三学生的简单个人博客" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>MySQL |  xqr的博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="xqr的博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-MySQL"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  MySQL
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/07/MySQL/" class="article-date">
+  <time datetime="2023-10-07T01:30:50.000Z" itemprop="datePublished">2023-10-07</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">7.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">26 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="MySQL："><a href="#MySQL：" class="headerlink" title="MySQL："></a>MySQL：</h2><h4 id="SQL语句执行顺序"><a href="#SQL语句执行顺序" class="headerlink" title="SQL语句执行顺序"></a>SQL语句执行顺序</h4><ol>
+<li><p>from 子句组装来自不同数据源的数据；</p>
+</li>
+<li><p>where 子句基于指定的条件对记录行进行筛选；  </p>
+</li>
+<li><p>group by 子句将数据划分为多个分组；  </p>
+</li>
+<li><p>使用聚集函数进行计算； </p>
+</li>
+<li><p>使用 having 子句筛选分组；</p>
+</li>
+<li><p>计算所有的表达式后，select；  </p>
+</li>
+<li><p>使用 order by 对结果集进行排序。</p>
+</li>
+<li><p>limit限制查询数量、查询偏移量</p>
+<p><img src="/imgs/MySQL/image-20231007095614868.png" alt="image-20231007095614868"></p>
+</li>
+</ol>
+<h4 id="事务的四大特性（ACID）："><a href="#事务的四大特性（ACID）：" class="headerlink" title="事务的四大特性（ACID）："></a>事务的四大特性（ACID）：</h4><ul>
+<li>原子性：事务是不可分割的最小操作单元，要么全部成功，要么全部失败。</li>
+<li>一致性：事务完成时，必须使得所有的数据保持一致状态</li>
+<li>隔离性：数据库系统提供的隔离机制，保证事务不受外部并发操作的影响，在独立的环境下运行。</li>
+<li>持久性：事务一单提交或回滚，会对数据库产生永久的改变</li>
+</ul>
+<p>而对于这四大特性，实际上分为两个部分。 其中的原子性、一致性、持久化，实际上是由InnoDB中的两份日志来保证的，</p>
+<p>一份是redo log日志，一份是undo log日志。 而持久性是通过数据库的锁，加上MVCC来保证的。</p>
+<h4 id="并发事务问题："><a href="#并发事务问题：" class="headerlink" title="并发事务问题："></a>并发事务问题：</h4><ol>
+<li><p>脏读：一个事务读到了另一个事务还没有提交的数据。<img src="/imgs/MySQL/image-20231007095624542.png" alt="image-20231007095624542"></p>
+</li>
+<li><p>不可重复读：一个事务先后读取同一条记录，但是两次读取的数据不同</p>
+</li>
+</ol>
+<p><img src="/imgs/MySQL/image-20231007095635241.png" alt="image-20231007095635241"></p>
+<ol start="3">
+<li>幻读：一个事务按照条件查询数据时，没有对应的数据行，但是在插入数据时，又发现这行数据已经存在，好像出现了”幻影“;<img src="/imgs/MySQL/image-20231007095644077.png" alt="image-20231007095644077"></li>
+</ol>
+<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p><img src="/imgs/MySQL/image-20231007095652192.png" alt="image-20231007095652192"></p>
+<h4 id="mysql执行流程"><a href="#mysql执行流程" class="headerlink" title="mysql执行流程"></a>mysql执行流程</h4><h4 id="B-Tree-与-B-Tree相比"><a href="#B-Tree-与-B-Tree相比" class="headerlink" title="B+Tree 与 B-Tree相比"></a>B+Tree 与 B-Tree相比</h4><ul>
+<li>所有的数据都会出现在叶子节点。</li>
+<li>叶子节点形成一个双向循环链表。</li>
+<li>非叶子节点仅仅起到索引数据作用，具体的数据都是在叶子节点存放的。<img src="/imgs/MySQL/image-20231007095709426.png" alt="image-20231007095709426"></li>
+</ul>
+<h4 id="为什么InnoDB存储引擎选择使用B-tree索引结构"><a href="#为什么InnoDB存储引擎选择使用B-tree索引结构" class="headerlink" title="为什么InnoDB存储引擎选择使用B+tree索引结构?"></a>为什么InnoDB存储引擎选择使用B+tree索引结构?</h4><ol>
+<li>相对于二叉树，层级更少，搜索效率高；</li>
+<li>对于B-tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低；</li>
+<li>相对Hash索引，B+tree支持范围匹配及排序操作；</li>
+<li>数据都在叶子节点，搜索效率稳定，且叶子节点形成双向循环链表，便于范围查找和排序</li>
+</ol>
+<h4 id="聚集索引-二级索引"><a href="#聚集索引-二级索引" class="headerlink" title="聚集索引&amp;二级索引"></a>聚集索引&amp;二级索引</h4><p><img src="/imgs/MySQL/image-20231007095717439.png" alt="image-20231007095717439"></p>
+<p>聚集索引选取规则:</p>
+<ul>
+<li><p>​	如果存在主键，主键索引就是聚集索引。</p>
+</li>
+<li><p>​	如果不存在主键，将使用第一个唯一（UNIQUE）索引作为聚集索引。</p>
+</li>
+<li><p>​	如果表没有主键，或没有合适的唯一索引，则InnoDB会自动生成一个rowid作为隐藏的聚集索引。</p>
+<p><img src="/imgs/MySQL/image-20231007095727258.png" alt="image-20231007095727258"></p>
+</li>
+<li><p>聚集索引的叶子节点下挂的是这一行的数据 。</p>
+</li>
+<li><p>二级索引的叶子节点下挂的是该字段值对应的主键值。</p>
+</li>
+</ul>
+<h4 id="联合索引在b-树中怎么存储"><a href="#联合索引在b-树中怎么存储" class="headerlink" title="联合索引在b+树中怎么存储"></a>联合索引在b+树中怎么存储</h4><p>联合索引和其他索引的区别就是在非叶子节点存储的是联合索引上全部字段，按照最左前缀法则排序，叶子节点会存储联合索引全部字段和主键id</p>
+<p><img src="/imgs/MySQL/image-20231007095734260.png" alt="image-20231007095734260"></p>
+<h4 id="索引失效情况"><a href="#索引失效情况" class="headerlink" title="索引失效情况"></a>索引失效情况</h4><ol>
+<li>在索引列上进行运算操作， 索引将失效  	<code>explain select * from tb_user where substring(phone,10,2) = &#39;15&#39;;</code> </li>
+<li>字符串不加引号  <code>explain select * from tb_user where profession = 软件工程 and age = 31 and status = 0;</code></li>
+<li>模糊查询（尾部模糊匹配，索引不会失效。如果是头部模糊匹配，索引失效） <code>explain select * from tb_user where profession like &#39;软件%&#39;;</code></li>
+<li>or连接条件 如果or前的条件中的列有索引，而后面的列中没有索引，那么涉及的索引都不会被用到。</li>
+<li>如果索引了多列（联合索引），要遵守最左前缀法则。最左前缀法则指的是查询从索引的最左列开始，并且不跳过索引中的列。如果跳跃某一列，索引将会部分失效(后面的字段索引失效)。最左前缀法则中指的最左边的列，是指在查询时，联合索引的最左边的字段(即是第一个字段)必须存在，与我们编写SQL时，条件编写的先后顺序无关。</li>
+<li>联合索引中，出现范围查询(&gt;,&lt;)，范围查询右侧的列索引失效。当范围查询使用&gt;&#x3D; 或 &lt;&#x3D; 时，走联合索引，不会使右侧的列索引失效</li>
+<li>MySQL评估不走索引比走索引还快，索引也失效。</li>
+</ol>
+<h4 id="如何去合理地创建表的索引"><a href="#如何去合理地创建表的索引" class="headerlink" title="如何去合理地创建表的索引"></a>如何去合理地创建表的索引</h4><ul>
+<li><p>针对于数据量较大，且查询比较频繁的表建立索引。</p>
+</li>
+<li><p>针对于常作为查询条件（where）、排序（order by）、分组（group by）操作的字段建立索引。</p>
+</li>
+<li><p>尽量选择区分度高的列作为索引，尽量建立唯一索引，区分度越高，使用索引的效率越高。</p>
+</li>
+<li><p>如果是字符串类型的字段，字段的长度较长，可以针对于字段的特点，建立前缀索引。</p>
+</li>
+<li><p>尽量使用联合索引，减少单列索引，查询时，联合索引很多时候可以覆盖索引，节省存储空间，避免回表，提高查询效率。</p>
+</li>
+<li><p>要控制索引的数量，索引并不是多多益善，索引越多，维护索引结构的代价也就越大，会影响增删改的效率</p>
+</li>
+</ul>
+<h4 id="通过索引查询数据，会经历几次磁盘IO"><a href="#通过索引查询数据，会经历几次磁盘IO" class="headerlink" title="通过索引查询数据，会经历几次磁盘IO"></a>通过索引查询数据，会经历几次磁盘IO</h4><p>这个要根据B+树的高度和查询的条件来判断</p>
+<p>如果查询建立了聚集索引，或者能够使用覆盖索引，就不需要回表，也就是需要B+树的层高次，</p>
+<p>否则要查两次索引，也就是两倍层高次</p>
+<h4 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h4><h5 id="插入数据优化"><a href="#插入数据优化" class="headerlink" title="插入数据优化"></a>插入数据优化</h5><ol>
+<li><p>批量插入数据 <code>Insert into tb_test values(1,&#39;Tom&#39;),(2,&#39;Cat&#39;),(3,&#39;Jerry&#39;); </code></p>
+</li>
+<li><p>手动控制事务 ，避免频繁开启、提交事务</p>
+<p><code>start transaction; insert into tb_test values(1,&#39;Tom&#39;),(2,&#39;Cat&#39;),(3,&#39;Jerry&#39;); insert into tb_test values(4,&#39;Tom&#39;),(5,&#39;Cat&#39;),(6,&#39;Jerry&#39;); insert into tb_test values(7,&#39;Tom&#39;),(8,&#39;Cat&#39;),(9,&#39;Jerry&#39;); commit;</code></p>
+</li>
+<li><p>主键顺序插入，性能要高于乱序插入，乱序插入会出现页分裂会降低效率。</p>
+</li>
+<li><p>一次性需要插入大批量数据(比如: 几百万的记录)，使用insert语句插入性能较低，可以使用MySQL数据库提供的load指令进行插入</p>
+<p><code>-- 客户端连接服务端时，加上参数 -–local-infile</code><br><code>mysql –-local-infile -u root -p</code><br><code>-- 设置全局参数local_infile为1，开启从本地加载文件导入数据的开关</code><br><code>set global local_infile = 1;</code><br><code>-- 执行load指令将准备好的数据，加载到表结构中</code><br><code>load data local infile &#39;/root/sql1.log&#39; into table tb_user fields terminated by &#39;,&#39; lines terminated by &#39;\n&#39; ;</code></p>
+</li>
+</ol>
+<h5 id="主键优化"><a href="#主键优化" class="headerlink" title="主键优化"></a>主键优化</h5><ul>
+<li>满足业务需求的情况下，尽量降低主键的长度。</li>
+<li>插入数据时，尽量选择顺序插入，选择使用AUTO_INCREMENT自增主键。</li>
+<li>尽量不要使用UUID做主键或者是其他自然主键，如身份证号。</li>
+<li>业务操作时，避免对主键的修改</li>
+</ul>
+<h5 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h5><ul>
+<li>根据排序字段建立合适的索引，多字段排序时，也遵循最左前缀法则。</li>
+<li>尽量使用覆盖索引。</li>
+<li>多字段排序, 一个升序一个降序，此时需要注意联合索引在创建时的规则（ASC&#x2F;DESC）。</li>
+<li>如果不可避免的出现filesort，大数据量排序时，可以适当增大排序缓冲区大小sort_buffer_size(默认256k)。</li>
+</ul>
+<h5 id="group-by优化"><a href="#group-by优化" class="headerlink" title="group by优化"></a>group by优化</h5><ul>
+<li>在分组操作时，可以通过索引来提高效率。</li>
+<li>分组操作时，索引的使用也是满足最左前缀法则的。</li>
+</ul>
+<h5 id="表连接优化"><a href="#表连接优化" class="headerlink" title="表连接优化"></a>表连接优化</h5><p>left join的情况下，对右表加索引，左表是驱动表，左连接就是左边都要查出来，所以左边还是all，但是右边是ref了。</p>
+<p>左连接的时候索引应该加在右表，右连接应该加在左表。</p>
+<h5 id="子查询怎么优化"><a href="#子查询怎么优化" class="headerlink" title="子查询怎么优化"></a>子查询怎么优化</h5><p>把子查询转化为表连接，建立索引实现优化</p>
+<h5 id="limit优化-深度分页怎么优化？"><a href="#limit优化-深度分页怎么优化？" class="headerlink" title="(limit优化)深度分页怎么优化？"></a>(limit优化)深度分页怎么优化？</h5><p>优化思路: 一般分页查询时，通过创建 覆盖索引 能够比较好地提高性能，可以通过覆盖索引加子查询形式进行优化</p>
+<p>先通过聚集索引查询主键，再利用覆盖索引来获取。</p>
+<p><code>select * from tb_sku limit 2000000, 10;</code> </p>
+<p>可以转换为：<code>explain select * from tb_sku t , (select id from tb_sku order by id limit 2000000,10) a where t.id = a.id;</code></p>
+<p>如果id或者其他有索引的字段是自增的，可以先通过索引找到偏移位置，再分页：</p>
+<p>select * from test_big_data where name like ‘itlgitlg%’ and id &gt; 800000 order by id asc limit 0,10</p>
+<h5 id="count优化"><a href="#count优化" class="headerlink" title="count优化"></a>count优化</h5><p>count(数字)：InoDB 引擎遍历整张表，但不取值。服务层对于返回的每一行，放一个数字“1”进去，直接按行进行累加。</p>
+<p>count(*)： InnoDB引擎并不会把全部字段取出来，而是专门做了优化，不取值，服务层直接按行进行累加。</p>
+<p>按照效率排序的话，count(字段) &lt; count(主键 id) &lt; count(1) ≈ count(<em>)，所以尽量使用 count(</em>)。</p>
+<h5 id="update优化"><a href="#update优化" class="headerlink" title="update优化"></a>update优化</h5><p>InnoDB的行锁是针对索引加的锁，不是针对记录加的锁 ,并且该索引不能失效，否则会从行锁升级为表锁 。</p>
+<h4 id="慢sql怎么看-怎么解决"><a href="#慢sql怎么看-怎么解决" class="headerlink" title="慢sql怎么看 怎么解决"></a>慢sql怎么看 怎么解决</h4><p>慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认10秒）的所有SQL语句的日志。如果要开启慢查询日志，需要在MySQL的配置文件（&#x2F;etc&#x2F;my.cnf）中配置如下信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 开启MySQL慢日志查询开关`</span><br><span class="line">`slow_query_log=1`</span><br><span class="line"></span><br><span class="line">`#设置慢日志的时间为2秒，SQL语句执行时间超过2秒，就会视为慢查询，记录慢查询日志`</span><br><span class="line">`long_query_time=2`</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#重启mysql服务</span><br><span class="line">`systemctl restart mysqld` </span><br></pre></td></tr></table></figure>
+
+<p>检查慢查询日志 ：在慢查询日志中，只会记录执行时间超多我们预设时间（2s）的SQL，执行较快的SQL是不会记录的。</p>
+<p>那这样，通过慢查询日志，就可以定位出执行效率比较低的SQL，从而有针对性的进行优化</p>
+<p><strong>用explain分析sql</strong></p>
+<h5 id="explain中的字段："><a href="#explain中的字段：" class="headerlink" title="explain中的字段："></a>explain中的字段：</h5><p>[explain有哪些字段，分别有什么含义_explain字段含义-CSDN博客](<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_50998273/article/details/111938295#:~:text=explain%E6%9C%89%E5%93%AA%E4%BA%9B%E5%AD%97%E6%AE%B5%EF%BC%8C%E5%88%86%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89">https://blog.csdn.net/weixin_50998273/article/details/111938295#:~:text=explain有哪些字段，分别有什么含义</a> 1 1. id SQL查询中的序列号。 id列数字越大越先执行，如果说数字一样大，那么就从上往下依次执行。 2 2.,查询真正使用到的索引。 … 8 8. key_len 查询用到的索引长度（字节数）。 … 更多项目)</p>
+<p>解决：</p>
+<ol>
+<li>SQL语句优化，尽量精简，去除非必要语句</li>
+<li>索引优化，让所有SQL都能够走索引</li>
+<li>如果是表的瓶颈问题，则分表，单表数据量维持在2000W（理论上）以内</li>
+<li>如果是单库瓶颈问题，则分库，读写分离</li>
+<li>如果是物理机器性能问题，则分多个数据库节点</li>
+</ol>
+<h4 id="怎么保证redis和DB的数据一致性"><a href="#怎么保证redis和DB的数据一致性" class="headerlink" title="怎么保证redis和DB的数据一致性"></a>怎么保证redis和DB的数据一致性</h4><h5 id="采用延时双删"><a href="#采用延时双删" class="headerlink" title="采用延时双删"></a>采用延时双删</h5><p>先删除缓存，再更新数据库，当更新数据后休眠一段时间通过定时任务（可通过整合定时任务框架、创建线程池，从中拿出一个线程休眠一段时间再启动）再删除一次缓存。</p>
+<h5 id="异步更新缓存-基于订阅binlog的同步机制"><a href="#异步更新缓存-基于订阅binlog的同步机制" class="headerlink" title="异步更新缓存(基于订阅binlog的同步机制)"></a>异步更新缓存(基于订阅binlog的同步机制)</h5><p>采用缓存淘汰策略，先更新数据库，再删除对应redis缓存后更新缓存。</p>
+<p><img src="/imgs/MySQL/image-20231007095757867.png" alt="image-20231007095757867"></p>
+<p>通过 Canal（消息推送工具也可以用kafka、rabbitMQ等来实现可靠性消息通信更新Redis。） 组件，（伪装成从节点）监控 Mysql 中 binlog（记录MySQL中新的写入、更新、删除等操作） 的日志，把更新后的数据同步到 Redis 里面，canal正是模仿了mysql的slave数据库的备份请求，使得Redis的数据更新达到了相同的效果。。</p>
+<p><img src="/imgs/MySQL/image-20231007095806660.png" alt="image-20231007095806660"></p>
+<p>因为这里是基于最终一致性来实现的，如果业务场景不能接受数据的短期不一致性，那就不能使用这个方案来做。</p>
+<h4 id="union和union-all的区别"><a href="#union和union-all的区别" class="headerlink" title="union和union all的区别"></a>union和union all的区别</h4><p>对于union查询，就是把多次查询的结果合并起来，形成一个新的查询结果集。<br>对于联合查询的多张表的列数必须保持一致，字段类型也需要保持一致。<br>union all 会将全部的数据直接合并在一起，union 会对合并之后的数据去重。</p>
+<h4 id="使用自增id还是UUID来当主键"><a href="#使用自增id还是UUID来当主键" class="headerlink" title="使用自增id还是UUID来当主键"></a>使用自增id还是UUID来当主键</h4><p>UUID。B+树使用双向链表来保存数据，所以使用自增id能够直接加到尾部，不需要页分裂，效率很高，且占用的空间小。但是如果一些敏感信息设置成自增就很容易被推理，暴露机密。</p>
+<p>同时当单表的数据量上来之后我们就需要进行水平分表操作（将一张数据表的数据分成多张表），如果这时我们还是按照之前的自增形式来做主键 id，就有可能会出现 id 重复的问题。</p>
+<p>如果使用UUID，生成的ID不仅是表独立的，而且是库独立的。对以后的数据操作很有好处，可以说一劳永逸。我们可以使用 UUID 来作为不重复的主键 id，但是 UUID 是无序的字符串，所以主键索引就会失效，而且占用空间大。</p>
+<ul>
+<li>全局唯一性：不能出现重复的 id</li>
+<li>递增性：MySQL 的 InnoDB 使用的是聚簇索引，由于多数 RDBMS 使用 B-tree 的数据结构来存储索引数据，因此在主键的选择上我们还是应该尽可能地使用有序的主键来保证写入性能，我们保证下一个 id 一定大于上一个 id，以此来满足事务版本号、IM 增量消息或者排序的特殊需求</li>
+<li>安全性：如果 id 是连续的，那么我们在知道一些基本规则的情况下就能很轻松地推测出下一份数据，这在一些机密性较高的业务场景是很危险的。所以我们有时会希望 id 是无规则的，最好还能包含有时间戳，这样就能够在开发中快速了解这个分布式 id 的生成时间</li>
+<li>高性能高可用性：确保在任何时候都能正确地生成 id，并且在高并发的环境下也能表现良好</li>
+</ul>
+<p>UUID：我们可以使用 UUID 来作为不重复的主键 id，但是 UUID 是无序的字符串，所以主键索引就会失效</p>
+<p>优点：简单、方便、性能好、出现数据拆分、合并存储的时候，能达到全局的唯一性<br>缺点：占用空间大，无序性、存储的是字符串、查询效率低、传输数据量大</p>
+<p>雪花算法：雪花算法是 Twitter 推出的针对分布式环境下的 id 生成算法，其结果是一个 Long 型的 64bit id。具体实现上使用 41bit 作为毫秒数，10bit 作为机器的 id（5bit 是数据中心，5bit 是机器 id），12bit 作为毫秒内的流水号（这意味着每个节点在每毫秒内可以产生 4096 个 id），最后还有一个符号位永远是 0</p>
+<p>优点：不依赖数据库、完全在内存中生成 id、高性能高可用、容量大、每秒可生成数百万个 id、id 递增、后续插入数据库的索引时性能较高<br>缺点：严重依赖系统时钟，如果某台机器的系统时钟发生回拨，就有可能会造成 id 冲突甚至 id 乱序</p>
+<h4 id="讲一讲mysql主从部署"><a href="#讲一讲mysql主从部署" class="headerlink" title="讲一讲mysql主从部署"></a>讲一讲mysql主从部署</h4><h5 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h5><p>主从复制是指将主数据库的 DDL 和 DML 操作通过二进制日志传到从库服务器中，然后在从库上对这些日志重新执行（也叫重做），从而使得从库和主库的数据保持同步。</p>
+<p>MySQL 复制的优点主要包含以下三个方面：<br>主库出现问题，可以快速切换到从库提供服务。<br>实现读写分离，降低主库的访问压力。<br>可以在从库中执行备份，以避免备份期间影响主库服务。</p>
+<h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>MySQL主从复制的核心就是 二进制日志，具体的过程如下：</p>
+<p><img src="/imgs/MySQL/image-20231007095821147.png" alt="image-20231007095821147"></p>
+<p>从上图来看，复制分成三步：</p>
+<ol>
+<li>Master 主库在事务提交时，会把数据变更记录在二进制日志文件 Binlog 中。</li>
+<li>从库读取主库的二进制日志文件 Binlog ，写入到从库的中继日志 Relay Log 。</li>
+<li>slave重做中继日志中的事件，将改变反映它自己的数据。</li>
+</ol>
+<h5 id="搭建主从环境："><a href="#搭建主从环境：" class="headerlink" title="搭建主从环境："></a>搭建主从环境：</h5><p>配置主库，修改配置文件 &#x2F;etc&#x2F;my.cnf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#mysql 服务ID，保证整个集群环境中唯一，取值范围：1 – 232-1，默认为1</span><br><span class="line">server-id=1</span><br><span class="line">#是否只读,1 代表只读, 0 代表读写</span><br><span class="line">read-only=0</span><br></pre></td></tr></table></figure>
+
+<p>重启MySQL服务器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysqld </span><br></pre></td></tr></table></figure>
+
+<p>登录mysql，创建远程连接的账号，并授予主从复制权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#创建itcast用户，并设置密码，该用户可在任意主机连接该MySQL服务</span><br><span class="line">CREATE USER &#x27;itcast&#x27;@&#x27;%&#x27; IDENTIFIED WITH mysql_native_password BY &#x27;Root@123456&#x27;</span><br><span class="line">;</span><br><span class="line">#为 &#x27;itcast&#x27;@&#x27;%&#x27; 用户分配主从复制权限</span><br><span class="line">GRANT REPLICATION SLAVE ON *.* TO &#x27;itcast&#x27;@&#x27;%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>通过指令，查看二进制日志坐标</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status ;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/imgs/MySQL/image-20231007095831175.png" alt="image-20231007095831175"></p>
+<p>字段含义说明：<br>file : 从哪个日志文件开始推送日志文件<br>position ： 从哪个位置开始推送日志<br>binlog_ignore_db : 指定不需要同步的数据库</p>
+<h5 id="从库配置"><a href="#从库配置" class="headerlink" title="从库配置"></a>从库配置</h5><p>修改配置文件 &#x2F;etc&#x2F;my.cnf</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#mysql 服务ID，保证整个集群环境中唯一，取值范围：1 – 2^32-1，和主库不一样即可</span><br><span class="line">server-id=2</span><br><span class="line">#是否只读,1 代表只读, 0 代表读写</span><br><span class="line">read-only=1</span><br></pre></td></tr></table></figure>
+
+<p>重新启动MySQL服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+
+<p>登录mysql，设置主库配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CHANGE REPLICATION SOURCE TO SOURCE_HOST=&#x27;192.168.200.200&#x27;, SOURCE_USER=&#x27;itcast&#x27;,</span><br><span class="line">SOURCE_PASSWORD=&#x27;Root@123456&#x27;, SOURCE_LOG_FILE=&#x27;binlog.000004&#x27;,</span><br><span class="line">SOURCE_LOG_POS=663;</span><br><span class="line">或者</span><br><span class="line">CHANGE MASTER TO MASTER_HOST=&#x27;192.168.200.200&#x27;, MASTER_USER=&#x27;itcast&#x27;,</span><br><span class="line">MASTER_PASSWORD=&#x27;Root@123456&#x27;, MASTER_LOG_FILE=&#x27;binlog.000004&#x27;,</span><br><span class="line">MASTER_LOG_POS=663;</span><br></pre></td></tr></table></figure>
+
+<p>开启同步操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">start replica ; #8.0.22之后</span><br><span class="line">start slave ; #8.0.22之前</span><br></pre></td></tr></table></figure>
+
+<p>查看主从同步状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show replica status ; #8.0.22之后</span><br><span class="line">show slave status ; #8.0.22之前</span><br></pre></td></tr></table></figure>
+
+<p><img src="/imgs/MySQL/image-20231007095843632.png" alt="image-20231007095843632"></p>
+<h4 id="mysql：死锁是什么？-实习中你有遇到死锁的情况吗"><a href="#mysql：死锁是什么？-实习中你有遇到死锁的情况吗" class="headerlink" title="mysql：死锁是什么？ 实习中你有遇到死锁的情况吗"></a>mysql：死锁是什么？ 实习中你有遇到死锁的情况吗</h4><p>简单来说就是两个或者两个以上的线程在执行的过程中，争夺同一个共享资源造成的相互等待的现象。如果没有外部干预，线程会一直阻塞无法往下执行，这些一直处于相互等待资源的线程就称为死锁线程。</p>
+<p>解决方法：尽量使用相同的顺序来访问索引记录和表，可以实现对数据排序，保证每个线程按照固定的顺序来处理。</p>
+<h4 id="MySQL三大范式"><a href="#MySQL三大范式" class="headerlink" title="MySQL三大范式"></a>MySQL三大范式</h4><ul>
+<li><h5 id="第一范式（1-NF）：字段不可再拆分。"><a href="#第一范式（1-NF）：字段不可再拆分。" class="headerlink" title="第一范式（1 NF）：字段不可再拆分。"></a>第一范式（1 NF）：字段不可再拆分。</h5><p><img src="/imgs/MySQL/image-20231007095856953.png" alt="image-20231007095856953"></p>
+</li>
+<li><h5 id="第二范式（2-NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。"><a href="#第二范式（2-NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。" class="headerlink" title="第二范式（2 NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。"></a>第二范式（2 NF）：表中任意一个主键或任意一组联合主键，可以确定除该主键外的所有的非主键值。</h5><ol>
+<li>造成整表的数据冗余。</li>
+</ol>
+<p>如，学生表，可能我就只有2个学生，每个学生都有许多的信息，比如，年龄、性别、身高、住址……如果与课程信息放到同一张表中，可能每个学生有3门课程，那数据总条数就会变成6条了。但是通过拆分，学生表我们只需要存储 2 条学生信息，课程表只需要存储 3 条课程信息，成绩表就只需保留学号、课程名称和成绩字段。</p>
+<ol start="2">
+<li>更新数据不方便。</li>
+</ol>
+<p>假设，课程的学分发生了变更，那我们就需要把整表关于该课程的学分都要更新一次，但如果我们拆分出课程表，那我们就只需要把课程表中的课程信息更新就行。</p>
+<ol start="3">
+<li>插入数据不方便或产生异常。</li>
+</ol>
+<p>① 假设主键是学号或课程名称，我们新增了某个课程，需要把数据插入到表中，这时，可能只有部分人有选修这门课程，那我们插入数据的时候还要规定给哪些人插入对应的课程信息，同时可能由于成绩还没有，我们需要对成绩置空，后续有成绩后还得重新更新一遍。</p>
+<p>② 假设主键是学号和课程名称的联合主键。同样也是新增了某课程，但是暂时没有人选修这门课，缺少了学号主键字段数据，会导致课程信息无法插入。</p>
+</li>
+<li><h5 id="第三范式（3-NF）：在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段-A-可以获取-某非主键字段-B。"><a href="#第三范式（3-NF）：在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段-A-可以获取-某非主键字段-B。" class="headerlink" title="第三范式（3 NF）：在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段 A 可以获取 某非主键字段 B。"></a>第三范式（3 NF）：在任一主键都可以确定所有非主键字段值的情况下，不能存在某非主键字段 A 可以获取 某非主键字段 B。</h5></li>
+</ul>
+<h4 id="undo-log"><a href="#undo-log" class="headerlink" title="undo log"></a>undo log</h4><ul>
+<li>回滚日志，用于记录数据被修改前的信息 , 作用包含两个 : 提供回滚(保证事务的原子性) 和MVCC(多版本并发控制) 。</li>
+<li>undo log和redo log记录物理日志不一样，它是逻辑日志。可以认为当delete一条记录时，undolog中会记录一条对应的insert记录，反之亦然，当update一条记录时，它记录一条对应相反的update记录。当执行rollback时，就可以从undo log中的逻辑记录读取到相应的内容并进行回滚。</li>
+<li>Undo log销毁：undo log在事务执行时产生，事务提交时，并不会立即删除undo log，因为这些日志可能还用于MVCC。</li>
+</ul>
+<h4 id="redo-log"><a href="#redo-log" class="headerlink" title="redo log"></a>redo log</h4><p>该日志文件由两部分组成：重做日志缓冲（redo log buffer）以及重做日志文件（redo logfile）,前者是在内存中，后者在磁盘中。当事务提交之后会把所有修改信息都存到该日志文件中, 用于在刷新脏页到磁盘,发生错误时, 进行数据恢复使用。</p>
+<p><img src="/imgs/MySQL/image-20231007095915993.png" alt="image-20231007095915993"></p>
+<p>有了redolog之后，当对缓冲区的数据进行增删改之后，会首先将操作的数据页的变化，记录在redolog buffer中。在事务提交时，会将redo log buffer中的数据刷新到redo log磁盘文件中。过一段时间之后，如果刷新缓冲区的脏页到磁盘时，发生错误，此时就可以借助于redo log进行数据恢复，这样就保证了事务的持久性。 而如果脏页成功刷新到磁盘 或 或者涉及到的数据已经落盘，此时redolog就没有作用了，就可以删除了，所以存在的两个redolog文件是循环写的。</p>
+<h4 id="MySQL如何解决幻读"><a href="#MySQL如何解决幻读" class="headerlink" title="MySQL如何解决幻读"></a>MySQL如何解决幻读</h4><p><strong>快照读</strong></p>
+<p>快照读，读取的是<strong>快照数据</strong>，不加锁的普通 SELECT 都属于快照读。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span></span><br><span class="line">复制代码<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> ...</span><br></pre></td></tr></table></figure>
+
+<p>通过mvcc机制来解决幻读</p>
+<p><strong>当前读</strong></p>
+<p>当前读就是读的是<strong>最新数据</strong>，而不是历史的数据，加锁的 SELECT，或者对数据进行增删改都会进行当前读。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> <span class="keyword">table</span> LOCK <span class="keyword">IN</span> SHARE MODE;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span> <span class="keyword">values</span> ...</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> ...</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">table</span> <span class="keyword">SET</span> ...</span><br></pre></td></tr></table></figure>
+
+<p>在当前读的条件下，InnoDB使用 next-key 锁进行搜索和索引扫描，以防止幻读。</p>
+<ul>
+<li>索引上的等值查询(唯一索引)，给不存在的记录加锁时, 优化为间隙锁 。</li>
+<li>索引上的等值查询(非唯一普通索引)，向右遍历时最后一个值不满足查询需求时，next-key lock 退化为间隙锁。</li>
+<li>索引上的范围查询(唯一索引)–会访问到不满足条件的第一个值为止。</li>
+</ul>
+<p><em>间隙锁唯一目的是防止其他事务插入间隙。间隙锁可以共存，一个事务采用的间隙锁不会</em><br><em>阻止另一个事务在同一间隙上采用间隙锁。</em></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7056583607929798692">MySQL 如何解决幻读（MVCC 原理分析） - 掘金 (juejin.cn)</a></p>
+<h4 id="MVCC机制"><a href="#MVCC机制" class="headerlink" title="MVCC机制"></a>MVCC机制</h4><p>详见<a target="_blank" rel="noopener" href="https://juejin.cn/post/7016165148020703246#heading-24">看一遍就理解：MVCC原理详解 - 掘金 (juejin.cn)</a></p>
+<p>InnoDB还会自动的给我们添加三个隐藏字段及其含义分别是</p>
+<p><img src="/imgs/MySQL/image-20231007095927862.png" alt="image-20231007095927862"></p>
+<p>全称 Multi-Version Concurrency Control，多版本并发控制。指维护一个数据的多个版本，使得读写操作没有冲突，快照读为MySQL实现MVCC提供了一个非阻塞读功能。MVCC的具体实现，还需要依赖于数据库记录中的三个隐式字段、undo log日志、readView。</p>
+<p>当某个事务执行第一条修改语句时，会记录undo log日志，记录数据变更之前的样子; 然后更新记录，<br>并且记录本次操作的事务ID，回滚指针，回滚指针用来指定如果发生回滚，回滚到哪一个版本。</p>
+<p><img src="/imgs/MySQL/image-20231007095937632.png" alt="image-20231007095937632"></p>
+<p>最终我们发现，不同事务或相同事务对同一条记录进行修改，会导致该记录的undolog生成一条<br>记录版本链表，链表的头部是最新的旧记录，链表尾部是最早的旧记录。</p>
+<p>ReadView（读视图）是快照读 SQL执行时MVCC提取数据的依据，记录并维护系统当前活跃的事务（未提交的）id。</p>
+<p><strong>RC隔离级别下，在事务中每一次执行快照读时生成ReadView。</strong></p>
+<p><strong>RR隔离级别下，仅在事务中第一次执行快照读时生成ReadView，后续复用该ReadView</strong></p>
+<p>ReadView中包含了四个核心字段：</p>
+<p><img src="/imgs/MySQL/image-20231007095944831.png" alt="image-20231007095944831"></p>
+<p>而在readview中就规定了版本链数据的访问规则：<br>trx_id 代表当前undolog版本链对应事务ID。</p>
+<p><img src="/imgs/MySQL/image-20231007095952369.png" alt="image-20231007095952369"></p>
+<h4 id="MySQL-事务的可重复读和读已提交，Read-View-时机"><a href="#MySQL-事务的可重复读和读已提交，Read-View-时机" class="headerlink" title="MySQL 事务的可重复读和读已提交，Read View 时机"></a>MySQL 事务的可重复读和读已提交，Read View 时机</h4><ul>
+<li>READ COMMITTED ：在事务中每一次执行快照读时生成ReadView。</li>
+<li>REPEATABLE READ：仅在事务中第一次执行快照读时生成ReadView，后续复用该ReadView。</li>
+</ul>
+<h4 id="乐观锁与悲观锁，在MySQL中怎么实现"><a href="#乐观锁与悲观锁，在MySQL中怎么实现" class="headerlink" title="乐观锁与悲观锁，在MySQL中怎么实现"></a>乐观锁与悲观锁，在MySQL中怎么实现</h4><p>悲观锁，比较消极的一种锁处理方式。直接在操作数据时，抢占锁。其他的事务在进行时就会等待，直到占有锁的事务释放锁为止。</p>
+<p>​    这种处理方式能保证数据的最大一致性，但是容易导致锁超时、并发程度低等问题。 首先我们开启事务一，并且对id&#x3D;1的数据进行update操作，此时我们不提交事务。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql root@127.0.0.1:demo&gt; begin;</span><br><span class="line">Query OK, 0 rows affected</span><br><span class="line">Time: 0.002s</span><br><span class="line">mysql root@127.0.0.1:demo&gt; update `user` set name = &#x27;张三111111&#x27;where id = 1;</span><br><span class="line">Query OK, 1 row affected</span><br><span class="line">Time: 0.004s</span><br></pre></td></tr></table></figure>
+
+<p>​    接着我们开启事务二，对id&#x3D;1的数据进行update操作，查看此时会发生什么情况？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql root@127.0.0.1:demo&gt; begin;</span><br><span class="line">Query OK, 0 rows affected</span><br><span class="line">Time: 0.002s</span><br><span class="line">mysql root@127.0.0.1:demo&gt; update `user` set sex = 1 where id = 1;</span><br></pre></td></tr></table></figure>
+
+<p>​    我们执行完update语句之后，就处于等待状态，SQL语句也不会马上被执行，这是因为事务一没有commit，也就没有释放id&#x3D;1的数据对应的写锁。</p>
+<p>乐观锁认为数据一般情况下不会造成冲突，只有当数据去执行修改情况时，才会针对数据冲突做处理。这里是如何发现冲突了呢？常规的方式，都是在数据行上加一个版本号或者时间戳等字段。(本文使用version作为版本号方式，使用时间戳方式同理)</p>
+<p>​    <strong>乐观锁的实现原理：</strong></p>
+<ul>
+<li>一个事务在读取数据时，将对应的版本号字段读取出来，假设此时的版本号是1。    </li>
+<li>另外一个事务也是执行同样的读取操作。当事务一提交时，对版本号执行+1，此时该数据行的版本号就是2。    </li>
+<li>第二个事务执行修改操作时，针对业务数据做条件，并默认增加一个版本号作为where条件。此时修改语句中的版本号字段是不满足where条件，该事务执行失败。通过这种方式来达到锁的功能。</li>
+</ul>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/07/MySQL/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/10/07/JVM/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            MySQL
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/10/06/JUC/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">JUC</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2016-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="xqr的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
