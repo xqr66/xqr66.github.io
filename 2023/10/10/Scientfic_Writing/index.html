@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="一个大三学生的简单个人博客" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Scientfic Writing Blogs |  xqr的博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="xqr的博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Scientfic_Writing"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Scientfic Writing Blogs
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/10/10/Scientfic_Writing/" class="article-date">
+  <time datetime="2023-10-10T15:32:50.000Z" itemprop="datePublished">2023-10-10</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">7 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="Do-you-know-the-underlying-implementation-of-ConcurrentHashMap-What-is-the-implementation-principle"><a href="#Do-you-know-the-underlying-implementation-of-ConcurrentHashMap-What-is-the-implementation-principle" class="headerlink" title="Do you know the underlying implementation of ConcurrentHashMap?What is the implementation principle?"></a>Do you know the underlying implementation of ConcurrentHashMap?What is the implementation principle?</h2><p>The overall architecture of ConcurrentHashMap</p>
+<p><img src="/./imgs/JUC%20-%20%E5%89%AF%E6%9C%AC/62cbc4a1232f4420ae9a8ba8348a7c3f.png" alt="img"></p>
+<p>This is the storage structure of ConcurrentHashMap in JDK1.8, which is composed of arrays,one-way linked list, red and black tree composition.</p>
+<p>When we initialize a ConcurrentHashMap instance, an array of length 16 is initialized by default.<br>Because the core of ConcurrentHashMap is still the hash table, there must be hash conflicts. ConcurrentHashMap uses chain addressing to resolve hash conflicts.</p>
+<p>If there are many hash conflicts, the length of the linked list will be long. In this case, the query complexity of data elements in ConcurrentHashMap will become O(n). Therefore, in JDK1.8, a red-black tree mechanism is introduced.</p>
+<p>When the array length is greater than 64 and the list length is greater than or equal to 8, the single necklace list is converted to a red-black tree. In addition, with the dynamic expansion of ConcurrentHashMap, once the list length is less than 8, the red-black tree will degenerate into a unidirectional list.</p>
+<p>ConcurrentHashMap is optimized for performance</p>
+<p>It is mainly reflected in the following aspects:</p>
+<p>In JDK1.8, the ConcurrentHashMap lock granularity is one node in the array, but in JDK1.7, the lock is Segment, the lock scope is larger, and therefore the performance is lower.</p>
+<p>The introduction of red-black tree reduces the time complexity of data query. The time complexity of red-black tree is O(logn).</p>
+<p>(As shown in the figure), when the array length is not enough, ConcurrentHashMap needs to expand the array. In the implementation of expansion, ConcurrentHashMap introduces the mechanism of multi-thread concurrent expansion. Simply put, after multiple threads fragment the original array, each thread is responsible for one fragment of data and this improves the efficiency of data migration during capacity expansion</p>
+<p><img src="/./imgs/JUC%20-%20%E5%89%AF%E6%9C%AC/b191f27fcc22418696ec34a6766db5b8.png" alt="img"></p>
+<p>In summary</p>
+<p>There are many design ideas in ConcurrentHashMap that are worth learning and learning from.<br>For example, lock granularity control, segmented lock design, etc., they can be applied in actual business scenarios.</p>
+<h2 id="Why-does-ConcurrentHashMap-not-allow-null-values-to-be-inserted-but-HashMap-does"><a href="#Why-does-ConcurrentHashMap-not-allow-null-values-to-be-inserted-but-HashMap-does" class="headerlink" title="Why does ConcurrentHashMap not allow null values to be inserted, but HashMap does?"></a>Why does ConcurrentHashMap not allow null values to be inserted, but HashMap does?</h2><h5 id="Why-does-ConcurrentHashMap-not-allow-null-values-to-be-inserted"><a href="#Why-does-ConcurrentHashMap-not-allow-null-values-to-be-inserted" class="headerlink" title="Why does ConcurrentHashMap not allow null values to be inserted?"></a>Why does ConcurrentHashMap not allow null values to be inserted?</h5><p>The default condition is ConcurrentHashMap in a multithreaded environment and HashMap in a single-threaded environment</p>
+<p>The key and value of ConcurrentHashMap cannot be null mainly to avoid ambiguity. null is a special value that means there are no objects or no references. (If you use null as a key, you can’t tell if the key exists in the ConcurrentHashMap or if it doesn’t exist at all.) Similarly, if you use null as a value, you cannot tell whether the value is actually stored in the ConcurrentHashMap or whether it was returned because the corresponding key could not be found.</p>
+<p>Take the get method value for example, there are two cases in which the return result is null:</p>
+<ul>
+<li><p>The value is not in the set;</p>
+</li>
+<li><p>The value itself is null.</p>
+</li>
+</ul>
+<p>This is where ambiguity comes in.</p>
+<p>In a multi-threaded environment, when one thread operates the ConcurrentHashMap, other threads modify the ConcurrentHashMap. Therefore, the containsKey(key) cannot be used to determine whether the key pair exists. Therefore, the ambiguity problem cannot be solved.</p>
+<p>For example, we now have thread T1 calling ConcurrentHashMap’s containsKey(key) method, and we expect the result to be false, that is, T1 does not put a null value into the ConcurrentHashMap. However, just by accident, before thread T1 can get the result, thread T2 calls the ConcurrentHashMap put() method, inserts a Key, and stores a null Value. Then, the result returned by thread T1 is true.</p>
+<p>If you do need to use null in ConcurrentHashMap, you can use a special static empty object instead of null.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">NULL</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br></pre></td></tr></table></figure>
+
+<p>In contrast, a HashMap can store null keys and values, but there can be only one null as a key and multiple null as a value. If null is passed in as an argument, the value of the location where the hash value is 0 is returned. HashMap is designed to be used by single threads, so if we get a null value, we can use HashMap’s containsKey(key) method to distinguish between the null value and the insert value. Or a null value that was not returned in the first place. In a single-threaded environment, when one thread operates the HashMap, other threads do not modify the HashMap. Therefore, you can determine whether the key and value pair exists by using the contains(key) rule. Therefore, the ambiguity problem does not exist.</p>
+<p>In other words, it is not possible to correctly determine whether a key-value pair exists under multiple threads (there is a case of modification by other threads), and it is possible for a single thread (there is no case of modification by other threads).</p>
+<h2 id="Difference-between-String-str-“abc”-and-String-str-new-String-“abc”"><a href="#Difference-between-String-str-“abc”-and-String-str-new-String-“abc”" class="headerlink" title="Difference between String str &#x3D; “abc” and String str &#x3D; new String(“abc”)"></a>Difference between String str &#x3D; “abc” and String str &#x3D; new String(“abc”)</h2><p>The principle of String str &#x3D;”abc”, when created as a literal, the JVM will first go to the string constant pool to find if the “abc” object exists, if it does not exist, create the string, and return the address to the “str”. If present, return the address of the string “abc” directly to ‘str’.</p>
+<p><img src="/./imgs/JUC%20-%20%E5%89%AF%E6%9C%AC/16e1f7c1f13d9561tplv-t2oaga2asx-jj-mark3024000q75-1696302993864-1-1697092469893-5.webp" alt="img"></p>
+<p>‘String str &#x3D; new String(“abc”)’ is created with the keyword ‘new’, ‘JVM’ will also look for this string in the string constant pool, if not, it will first create the string “abc” in the string constant pool. Then make a copy and put it on the heap and return the address to ‘str’. If the string is present in the string constant pool, then just make a copy and put it on the heap and return the address to str.</p>
+<p><img src="/./imgs/JUC%20-%20%E5%89%AF%E6%9C%AC/16e1f8c6aa324edetplv-t2oaga2asx-jj-mark3024000q75-1696303002110-3.webp" alt="img"></p>
+<h2 id="ConcurrentHashMap-Why-is-thread-safe"><a href="#ConcurrentHashMap-Why-is-thread-safe" class="headerlink" title="ConcurrentHashMap Why is thread-safe?"></a>ConcurrentHashMap Why is thread-safe?</h2><p>Adding an element first determines if the container is empty,</p>
+<ul>
+<li><p>If it is empty, use volatile plus CAS to initialize it. This prevents multiple threads from initializing at the same time, which may cause concurrency problems.</p>
+</li>
+<li><p>If the container is not empty, calculate whether the location is empty based on the stored element.</p>
+</li>
+<li><p>If the result bucket is empty according to the stored elements, CAS is used to set this node to avoid concurrency conflicts.</p>
+</li>
+</ul>
+<p>If you calculate whether the bucket is empty based on the stored element, then use synchronized to lock the header of the bucket list. Then, iterate over the data in the bucket, update or add the node to the bucket according to the hash value and key.</p>
+<ul>
+<li><p>If the hash value of the head node in the bucket is MOVED (-1), it indicates that the map is being expanded. At this time, the list in the bucket will be locked to help expand the map, and a new table will be put after the expansion is complete</p>
+</li>
+<li><p>Finally decide if you need to change to a red-black tree. This ensures thread safety during concurrent access.</p>
+</li>
+</ul>
+<p>Set multiple accumulator cells to calculate the value of size() to prevent concurrent counting errors.</p>
+<ul>
+<li>When thread contention is not intense, the CAS baseCount operation is used to increase the number of elements by atoms.</li>
+<li>If thread contention is intense, use an array to maintain the number of elements, if you want to increase the total number of elements, directly select a random element from the array, and then use CAS to achieve atomic increments, and then go through all the values in the group and baseCount. Its core idea is to introduce arrays to implement the load on concurrent updates.</li>
+</ul>
+<p>Summary: ConcurrentHashMap ensures thread-safe by ** locking array headers ** and ** CAS initialization **.</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2023/10/10/Scientfic_Writing/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/10/07/JVM/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">JVM</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2016-2023
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="xqr的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
