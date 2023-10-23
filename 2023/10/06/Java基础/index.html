@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">8.8k</span>
+            <span class="post-count">12.7k</span>
         </span>
     </span>
 
@@ -92,7 +92,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">32 min</span>
+            <span class="post-count">46 min</span>
         </span>
     </span>
 </div>
@@ -107,12 +107,27 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><h4 id="java的访问权限有哪些"><a href="#java的访问权限有哪些" class="headerlink" title="java的访问权限有哪些"></a>java的访问权限有哪些</h4><h5 id="类的成员变量和方法访问权限"><a href="#类的成员变量和方法访问权限" class="headerlink" title="类的成员变量和方法访问权限"></a>类的成员变量和方法访问权限</h5><table>
+  <h2 id="Java基础"><a href="#Java基础" class="headerlink" title="Java基础"></a>Java基础</h2><h3 id="基本数据类型与权限"><a href="#基本数据类型与权限" class="headerlink" title="基本数据类型与权限"></a>基本数据类型与权限</h3><h4 id="基本类型和包装类型的区别"><a href="#基本类型和包装类型的区别" class="headerlink" title="基本类型和包装类型的区别"></a><strong>基本类型和包装类型的区别</strong></h4><h5 id="1-基本类型有初始值，而包装类型的默认值是null"><a href="#1-基本类型有初始值，而包装类型的默认值是null" class="headerlink" title="1.基本类型有初始值，而包装类型的默认值是null"></a>1.基本类型有初始值，而包装类型的默认值是null</h5><h5 id="2-包装类型可以为-null，而基本类型不可以"><a href="#2-包装类型可以为-null，而基本类型不可以" class="headerlink" title="2.包装类型可以为 null，而基本类型不可以"></a>2.包装类型可以为 null，而基本类型不可以</h5><p>数据库的查询结果可能是null，因为自动拆箱，用基本数据类型接收有<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=NPE&spm=1001.2101.3001.7020">NPE</a>（NullPointerException）风险。</p>
+<h5 id="3-存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用"><a href="#3-存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用" class="headerlink" title="3.存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用"></a>3.存储位置有所区别：基本类型是成员变量就存储在<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%A0%86%E5%86%85%E5%AD%98&spm=1001.2101.3001.7020">堆内存</a>里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用</h5><h5 id="4-包装类型可用于泛型，而基本类型不可以"><a href="#4-包装类型可用于泛型，而基本类型不可以" class="headerlink" title="4.包装类型可用于泛型，而基本类型不可以"></a>4.包装类型可用于泛型，而基本类型不可以</h5><p>如果我们这么写<br>List<int> a &#x3D; new ArrayList&lt;&gt;();<br>编译器会报错：Type argument cannot be of primitive type(类型参数不能为基本类型)<br>这是为什么呢？因为泛型信息只存在于代码编译阶段，在进入 JVM 之前，与泛型相关的信息会被擦除掉，专业术语叫做类型擦除，最后只保留原始类型，而原始类型只能是 Object 类及其子类。</p>
+<h5 id="5-在使用“-”进行判断的时候的不同"><a href="#5-在使用“-”进行判断的时候的不同" class="headerlink" title="5.在使用“&#x3D;&#x3D;”进行判断的时候的不同"></a>5.在使用“&#x3D;&#x3D;”进行判断的时候的不同</h5><p>基本数据类型会直接比较值是否相同，而包装数据类型用“&#x3D;&#x3D;”判断比较的是地址值（在-128 – 127之间会共用内部类的cache），真正判断是否相等需要用equals()。</p>
+<ol start="6">
+<li>自动装箱和自动拆箱<br>把基本类型转换成包装类型的过程叫做装箱（boxing）。反之，把包装类型转换成基本类型的过程叫做拆箱（unboxing）。</li>
+</ol>
+<p>1）基本类型和包装类型进行 &#x3D;&#x3D; 比较，包装类型会自动拆箱，直接和基本类型比较值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int a = 9;</span><br><span class="line">Integer b = 9;</span><br><span class="line">System.out.println(a == b);</span><br></pre></td></tr></table></figure>
+
+
+<p>上述代码的结果为 true。</p>
+<p>2）当需要进行自动装箱时，如果数字在 -128 至 127 之间，会直接使用缓存中的对象，而不是重新创建一个对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer A = 199;  </span><br><span class="line">int a = A;  </span><br></pre></td></tr></table></figure>
+
+<p>执行第一句代码的时候，系统为我们执行了：<br>Integer A &#x3D; Integer.valueOf(199);<br>执行第二句代码的时候，系统为我们执行了：<br>int a &#x3D; A.intValue();</p>
+<h4 id="java的访问权限有哪些"><a href="#java的访问权限有哪些" class="headerlink" title="java的访问权限有哪些"></a>java的访问权限有哪些</h4><h5 id="类的成员变量和方法访问权限"><a href="#类的成员变量和方法访问权限" class="headerlink" title="类的成员变量和方法访问权限"></a>类的成员变量和方法访问权限</h5><table>
 <thead>
 <tr>
 <th>修饰符</th>
 <th>类内部</th>
-<th>同包</th>
+<th>同包（package）</th>
 <th>子类</th>
 <th>任何地方</th>
 </tr>
@@ -132,7 +147,7 @@
 <td></td>
 </tr>
 <tr>
-<td>包访问权限</td>
+<td>缺省</td>
 <td>Yes</td>
 <td>Yes</td>
 <td></td>
@@ -146,16 +161,62 @@
 <td></td>
 </tr>
 </tbody></table>
-<h5 id="类的访问权限"><a href="#类的访问权限" class="headerlink" title="类的访问权限"></a>类的访问权限</h5><p>类的访问权限仅有<strong>public</strong>和<strong>包访问权限</strong>， 如果一个类声明的时候用了<strong>public</strong>，则该类的类名必须与文件名一致，包括大小写，如果不匹配，会有编译错误</p>
-<h4 id="String-str-“abc”-和String-str-new-String-“abc”-的区别"><a href="#String-str-“abc”-和String-str-new-String-“abc”-的区别" class="headerlink" title="String str &#x3D; “abc” 和String str &#x3D; new String(“abc”)的区别"></a><strong>String str &#x3D; “abc” 和String str &#x3D; new String(“abc”)的区别</strong></h4><p><code>String str =&quot;abc&quot;</code>的原理，采用字面值的方式创建时，<code>JVM</code>会先去字符串常量池中去查找是否存在”abc”这个对象，如果不存在就创建这个字符串，并把地址返回给<code>str</code>。如果存在则直接把”abc”这个字符串的地址返回给<code>str</code>。</p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/16e1f7c1f13d9561tplv-t2oaga2asx-jj-mark3024000q75-1696302993864-1-1696643234832-1.webp" alt="img"></p>
-<p><code>String str = new String(&quot;abc&quot;)</code>采用<code>new</code>关键字的方式创建，<code>JVM</code>也会去字符串常量池中查找有没有这个字符串，如果没有的话，就先在字符串常量池里创建”abc”这个字符串，然后再复制一份放在堆里并把地址返回给<code>str</code>。如果字符串常量池里存在该字符串，那么就直接复制一份放在堆里并把地址返回给<code>str</code>。</p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/16e1f8c6aa324edetplv-t2oaga2asx-jj-mark3024000q75-1696303002110-3-1696643254308-3.webp" alt="img"></p>
-<h4 id="equals-的底层代码是什么"><a href="#equals-的底层代码是什么" class="headerlink" title="equals 的底层代码是什么?"></a>equals 的底层代码是什么?</h4><ol>
-<li>先使用&#x3D;&#x3D; 进行地址值的判断  </li>
-<li>判断equals()中的值是否为字符串  </li>
-<li>判断字符串的长度是否相同  </li>
-<li>循环遍历进行判断两个字符串是否相同</li>
+<table>
+<thead>
+<tr>
+<th align="left">权限修饰符</th>
+<th align="left">类</th>
+<th align="left">变量&#x2F;方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">public</td>
+<td align="left">包内外的类都可以访问</td>
+<td align="left">包内外的类都可以访问</td>
+</tr>
+<tr>
+<td align="left">protected</td>
+<td align="left">类不可以声明为protected</td>
+<td align="left">本包内的类和子类可以访问</td>
+</tr>
+<tr>
+<td align="left">不写</td>
+<td align="left">本包中的类可以访问</td>
+<td align="left">本包中的类可以访问</td>
+</tr>
+<tr>
+<td align="left">private</td>
+<td align="left">类不可以声明为private</td>
+<td align="left">只允许本类访问</td>
+</tr>
+</tbody></table>
+<h5 id="类的访问权限"><a href="#类的访问权限" class="headerlink" title="类的访问权限"></a>类的访问权限</h5><p>类的访问权限仅有<strong>public</strong>和<strong>default</strong>， 如果一个类声明的时候用了<strong>public</strong>，则该类的类名必须与文件名一致，包括大小写，如果不匹配，会有编译错误</p>
+<h4 id="Java的基本类型存储位置"><a href="#Java的基本类型存储位置" class="headerlink" title="Java的基本类型存储位置"></a><strong>Java的基本类型存储位置</strong></h4><ul>
+<li><p><strong>第一种</strong>: 在方法中声明的变量，即该变量是局部变量，每当程序调用方法时，系统都会为该方法建立一个方法栈，其所在方法中声明的变量就放在方法栈中，当方法结束系统会释放方法栈，其对应在该方法中声明的变量随着栈的销毁而结束，这就局部变量只能在方法中有效的原因</p>
+<p>（1）当声明是基本类型的变量的时，其变量名及值（变量名及值是两个概念）是放在方法栈中</p>
+<p>（2）当声明的是引用变量时，所声明的变量（该变量实际上是在方法中存储的是内存地址值）是放在方法的栈中，该变量所指向的对象是放在堆类存中的。</p>
+</li>
+<li><p><strong>第二种</strong> 在类中声明的变量是类的成员变量(全局变量),放在堆中</p>
+<ol>
+<li>声明的是基本类型的变量,其变量名及其值放在堆内存中</li>
+<li>声明的是引用类型时，其声明的变量仍然会存储一个内存地址值，该内存地址值指向所引用的对象。引用变量名和对应的对象仍然存储在相应的堆中。但与对象中的普通成员变量（局部变量）不同的是，它们的生命周期是在对象销毁时才结束的</li>
+</ol>
+</li>
+<li><p><strong>第三种</strong> 静态变量：</p>
+<p>​	静态变量随着类的加载而存在，是存储在方法区（Method Area）中的，而不是存储在栈或堆上，所以它的生命周期与程序的生命周期一样长。</p>
+<p><img src="/./imgs/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MjcxMjE2,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+</li>
+</ul>
+<h4 id="包装类的缓存"><a href="#包装类的缓存" class="headerlink" title="包装类的缓存"></a>包装类的缓存</h4><p>1、前提：发生自动装箱的过程（基本类型–&gt;包装类型）<br>创建一个包装类对象有两种方法：<br>（1）构造器方法（就是new出来）；<br>（2）自动装箱（就是编译器自动调用包装类的valueOf方法）；</p>
+<h5 id="两种方法的区别："><a href="#两种方法的区别：" class="headerlink" title="两种方法的区别："></a>两种方法的区别：</h5><p>构造器方法：不论值的大小，返回的将都会是一个新对象；<br>自动装箱会先经过判断，再决定返回的是一个新对象还是常量池中已存在的对象。</p>
+<p>2、机制：当通过自动装箱机制创建包装类对象时，首先会判断数值是否在缓存范围内，如果满足条件，则会从  该包装类中的静态内部类xxCache包装类 类型数组（放在方法区的常量池）中寻找指定数值，并返回缓存的对象，否则创建一个新的对象返回。</p>
+<p>3、原理：<br>（1）当包装类加载时，该包装类中的内部类xxCache会初始化一个包装类类型数组，最小值（固定值）为-128,而最大值（默认值）为127【可修改】，是所有线程共享的。</p>
+<h5 id="缓存的作用"><a href="#缓存的作用" class="headerlink" title="缓存的作用"></a>缓存的作用</h5><p>在缓存值范围内的对象可以直接在常量池中取出，不用创建新的对象；<br>当需要频繁的使用同一对象的时候，如果有缓存，则可以避免重复创建同一对象，节省空间开销和时间消耗，提升了性能。</p>
+<p><img src="/./imgs/image-20231003111615708.png" alt="image-20231003111615708"></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><h4 id="重载与重写的区别"><a href="#重载与重写的区别" class="headerlink" title="重载与重写的区别"></a>重载与重写的区别</h4><ol>
+<li>重写必须依赖于继承(父子关系) 将父类的的方法给完善。而重载不需要依赖继承关系，在自己的类中就可以实现。</li>
+<li>重写的方法名和参数列表必须和父类相同，如果父类没有这个方法，那么就不算重写。重载是在自身类中创建多个方法名相同但是参数类型或者个数不同的方法。</li>
+<li>重写的参数不能修改，而重载的参数必须修改。</li>
 </ol>
 <h4 id="object中的hashcode-方法是做什么用的"><a href="#object中的hashcode-方法是做什么用的" class="headerlink" title="object中的hashcode()方法是做什么用的"></a>object中的hashcode()方法是做什么用的</h4><p>这是因为在一些容器（比如 <code>HashMap</code>、<code>HashSet</code>）中，有了 <code>hashCode()</code> 之后，判断元素是否在对应容器中的效率会更高（参考添加元素进<code>HashSet</code>的过程）！</p>
 <p>我们在前面也提到了添加元素进<code>HashSet</code>的过程，如果 <code>HashSet</code> 在对比的时候，同样的 <code>hashCode</code> 有多个对象，它会继续使用 <code>equals()</code> 来判断是否真的相同。也就是说 <code>hashCode</code> 帮助我们大大缩小了查找成本。</p>
@@ -164,28 +225,30 @@
 <h4 id="为什么重写-equals-时必须重写-hashCode-方法？"><a href="#为什么重写-equals-时必须重写-hashCode-方法？" class="headerlink" title="为什么重写 equals() 时必须重写 hashCode() 方法？"></a>为什么重写 equals() 时必须重写 hashCode() 方法？</h4><p>因为两个相等的对象的 <code>hashCode</code> 值必须是相等。也就是说如果 <code>equals</code> 方法判断两个对象是相等的，那这两个对象的 <code>hashCode</code> 值也要相等。</p>
 <p>如果重写 <code>equals()</code> 时没有重写 <code>hashCode()</code> 方法的话就可能会导致 <code>equals</code> 方法判断是相等的两个对象，<code>hashCode</code> 值却不相等。</p>
 <p>再map集合中，如果只重写equals方法，那么两个相同对象hashcode可能不同，会存在多个key相同的情况。</p>
-<h4 id="基本类型和包装类型的区别"><a href="#基本类型和包装类型的区别" class="headerlink" title="基本类型和包装类型的区别"></a><strong>基本类型和包装类型的区别</strong></h4><h5 id="1-基本类型有初始值，而包装类型的默认值是null"><a href="#1-基本类型有初始值，而包装类型的默认值是null" class="headerlink" title="1.基本类型有初始值，而包装类型的默认值是null"></a>1.基本类型有初始值，而包装类型的默认值是null</h5><h5 id="2-包装类型可以为-null，而基本类型不可以"><a href="#2-包装类型可以为-null，而基本类型不可以" class="headerlink" title="2.包装类型可以为 null，而基本类型不可以"></a>2.包装类型可以为 null，而基本类型不可以</h5><p>数据库的查询结果可能是null，因为自动拆箱，用基本数据类型接收有<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=NPE&spm=1001.2101.3001.7020">NPE</a>（NullPointerException）风险。</p>
-<h5 id="3-存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用"><a href="#3-存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用" class="headerlink" title="3.存储位置有所区别：基本类型是成员变量就存储在堆内存里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用"></a>3.存储位置有所区别：基本类型是成员变量就存储在<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%A0%86%E5%86%85%E5%AD%98&spm=1001.2101.3001.7020">堆内存</a>里，如果是局部变量就存储在栈内存里；而包装类型则存储的是堆中的引用</h5><h5 id="4-包装类型可用于泛型，而基本类型不可以"><a href="#4-包装类型可用于泛型，而基本类型不可以" class="headerlink" title="4.包装类型可用于泛型，而基本类型不可以"></a>4.包装类型可用于泛型，而基本类型不可以</h5><p>如果我们这么写<br>List<int> a &#x3D; new ArrayList&lt;&gt;();<br>编译器会报错：Type argument cannot be of primitive type(类型参数不能为基本类型)<br>这是为什么呢？因为泛型信息只存在于代码编译阶段，在进入 JVM 之前，与泛型相关的信息会被擦除掉，专业术语叫做类型擦除，最后只保留原始类型，而原始类型只能是 Object 类及其子类。</p>
-<h5 id="5-在使用“-”进行判断的时候的不同"><a href="#5-在使用“-”进行判断的时候的不同" class="headerlink" title="5.在使用“&#x3D;&#x3D;”进行判断的时候的不同"></a>5.在使用“&#x3D;&#x3D;”进行判断的时候的不同</h5><ol start="6">
-<li>自动装箱和自动拆箱<br>把基本类型转换成包装类型的过程叫做装箱（boxing）。反之，把包装类型转换成基本类型的过程叫做拆箱（unboxing）。</li>
-</ol>
-<p>1）基本类型和包装类型进行 &#x3D;&#x3D; 比较，包装类型会自动拆箱，直接和基本类型比较值</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int a = 9;</span><br><span class="line">Integer b = 9;</span><br><span class="line">System.out.println(a == b);</span><br></pre></td></tr></table></figure>
-
-
-<p>上述代码的结果为 true。</p>
-<p>2）当需要进行自动装箱时，如果数字在 -128 至 127 之间，会直接使用缓存中的对象，而不是重新创建一个对象。<br>这个知识我之前从未听闻，正是在写这篇文章的时候查看相关技术博客才了解到的，又学到了新知识！<br>我们先来看这么一段代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer A = 199;  </span><br><span class="line">int a = A;  </span><br></pre></td></tr></table></figure>
-
-<p>执行第一句代码的时候，系统为我们执行了：<br>Integer A &#x3D; Integer.valueOf(199);<br>执行第二句代码的时候，系统为我们执行了：<br>int a &#x3D; A.intValue();</p>
 <h4 id="object类中的常用方法的用处："><a href="#object类中的常用方法的用处：" class="headerlink" title="object类中的常用方法的用处："></a>object类中的常用方法的用处：</h4><p>1、 getClass()：获取类的class对象。<br>2、 hashCode:获取对象的hashCode值<br>3、 equals():比较对象是否相等，比较的是值和地址，子类可重写以自定义。<br>4、 clone()：克隆方法。<br>5、 toString():如果没有重写，应用对象将打印的是地址值。<br>6、 notify():随机选择一个在该对象上调用wait方法的线程，解除其阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>7、 notifyall():解除所有那些在该对象上调用wait方法的线程的阻塞状态。该方法只能在同步方法或同步块内部调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>8、 wait():导致线程进入等待状态，直到它被其他线程通过notify()或者notifyAll唤醒。该方法只能在同步方法中调用。如果当前线程不是锁的持有者，该方法抛出一个IllegalMonitorStateException异常。<br>9、 finalize()：对象回收时调用</p>
-<h4 id="包装类的缓存"><a href="#包装类的缓存" class="headerlink" title="包装类的缓存"></a>包装类的缓存</h4><p>1、前提：发生自动装箱的过程（基本类型–&gt;包装类型）<br>创建一个包装类对象有两种方法：<br>（1）构造器方法（就是new出来）；<br>（2）自动装箱（就是编译器自动调用包装类的valueOf方法）；</p>
-<h5 id="两种方法的区别："><a href="#两种方法的区别：" class="headerlink" title="两种方法的区别："></a>两种方法的区别：</h5><p>构造器方法：不论值的大小，返回的将都会是一个新对象；<br>自动装箱会先经过判断，再决定返回的是一个新对象还是常量池中已存在的对象。</p>
-<p>2、机制：当通过自动装箱机制创建包装类对象时，首先会判断数值是否在缓存范围内，如果满足条件，则会从  该包装类中的静态内部类xxCache包装类 类型数组（放在方法区的常量池）中寻找指定数值，并返回缓存的对象，否则创建一个新的对象返回。</p>
-<p>3、原理：<br>（1）当包装类加载时，该包装类中的内部类xxCache会初始化一个包装类类型数组，最小值（固定值）为-128,而最大值（默认值）为127【可修改】，是所有线程共享的。</p>
-<h5 id="缓存的作用"><a href="#缓存的作用" class="headerlink" title="缓存的作用"></a>缓存的作用</h5><p>在缓存值范围内的对象可以直接在常量池中取出，不用创建新的对象；<br>当需要频繁的使用同一对象的时候，如果有缓存，则可以避免重复创建同一对象，节省空间开销和时间消耗，提升了性能。</p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094746373.png" alt="image-20231007094746373"></p>
-<h4 id="数组和链表的不同"><a href="#数组和链表的不同" class="headerlink" title="数组和链表的不同"></a>数组和链表的不同</h4><table>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><h4 id="String-、StringBuffer和StringBuilder的区别"><a href="#String-、StringBuffer和StringBuilder的区别" class="headerlink" title="String 、StringBuffer和StringBuilder的区别"></a>String 、StringBuffer和StringBuilder的区别</h4><h5 id="1-可变性"><a href="#1-可变性" class="headerlink" title="1.可变性"></a>1.可变性</h5><p>​	String 内部的 value 值是 final 修饰的，所以它是不可变类。所以每次修改 String 的值，都会产生一个新的对象。<br>​	StringBuffer 和 StringBuilder 是可变类，字符串的变更不会产生新的对象。</p>
+<h5 id="2-线程安全性"><a href="#2-线程安全性" class="headerlink" title="2.线程安全性"></a>2.线程安全性</h5><p>​	String 是不可变类，所以它是线程安全的。<br>​	StringBuffer 是线程安全的，因为它每个操作方法都加了 synchronized 同步关键字。<br>​	StringBuilder 不是线程安全的。所以在多线程环境下对字符串进行操作，应该使用 StringBuffer，否则使用StringBuilder</p>
+<h5 id="3-性能方面。"><a href="#3-性能方面。" class="headerlink" title="3.性能方面。"></a>3.性能方面。</h5><p>​	String 的性能是最低的，因为不可变意味着在做字符串拼接和修改的时候，需要重新创建新的对象以及分配内存。<br>​	其次是 StringBuffer 要比 String 性能高，因为它的可变性使得字符串可以直接被修改<br>​	最后是 StringBuilder，它比 StringBuffer 的性能高，因为 StringBuffer 加了同步锁。</p>
+<h5 id="4-存储方面。"><a href="#4-存储方面。" class="headerlink" title="4.存储方面。"></a>4.存储方面。</h5><p>​	String 存储在字符串常量池里面<br>​	StringBuffer 和 StringBuilder 存储在堆内存空间。</p>
+<h4 id="StringBuffer、StringBuilder的扩容原理"><a href="#StringBuffer、StringBuilder的扩容原理" class="headerlink" title="StringBuffer、StringBuilder的扩容原理"></a>StringBuffer、StringBuilder的扩容原理</h4><p>扩容原理：</p>
+<p><code>StringBuffer</code>的底层数组结构用的是<code>char</code>类型的数组如果没有指定大小，默认大小为16，指定了大小，默认大小为（16 + 指定大小）。</p>
+<p>所以，当我们使用<code>StringBuffer</code>对象的<code>append(...)</code>方法追加数据时，</p>
+<ul>
+<li>如果数组长度可以容纳追加的数据，就直接追加到数组</li>
+<li>如果char类型数组的长度无法容纳我们追加的数据，<code>StringBuffer</code>就会进行扩容。</li>
+<li>扩容时会用到<code>Arrays</code>类中的<code>copyOf(...)</code>方法，每次扩容的容量大小是原来的容量的2倍（通过无符号左移）加2。</li>
+</ul>
+<h4 id="String-str-“abc”-和String-str-new-String-“abc”-的区别"><a href="#String-str-“abc”-和String-str-new-String-“abc”-的区别" class="headerlink" title="String str &#x3D; “abc” 和String str &#x3D; new String(“abc”)的区别"></a><strong>String str &#x3D; “abc” 和String str &#x3D; new String(“abc”)的区别</strong></h4><p><code>String str =&quot;abc&quot;</code>的原理，采用字面值的方式创建时，<code>JVM</code>会先去字符串常量池中去查找是否存在”abc”这个对象，如果不存在就创建这个字符串，并把地址返回给<code>str</code>。如果存在则直接把”abc”这个字符串的地址返回给<code>str</code>。</p>
+<p><img src="/./imgs/16e1f7c1f13d9561tplv-t2oaga2asx-jj-mark3024000q75-1696302993864-1.webp" alt="img"></p>
+<p><code>String str = new String(&quot;abc&quot;)</code>采用<code>new</code>关键字的方式创建，<code>JVM</code>也会去字符串常量池中查找有没有这个字符串，如果没有的话，就先在字符串常量池里创建”abc”这个字符串，然后再复制一份放在堆里并把地址返回给<code>str</code>。如果字符串常量池里存在该字符串，那么就直接复制一份放在堆里并把地址返回给<code>str</code>。</p>
+<p><img src="/./imgs/16e1f8c6aa324edetplv-t2oaga2asx-jj-mark3024000q75-1696303002110-3.webp" alt="img"></p>
+<h4 id="equals-的底层代码是什么"><a href="#equals-的底层代码是什么" class="headerlink" title="equals 的底层代码是什么?"></a>equals 的底层代码是什么?</h4><ol>
+<li>先使用&#x3D;&#x3D; 进行地址值的判断  </li>
+<li>判断equals()中的值是否为字符串  instanceof()方法</li>
+<li>判断字符串的长度是否相同  </li>
+<li>循环遍历进行判断两个字符串是否相同</li>
+</ol>
+<h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><h4 id="数组和链表的不同"><a href="#数组和链表的不同" class="headerlink" title="数组和链表的不同"></a>数组和链表的不同</h4><table>
 <thead>
 <tr>
 <th></th>
@@ -214,89 +277,196 @@
 <td>长度变化较大时，事先无法估量数据规模，当线性表要求频繁插入和删除时</td>
 </tr>
 </tbody></table>
-<h4 id="抽象类接口什么不同"><a href="#抽象类接口什么不同" class="headerlink" title="抽象类接口什么不同"></a>抽象类接口什么不同</h4><p><strong>抽象类</strong>：在Java中被abstract关键字修饰的类称为抽象类，被abstract关键字修饰的方法称为抽象方法，抽象方法只有方法的声明，没有方法体。抽象类的特点：</p>
-<p>a、抽象类不能被实例化只能被继承；</p>
-<p>b、包含抽象方法的一定是抽象类，但是抽象类不一定含有抽象方法；</p>
-<p>c、抽象类中的抽象方法的修饰符只能为public或者protected，默认为public；</p>
-<p>d、一个子类继承一个抽象类，则子类必须实现父类抽象方法，否则子类也必须定义为抽象类；</p>
-<p>e、抽象类可以包含属性、方法、构造方法，但是构造方法不能用于实例化，主要用途是被子类调用。</p>
-<p>*<strong>接口*：</strong>Java中接口使用interface关键字修饰，特点为:</p>
-<p>a、接口可以包含变量、方法；变量被隐士指定为public static final，方法被隐士指定为public abstract（JDK1.8之前）；</p>
-<p>b、接口支持多继承，即一个接口可以extends多个接口，间接的解决了Java中类的单继承问题；</p>
-<p>c、一个类可以实现多个接口；</p>
-<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a><strong>相同点</strong></h5><p>（1）都不能被实例化 （2）接口的实现类或抽象类的子类都只有实现了接口或抽象类中的方法后才能实例化。</p>
-<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a><strong>不同点</strong></h5><p>（1）接口只有定义，不能有方法的实现，java 1.8中可以定义default方法体，而抽象类可以有定义与实现，方法可在抽象类中实现。</p>
-<p>（2）实现接口的关键字为implements，继承抽象类的关键字为extends。一个类可以实现多个接口，但一个类只能继承一个抽象类。所以，使用接口可以间接地实现多重继承。</p>
-<p>（3）接口强调特定功能的实现，而抽象类强调所属关系。</p>
-<h4 id="Java的基本类型的成员变量在栈还是堆？"><a href="#Java的基本类型的成员变量在栈还是堆？" class="headerlink" title="Java的基本类型的成员变量在栈还是堆？"></a><strong>Java的基本类型的成员变量在栈还是堆？</strong></h4><ul>
-<li><p><strong>第一种</strong>: 在方法中声明的变量，即该变量是局部变量，每当程序调用方法时，系统都会为该方法建立一个方法栈，其所在方法中声明的变量就放在方法栈中，当方法结束系统会释放方法栈，其对应在该方法中声明的变量随着栈的销毁而结束，这就局部变量只能在方法中有效的原因</p>
-<p>（1）当声明是基本类型的变量的时，其变量名及值（变量名及值是两个概念）是放在方法栈中</p>
-<p>（2）当声明的是引用变量时，所声明的变量（该变量实际上是在方法中存储的是内存地址值）是放在方法的栈中，该变量所指向的对象是放在堆类存中的。</p>
-</li>
-<li><p><strong>第二种</strong> 在类中声明的变量是成员变量(全局变量),放在堆中</p>
-<ol>
-<li>声明的是基本类型的变量,其变量名及其值放在堆内存中</li>
-<li>声明的是引用类型时，其声明的变量仍然会存储一个内存地址值，该内存地址值指向所引用的对象。引用变量名和对应的对象仍然存储在相应的堆中。但与对象中的普通成员变量（局部变量）不同的是，它们的生命周期是在对象销毁时才结束的</li>
-</ol>
-</li>
-<li><p><strong>第三种</strong> 静态变量：</p>
-<p>​	静态变量随着类的加载而存在，是存储在方法区（Method Area）中的，而不是存储在栈或堆上，所以它的生命周期与程序的生命周期一样长。</p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094805132.png" alt="image-20231007094805132"></p>
-</li>
-</ul>
-<h4 id="浅拷贝和深拷贝的区别"><a href="#浅拷贝和深拷贝的区别" class="headerlink" title="浅拷贝和深拷贝的区别"></a>浅拷贝和深拷贝的区别</h4><p>深拷贝和浅拷贝是只针对引用数据类型的</p>
-<p>浅拷贝只复制指向某个对象的指针，而不复制对象本身，新旧对象还是共享同一块内存（分支）。</p>
-<p>浅拷贝是按位拷贝对象，它会创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。<br>如果属性是基本类型，拷贝的就是基本类型的值；如果属性是内存地址（引用类型），拷贝的就是内存地址 ，因此如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
-<p>深拷贝会另外创造一个一模一样的对象，新对象跟原对象不共享内存，修改新对象不会改到原对象，是“值”而不是“引用”（不是分支）</p>
-<p>拷贝第一层级的对象属性或数组元素<br>递归拷贝所有层级的对象属性和数组元素<br>深拷贝会拷贝所有的属性,并拷贝属性指向的动态分配的内存。当对象和它所引用的对象一起拷贝时即发生深拷贝。深拷贝相比于浅拷贝速度较慢并且花销较大。</p>
-<p><strong>引用拷贝</strong>: 引用拷贝就是直接赋值，只在栈中创建一个新的引用，拷贝引用的地址，所以指向的是堆中同一个对象。</p>
-<p><strong>浅拷贝</strong>：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p>
-<p><strong>深拷贝</strong>：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。</p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094842954.png" alt="image-20231007094842954"></p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094847027.png" alt="image-20231007094847027"></p>
-<h4 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h4><p>首先，我认为，之所以需要序列化，核心目的是为了解决网络通信之间的对象传输问题。<br>也就是说，如何把当前 JVM 进程里面的一个对象，跨网络传输到另外一个 JVM进程里面。<br>而序列化，就是把内存里面的对象转化为字节流，以便用来实现存储或者传输。<br>反序列化，就是根据从文件或者网络上获取到的对象的字节流，根据字节流里面保存的对象描述信息和状态。重新构建一个新的对象。</p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094855585.png" alt="image-20231007094855585"></p>
-<p>其次呢，序列化的前提是保证通信双方对于对象的可识别性，所以很多时候，我们会把对象先转化为通用的解析格式，比如 json、xml 等。然后再把他们转化为数据流进行网络传输，从而实现跨平台和跨语言的可识别性。</p>
-<h4 id="Java反射有了解吗？举几个Java反射的应用案例"><a href="#Java反射有了解吗？举几个Java反射的应用案例" class="headerlink" title="Java反射有了解吗？举几个Java反射的应用案例"></a>Java反射有了解吗？举几个Java反射的应用案例</h4><p>反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候），获取任意一个类的成员变量、成员方法和属性,调用任意一个对象的方法和属性,，这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。</p>
-<ul>
-<li>获取任意类的名称、package信息、所有属性、方法、注解、类型、类加载器等</li>
-<li>获取任意对象的属性，并且能改变对象的属性</li>
-<li>调用任意对象的方法</li>
-<li>判断任意一个对象所属的类</li>
-<li>实例化任意一个类的对象</li>
-<li>通过反射我们可以实现动态装配，降低代码的耦合度,动态代理等。</li>
-</ul>
-<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
-<li>可以增加程序的灵活性，在运行过程中可以动态堆类进行修改和操作</li>
-<li>提高代码复用率，比如动态代理</li>
-<li>可以在运行是轻松获取任意一个类的方法、属性、并且还能通过反射进行动态调用</li>
-</ul>
-<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
-<li>使用反射后，可读性较差</li>
-<li>反射可以绕过一些限制访问的属性和方法，可能回导致一些安全性问题</li>
-<li>反射回设计动态类型的解析，所以JVM无法对这些代码进行优化，导致性能要比非反射调用更低</li>
-</ul>
-<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><ul>
-<li>AOP动态代理的场景中，使用动态生成的代理类来提升代码复用性。</li>
-<li>IOC：用反射来实例化bean对象等</li>
-</ul>
-<h4 id="String-、StringBuffer和StringBuilder的区别"><a href="#String-、StringBuffer和StringBuilder的区别" class="headerlink" title="String 、StringBuffer和StringBuilder的区别"></a>String 、StringBuffer和StringBuilder的区别</h4><h5 id="1-可变性"><a href="#1-可变性" class="headerlink" title="1.可变性"></a>1.可变性</h5><p>​	String 内部的 value 值是 final 修饰的，所以它是不可变类。所以每次修改 String 的值，都会产生一个新的对象。<br>​	StringBuffer 和 StringBuilder 是可变类，字符串的变更不会产生新的对象。</p>
-<h5 id="2-线程安全性"><a href="#2-线程安全性" class="headerlink" title="2.线程安全性"></a>2.线程安全性</h5><p>​	String 是不可变类，所以它是线程安全的。<br>​	StringBuffer 是线程安全的，因为它每个操作方法都加了 synchronized 同步关键字。<br>​	StringBuilder 不是线程安全的。所以在多线程环境下对字符串进行操作，应该使用 StringBuffer，否则使用StringBuilder</p>
-<h5 id="3-性能方面。"><a href="#3-性能方面。" class="headerlink" title="3.性能方面。"></a>3.性能方面。</h5><p>​	String 的性能是最低的，因为不可变意味着在做字符串拼接和修改的时候，需要重新创建新的对象以及分配内存。<br>​	其次是 StringBuffer 要比 String 性能高，因为它的可变性使得字符串可以直接被修改<br>​	最后是 StringBuilder，它比 StringBuffer 的性能高，因为 StringBuffer 加了同步锁。</p>
-<h5 id="4-存储方面。"><a href="#4-存储方面。" class="headerlink" title="4.存储方面。"></a>4.存储方面。</h5><p>​	String 存储在字符串常量池里面<br>​	StringBuffer 和 StringBuilder 存储在堆内存空间。</p>
-<h4 id="StringBuffer、StringBuilder的扩容原理"><a href="#StringBuffer、StringBuilder的扩容原理" class="headerlink" title="StringBuffer、StringBuilder的扩容原理"></a>StringBuffer、StringBuilder的扩容原理</h4><p>扩容原理：</p>
-<p><code>StringBuffer</code>的底层数组结构用的是<code>char</code>类型的数组如果没有指定大小，默认大小为16，指定了大小，默认大小为（16 + 指定大小）。</p>
-<p>所以，当我们使用<code>StringBuffer</code>对象的<code>append(...)</code>方法追加数据时，</p>
-<ul>
-<li>如果数组长度可以容纳追加的数据，就直接追加到数组</li>
-<li>如果char类型数组的长度无法容纳我们追加的数据，<code>StringBuffer</code>就会进行扩容。</li>
-<li>扩容时会用到<code>Arrays</code>类中的<code>copyOf(...)</code>方法，每次扩容的容量大小是原来的容量的2倍（通过无符号左移）加2。</li>
-</ul>
-<h4 id="说说ArrayList"><a href="#说说ArrayList" class="headerlink" title="说说ArrayList"></a>说说ArrayList</h4><p>ArrayList 是一个数组结构的存储容器，所以ArrayList是支持随机存取的，默认情况下，数组的长度是 10.当然我们也可以在构建 ArrayList 对象的时候自己指定初始长度。随着在程序里面不断的往 ArrayList 中添加数据，当添加的数据达到 10 个的时候，ArrayList 就没有多余容量可以存储后续的数据。这个时候 ArrayList 会自动触发扩容。扩容的具体流程很简单：</p>
+<h4 id="说说ArrayList"><a href="#说说ArrayList" class="headerlink" title="说说ArrayList"></a>说说ArrayList</h4><p>ArrayList 是一个数组结构的存储容器，所以ArrayList是支持随机存取的，默认情况下，数组的长度是 10.也可以在构建 ArrayList 对象的时候自己指定初始长度。随着在程序里面不断的往 ArrayList 中添加数据，当添加的数据达到 10 个的时候，ArrayList 就没有多余容量可以存储后续的数据。这个时候 ArrayList 会自动触发扩容。扩容的具体流程很简单：</p>
 <ol>
 <li>首先，创建一个新的数组，这个新数组的长度是原来数组长度的 1.5 倍。</li>
 <li>然后使用 Arrays.copyOf 方法把老数组里面的数据拷贝到新的数组里面。<br>扩容完成后再把当前要添加的元素加入到新的数组里面，从而完成动态扩容的过程。</li>
 </ol>
+<h4 id="常见的树"><a href="#常见的树" class="headerlink" title="常见的树"></a>常见的树</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/531299726#%E5%89%8D%E8%A8%80">为什么红黑树的效率比较高 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/361961175">红黑树 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/91960960">一文带你彻底读懂红黑树（附详细图解） - 知乎 (zhihu.com)</a></p>
+<h5 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a><strong>平衡二叉树</strong></h5><p>特点：<strong>一个根节点的左右个子树的高度差不超过1</strong></p>
+<p><img src="/./imgs/v2-db8cdc6ff692f73cb4984ff80e45ef34_720w.webp" alt="img"></p>
+<h5 id="非平衡二叉树"><a href="#非平衡二叉树" class="headerlink" title="非平衡二叉树"></a><strong>非平衡二叉树</strong></h5><p><img src="/./imgs/v2-07b3c6b4c4d2d524555fb739bf599981_720w.webp" alt="img"></p>
+<p>高度差已经大于1 了。平衡树解决的问题就是 能够最大限度的增加访问的每个节点的的平均性。保证每个节点被访问的次数平衡。</p>
+<h5 id="完全二叉树"><a href="#完全二叉树" class="headerlink" title="完全二叉树"></a><strong>完全二叉树</strong></h5><p>除最后一层外，每一层上的结点数均达到最大值；在最后一层上只缺少右边的若干结点。</p>
+<p><img src="/./imgs/v2-db8cdc6ff692f73cb4984ff80e45ef34_720w.webp" alt="img"></p>
+<p>堆排序 结构其实就是一个完全二叉树的结构，倒序和正序就是用的 大根堆 小根堆的原理。</p>
+<h5 id="满二叉树"><a href="#满二叉树" class="headerlink" title="满二叉树"></a><strong>满二叉树</strong></h5><p>每个节点是叶节点或者度为2.</p>
+<p><img src="/./imgs/v2-c24507d5ab42fa1a9de508aea129bacc_720w.webp" alt="img"></p>
+<h5 id="二叉搜索树（Binary-Search-Tree）"><a href="#二叉搜索树（Binary-Search-Tree）" class="headerlink" title="二叉搜索树（Binary Search Tree）"></a><strong>二叉搜索树（Binary Search Tree）</strong></h5><p>特点是每个根节点大于左子树上的任意一个节点，小于等于右子树上的任意一个节点。</p>
+<p><img src="/./imgs/v2-bc1985e7abdd4871d0d0709f02a64725_720w.webp" alt="img"></p>
+<p>可以利用二叉搜索树的大小关系，有点类似于二分查找。二叉搜索树查询的时间复杂度为O(logn)，因为每次查找都能将范围缩小一半。</p>
+<p><strong>二叉搜索树的不足：</strong></p>
+<p><img src="/./imgs/v2-b43c0ec9893114064c891d5b3b2ee383_720w.webp" alt="img"></p>
+<p>极端的二叉搜索树：如果二叉搜索树每个节点都只有左节点或者都只有右节点，那么这颗树就会降级为链表结构，使得时间复杂度为O(n),所以引出了平衡排序树(AVL树).</p>
+<h5 id="平衡二叉搜索树（AVL树）"><a href="#平衡二叉搜索树（AVL树）" class="headerlink" title="平衡二叉搜索树（AVL树）"></a>平衡二叉搜索树（AVL树）</h5><p><strong>特点</strong></p>
+<ul>
+<li>任意节点的左右子树的高度差都小于等于1</li>
+<li>常见的平衡树包括B树（MySQL中的索引），AVL树等</li>
+</ul>
+<p><strong>平衡二叉搜索树能同时满足平衡树和二叉搜索树的特点：</strong></p>
+<ul>
+<li>优点：AVL树可以有效减少二叉树的深度，从而提升查询的效率。</li>
+<li>缺点：AVL树为了达到平衡（任意节点的左右子树的高度差都小于等于1，这属于<strong>绝对平衡</strong>，维持起来并不容易），需要付出额外代价。在插入和删除操作时，AVL树都需要进行再平衡。</li>
+</ul>
+<p>所以AVL树还有待改进——红黑树。</p>
+<table>
+<thead>
+<tr>
+<th>平衡二叉树类型</th>
+<th>平衡度</th>
+<th>调整频率</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AVL树</td>
+<td>高</td>
+<td>高</td>
+<td>查询多，增&#x2F;删少</td>
+</tr>
+<tr>
+<td>红黑树</td>
+<td>低</td>
+<td>低</td>
+<td>增&#x2F;删频繁</td>
+</tr>
+</tbody></table>
+<hr>
+<h5 id="红黑树（R-B树）"><a href="#红黑树（R-B树）" class="headerlink" title="红黑树（R-B树）"></a>红黑树（R-B树）</h5><p>红黑树是一种特化的AVL树，查询与AVL树基本相同，在插入和删除时通过特定操作保持二叉搜索树的<strong>相对平衡</strong>（红黑树与AVL树不同，AVL是绝对平衡）， 因为这种相对平衡的条件，红黑树在插入和删除时，对于树的调整的频率低于AVL树，对于树的旋转的次数也比AVL树少，从而获得较高的性能。</p>
+<p><img src="/./imgs/v2-d5a84583be75cd748b2a979e27a911ec_720w.webp" alt="img"></p>
+<p><strong>由图可以看出红黑树不是严格的AVL树，只是黑色平衡</strong></p>
+<p><strong>红黑树的特点</strong>：</p>
+<ol>
+<li><strong>首先必须满足二叉搜索树</strong></li>
+<li><strong>节点非黑即红</strong></li>
+<li><strong>根节点是黑色的，叶子节点是黑色的（都是空节点，为了简单起见，红黑树一般会省略叶子结点）</strong></li>
+<li><strong>相邻父子节点不能同为红色，每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。</strong>）</li>
+<li><strong>从一个节点到该节点的叶子结点的所有路径上包含的黑节点数量相等（这是平衡关键）</strong></li>
+</ol>
+<p><strong>红黑树特点总结成一句口诀：黑根黑叶红不邻，通祖等高只数黑</strong></p>
+<p><strong>红黑树相关定理</strong></p>
+<ol>
+<li>从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。</li>
+</ol>
+<p>要满足从根节点到叶节点每条路径的黑色节点数量一致。最短路径：全是黑色 最长路径：黑红相间</p>
+<p>对于给定的黑色高度为n的红黑树，从根结点到叶结点的简单路径的最短长度为n-1，最大长度为2(n-1)，从这一点我们可以看出红黑树是 大致平衡的。(当然比平衡二叉树要差一些，AVL的平衡因子最多为1)</p>
+<ol start="2">
+<li>红黑树的树高(h)不大于两倍的红黑树的黑深度(bd)，即h&lt;&#x3D;2bd</li>
+</ol>
+<p>根据定理1，我们不难说明这一点。bd是红黑树的最短路径长度。而可能的最长路径长度(树高的最大值)就是红黑相间的路径，等于2bd。因此h&lt;&#x3D;2bd。</p>
+<ol start="3">
+<li>一棵拥有n个内部结点(不包括叶子结点)的红黑树的树高h&lt;&#x3D;2log(n+1)</li>
+</ol>
+<p>下面我们首先证明一颗有n个内部结点的红黑树满足n&gt;&#x3D;2^bd-1。这可以用数学归纳法证明，施归纳于树高h。当h&#x3D;0时，这相当于是一个叶结点，黑高度bd为0，而内部结点数量n为0，此时0&gt;&#x3D;2^0-1成立。假设树高h&lt;&#x3D;t时，n&gt;&#x3D;2^bd-1成立，我们记一颗树高 为t+1的红黑树的根结点的左子树的内部结点数量为nl，右子树的内部结点数量为nr，记这两颗子树的黑高度为bd’（注意这两颗子树的黑高度必然一 样），显然这两颗子树的树高&lt;&#x3D;t，于是有nl&gt;&#x3D;2^bd’-1以及nr&gt;&#x3D;2^bd’-1，将这两个不等式相加有nl+nr&gt;&#x3D;2^(bd’+1)-2，将该不等式左右加1，得到n&gt;&#x3D;2^(bd’+1)-1，很显然bd’+1&gt;&#x3D;bd，于是前面的不等式可以 变为n&gt;&#x3D;2^bd-1，这样就证明了一颗有n个内部结点的红黑树满足n&gt;&#x3D;2^bd-1。</p>
+<p>在根据定理2，h&lt;&#x3D;2bd。即n&gt;&#x3D;2^(h&#x2F;2)-1，那么h&lt;&#x3D;2log(n+1)</p>
+<p>从这里我们能够看出，红黑树的查找长度最多不超过2log(n+1)，因此其查找时间复杂度也是O(log N)级别的。</p>
+<p><strong>红黑树的复杂度分析</strong></p>
+<ul>
+<li><p>一棵含有n个节点（内部节点，不包含空的叶子节点）的红黑树的高度至多为2log(n+1)</p>
+</li>
+<li><p>查找时间复杂度为O(logn),红黑树上的查找操作与普通二叉查找树上的查找操作相同</p>
+</li>
+<li><p>插入时间复杂度为O(1)+O(logn)</p>
+</li>
+<li><p>删除时间复杂度为O(1)+O(logn)</p>
+</li>
+</ul>
+<p><strong>AVL vs 红黑树</strong></p>
+<ul>
+<li>插入：AVL和红黑树都是最多两次旋转实现复衡，旋转的量级是O(1)，恢复红黑树的属性需要O(log n)的颜色变更</li>
+<li>删除：AVL旋转的量级是O(logn)，红黑树最多旋转3次实现复衡只要O(1)</li>
+<li>红黑树插入和删除效率更高，AVL的查找效率更高.</li>
+<li>红黑树成本较低，AVL成本较高</li>
+</ul>
+<p><strong>两者没有谁好谁坏，关键看使用场景</strong></p>
+<p><strong>红黑树的实际应用</strong></p>
+<ul>
+<li><strong>Java中的HashMap、TreeMap、TreeSet等</strong></li>
+</ul>
+<p><strong>红黑树的基本操作</strong></p>
+<p><strong>查找节点（二叉搜索树一样的查找）</strong></p>
+<ol>
+<li>选择根节点作为当前节点</li>
+<li>按照二叉搜索树特点进行循环查找（若值与当前节点值相等，则返回该节点；若值小于当前节点，左节点作为当前节点；否则，右节点作为当前节点）</li>
+<li>未找到，为null</li>
+</ol>
+<p><img src="/./imgs/v2-f90edcb09cc58e310e2047ba8d6af772_720w.webp" alt="img"></p>
+<h5 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h5><p>[B+ 树搜索时间复杂度到底是什么：mlogmN &#x2F; logN？ - 知乎 (zhihu.com)](<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/402951">https://zhuanlan.zhihu.com/p/402951</a></p>
+<p><img src="/./imgs/image-20231023104558443.png" alt="image-20231023104558443"></p>
+<p>第一种，按照B+树数据结构来算，要访问节点数 * 节点内的搜索时间复杂度，其中节点内搜索时间有线性查找、二分查找两种</p>
+<p>第二种：</p>
+<p>说一个结论：非叶子节点的大小 &#x3D; 页大小。下面是证明</p>
+<blockquote>
+<p>B+ 树在搜索过程中，需要从磁盘IO来读取节点的数据。我们知道磁盘IO一次读取的数据大小为一页。</p>
+<ul>
+<li>非叶子节点的大小 &gt; 页大小：那么意味着搜索过程中，为了获取一个完整节点来查找数据，我们需要多次IO来获取这个节点，这显然非常消耗时间。所以非叶子节点的大小不能超过一页。</li>
+<li>非叶子节点的体积非常小：这就意味着B+树的分叉就少，B+树的总节点数会变多、深度变大。B+树利用指针构成的树形结构，意味着每个节点在磁盘上是不连续的，B+树的深度变大了，意味着搜索时访问的节点数量变多，IO次数也变多了。</li>
+<li>因此，非叶子节点过大、过小，都会导致IO次数增加。所以最合适的非叶子节点大小 &#x3D; 页大小。</li>
+</ul>
+</blockquote>
+<p>因为</p>
+<p>1 B+树的节点，即非叶子节点大小 &#x3D; 页大小</p>
+<p>2 读取一页需要一次IO</p>
+<p><img src="/./imgs/image-20231023105000623.png" alt="image-20231023105000623"></p>
+<h4 id="有哪些线程安全的容器？"><a href="#有哪些线程安全的容器？" class="headerlink" title="有哪些线程安全的容器？"></a>有哪些线程安全的容器？</h4><h5 id="不可变类："><a href="#不可变类：" class="headerlink" title="不可变类："></a>不可变类：</h5><ul>
+<li>String：String的各个substring、replace、reverse 等方法都是重新new一个String对象，不会改变源对象，而且用final修饰，不会有子类覆盖String的方法，不会出现线程安全问题</li>
+<li>Integer 类似String</li>
+<li>Random 类似String</li>
+</ul>
+<h5 id="遗留的线程安全集合"><a href="#遗留的线程安全集合" class="headerlink" title="遗留的线程安全集合"></a>遗留的线程安全集合</h5><ul>
+<li>StringBuﬀer 对方法加上了synchronized锁，保证线程安全，但是效率比StringBuilder低一些</li>
+<li>Vector 每个方法都加上了synchronized 关键字，串行化执行，效率低下。而且多线程下组合调用这些方法还是会出现线程不安全。</li>
+<li>Hashtable： 每个方法都加上了synchronized 关键字，串行化执行，效率低下。而且多线程下组合调用这些方法还是会出现线程不安全。</li>
+</ul>
+<h5 id="经过修饰的线程安全的集合"><a href="#经过修饰的线程安全的集合" class="headerlink" title="经过修饰的线程安全的集合"></a>经过修饰的线程安全的集合</h5><ul>
+<li>synchronizedList 、synchronizedMap 、 synchronizedSet等等， 把不安全的list、map、set等作为构造的参数， 其方法使用synchronized(mutex) {map.get();} 使用的还是原本集合中的方法，但是通过synchronized和信号量来实现同步</li>
+</ul>
+<h5 id="java-util-concurrent-包下的类"><a href="#java-util-concurrent-包下的类" class="headerlink" title="java.util.concurrent 包下的类"></a>java.util.concurrent 包下的类</h5><p>concurrentHashMap。</p>
+<p>copyOnWriteArrayList: <code>CopyOnWriteArrayList</code> 中的读取操作是完全无需加锁的。更加厉害的是，写入操作也不会阻塞读取操作，只有写写才会互斥。这样一来，读操作的性能就可以大幅度提升。</p>
+<p><code>CopyOnWriteArrayList</code> 线程安全的核心在于其采用了 <strong>写时复制（Copy-On-Write）</strong> 的策略，从 <code>CopyOnWriteArrayList</code> 的名字就能看出了。</p>
+<p>当需要修改（ <code>add</code>，<code>set</code>、<code>remove</code> 等操作） <code>CopyOnWriteArrayList</code> 的内容时，不会直接修改原数组，而是会先创建底层数组的副本，对副本数组进行修改，修改完之后再将修改后的数组赋值回去，这样就可以保证写操作不会影响读操作了。</p>
+<p>BlockingQueue的实现类:阻塞队列（<code>BlockingQueue</code>）被广泛使用在“生产者-消费者”问题中，其原因是 <code>BlockingQueue</code> 提供了可阻塞的插入和移除的方法。当队列容器已满，生产者线程会被阻塞，直到队列未满；当队列容器为空时，消费者线程会被阻塞，直至队列非空时为止。</p>
+<p>线程安全的类不一定能保证线程安全，只能保证单个方法执行是线程安全的，但是多个方法的组合还是会出现不安全</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Integer&gt; map = new concurrentHashMap&lt;&gt;();</span><br><span class="line">int count = map.get(str);</span><br><span class="line">//在此处时间片结束，线程不安全</span><br><span class="line">map.put(str,count == 0 : 1 ? count + 1);;</span><br></pre></td></tr></table></figure>
+
+<h4 id="线程不安全的集合"><a href="#线程不安全的集合" class="headerlink" title="线程不安全的集合"></a>线程不安全的集合</h4><ul>
+<li>HashMap</li>
+<li>HashSet</li>
+<li>ArrayList:put方法中，elementData[size++] &#x3D; e，不是一个原子操作</li>
+<li>LinkedList:add方法可能出现指针指向错误节点</li>
+</ul>
+<h4 id="List、Map、Set能不能存NULL？"><a href="#List、Map、Set能不能存NULL？" class="headerlink" title="List、Map、Set能不能存NULL？"></a>List、Map、Set能不能存NULL？</h4><h5 id="List-——-允许为null"><a href="#List-——-允许为null" class="headerlink" title="List —— 允许为null"></a><strong>List —— 允许为null</strong></h5><ul>
+<li>ArrayList底层是数组，可以添加null</li>
+<li>LinkedList底层是双向链表，可以node.value &#x3D; null</li>
+<li>Vector底层是数组，可以存储NULL</li>
+</ul>
+<h5 id="Map"><a href="#Map" class="headerlink" title="Map"></a><strong>Map</strong></h5><ul>
+<li>HashMap只允许有一个key为null的节点，因为Map的key相同，后面节点会替换相同key的节点，可以有多个value为null的节点，当key为null，计算出的hash值为0，放在第一个桶中。		这是因为 HashMap 的设计是给单线程使用的，所以如果查询到了 null 值，我们可以通过 hashMap.containsKey(key) 的方法来区分这个 null 值到底是存入的 null？还是压根不存在的 null？这样二义性问题就得到了解决，所以 HashMap 不怕二义性问题。</li>
+<li>TreeMap会调用compareTo方法，当对象为null，会报空指针</li>
+<li>HashTable底层为散列表，需要对value进行判空，会调用key.hashCode()来计算桶的位置，key和value都不能为空。</li>
+</ul>
+<h5 id="Set"><a href="#Set" class="headerlink" title="Set"></a><strong>Set</strong></h5><ul>
+<li>HashSet底层是HashMap，可以有一个key为NULL的元素。</li>
+<li>LinkedHashSet底层也是HashMap，允许一个key为NULL</li>
+<li>TreeSet底层是TreeMap不能有key为null的元素</li>
+</ul>
+<h4 id="ConcurrentHashMap为什么key和value都不能存入null？"><a href="#ConcurrentHashMap为什么key和value都不能存入null？" class="headerlink" title="ConcurrentHashMap为什么key和value都不能存入null？"></a>ConcurrentHashMap为什么key和value都不能存入null？</h4><p>从代码层面来看：ConcurrentHashMap在put方法的起始位置就判断Key和Value是否为空，如果是就抛出空指针异常。</p>
+<p><code>ConcurrentHashMap</code> 的 key 和 value 不能为 null 主要是为了避免二义性。null 是一个特殊的值，表示没有对象或没有引用。（如果你用 null 作为键，那么你就无法区分这个键是否存在于 <code>ConcurrentHashMap</code> 中，还是根本没有这个键。）同样，如果你用 null 作为值，那么你就无法区分这个值是否是真正存储<code>ConcurrentHashMap</code> 中的，还是因为找不到对应的键而返回的。</p>
+<p>拿 get 方法取值来说，返回的结果为 null 存在两种情况：</p>
+<ul>
+<li>值没有在集合中 ；</li>
+<li>值本身就是 null。</li>
+</ul>
+<p>这也就是二义性的由来。</p>
+<p>多线程环境下，存在一个线程操作该 <code>ConcurrentHashMap</code> 时，其他的线程将该 <code>ConcurrentHashMap</code> 修改的情况，所以无法通过 <code>containsKey(key)</code> 来判断否存在这个键值对，也就没办法解决二义性问题了。</p>
+<p>与此形成对比的是，<code>HashMap</code> 可以存储 null 的 key 和 value，但 null 作为键只能有一个，null 作为值可以有多个。如果传入 null 作为参数，就会返回 hash 值为 0 的位置的值。HashMap 的设计是给单线程使用的，所以如果取到 null（空） 值，我们可以通过HashMap 的 containsKey(key)方 法来区分这个 null（空） 值到底是插入值是 null（空），还是本就没有才返回的 null（空） 值。单线程环境下，不存在一个线程操作该 HashMap 时，其他的线程将该 <code>HashMap</code> 修改的情况，所以可以通过 <code>contains(key)</code>来做判断是否存在这个键值对，从而做相应的处理，也就不存在二义性问题。</p>
+<p>也就是说，多线程下无法正确判定键值对是否存在（存在其他线程修改的情况），单线程是可以的（不存在其他线程修改的情况）。</p>
+<p>如果你确实需要在 ConcurrentHashMap 中使用 null 的话，可以使用一个特殊的静态空对象来代替 null。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">NULL</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br></pre></td></tr></table></figure>
+
+<p>举个例子，现在有线程 T1 调用了 ConcurrentHashMap 的 containsKey(key) 方法，<br>我们期望返回的结果是 false，也就是说，T1 并没有往 ConcurrentHashMap 中 put null（空）值。<br>但是，恰恰出了个意外，在线程 T1 还没有得到返回结果之前，线程 T2 又调用了<br>ConcurrentHashMap 的 put() 方法，插入了一个 Key，并且存入的 Value 是 null（空） 值。那么，线程 T1 最终得到的返回结果就变成 true 了。</p>
 <h4 id="Map的遍历方式"><a href="#Map的遍历方式" class="headerlink" title="Map的遍历方式"></a>Map的遍历方式</h4><p>1）在 for 循环中使用 entries 实现 Map 的遍历（最常见和最常用的）。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, String&gt;();</span><br><span class="line">    map.put(<span class="string">&quot;Java入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/java/&quot;</span>);</span><br><span class="line">    map.put(<span class="string">&quot;C语言入门教程&quot;</span>, <span class="string">&quot;http://c.biancheng.net/c/&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : map.entrySet()) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">mapKey</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">        <span class="type">String</span> <span class="variable">mapValue</span> <span class="operator">=</span> entry.getValue();</span><br><span class="line">        System.out.println(mapKey + <span class="string">&quot;：&quot;</span> + mapValue);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -317,7 +487,8 @@
 <h4 id="为什么扩容因子是-0-75？"><a href="#为什么扩容因子是-0-75？" class="headerlink" title="为什么扩容因子是 0.75？"></a>为什么扩容因子是 0.75？</h4><p>扩容因子表示 Hash 表中元素的填充程度，扩容因子的值越大，那么触发扩容的元素个数更多，<br>虽然空间利用率比较高，但是 hash 冲突的概率会增加。<br>扩容因子的值越小，触发扩容的元素个数就越少，也意味着 hash 冲突的概率减少，<br>但是对内存空间的浪费就比较多，而且还会增加扩容的频率。<br>因此，扩容因子的值的设置，本质上就是在 冲突的概率 以及 空间利用率之间的平衡。<br>0.75 这个值的来源，和统计学里面的泊松分布有关。</p>
 <p>当扩容因子在 0.75 的时候，链表长度达到 8 的可能性几乎为 0，也就是比较好的达到了空间成本和时间成本的平衡。</p>
 <h4 id="HashMap的Hash值如何计算"><a href="#HashMap的Hash值如何计算" class="headerlink" title="HashMap的Hash值如何计算"></a>HashMap的Hash值如何计算</h4><p> <strong>h &#x3D; (key.hashCode ()) ^ (key.hashCode()&gt;&gt;16)</strong>,让hashCode的高16位和低16位进行异或，这样可以让hash值得散列度更高，尽可能区减少hash冲突的情况，从而去提升数据查找性能。</p>
-<h4 id="HashMap怎么解决hash冲突的"><a href="#HashMap怎么解决hash冲突的" class="headerlink" title="HashMap怎么解决hash冲突的"></a>HashMap怎么解决hash冲突的</h4><p>首先，HashMap 底层采用了数组的结构来存储数据元素，数组的默认长度是 16，当我们通过 put 方法添加数据的时候，HashMap 根据 Key 的 hash 值进行取模运算,最终保存到数组的指定位置。<br>但是这种设计会存在 hash 冲突问题，也就是两个不同 hash 值的 key，最终取模后会落到同一个数组下标。所以 HashMap 引入了链式寻址法来解决 hash 冲突问题， 对于存在冲突的key，HashMap 把这些 key 组成一个单向链表。然后采用尾插法把这个 key 保存到链表的尾部。另外，为了避免链表过长的问题，当链表长度大于 8 并且数组长度大于等于 64 的时候，HashMap 会把链表转化为红黑树,从而减少链表数据查询的时间复杂度问题，提升查询性能</p>
+<h4 id="HashMap为什么一定大小要是2的幂次方？"><a href="#HashMap为什么一定大小要是2的幂次方？" class="headerlink" title="HashMap为什么一定大小要是2的幂次方？"></a>HashMap为什么一定大小要是2的幂次方？</h4><p>HashMap为了提高存取效率，减少hash冲突，就是要尽量把数据分配均匀，使得每个链表长度大致相同，就可以通过hash值 % 数组长度 来实现。<br>但直接取模运算的效率不如位运算&amp;，当容量为2的n次方时，hash &amp; (capacity - 1) &#x3D;&#x3D; hash % capacity，通过 hash &amp; (capacity - 1) 来替代取模运算，而前提就是容量必须为2的n次方。</p>
+<h4 id="HashMap怎么解决hash冲突的"><a href="#HashMap怎么解决hash冲突的" class="headerlink" title="HashMap怎么解决hash冲突的"></a>HashMap怎么解决hash冲突的</h4><p>hash 冲突问题 : 也就是两个不同 hash 值的 key，最终&amp;运算会落到同一个数组下标。所以 HashMap 引入了链式寻址法来解决 hash 冲突问题， 对于存在冲突的key，HashMap 把这些 key 组成一个单向链表。然后采用尾插法把这个 key 保存到链表的尾部。另外，为了避免链表过长的问题，当链表长度大于 8 并且数组长度大于等于 64 的时候，HashMap 会把链表转化为红黑树,从而减少链表数据查询的时间复杂度问题，提升查询性能</p>
 <p>解决 hash 冲突问题的方法有很多，比如</p>
 <ul>
 <li>再 hash 法，就是如果某个 hash 函数产生了冲突，再用另外一个 hash 进行计算，</li>
@@ -346,7 +517,7 @@
 <ul>
 <li><p>如果位置上没有结点，直接返回null。</p>
 </li>
-<li><p>有结点，，判断头结点的hash值是否等于key的hash值</p>
+<li><p>有结点，判断头结点的hash值是否等于key的hash值</p>
 <ul>
 <li><p>hash值相等，继续用 “&#x3D;&#x3D;” 和equals（）判断key是否相等，相等就返回</p>
 </li>
@@ -361,7 +532,8 @@
 <li>根据key的hashcode 获得hash值（hashcode ^ (hashcode  &gt;&gt;&gt; 16)）</li>
 <li>通过hash &amp; (n - 1) 找到对应桶的位置</li>
 <li>如果桶为空，就直接put</li>
-<li>如果桶不为空就遍历桶中所有元素，通过比较hashcode –&gt; “&#x3D;&#x3D;”判断 –&gt;equals 判断是否已存在，存在就更新value值， 不存在，就插入，size++     判断是否需要转化为红黑树      是否需要扩容</li>
+<li>如果桶不为空就遍历桶中所有元素，通过比较hashcode –&gt; “&#x3D;&#x3D;”判断 –&gt;equals 判断是否已存在，存在就更新value值， 不存在，就插入，size++     </li>
+<li>判断是否需要转化为红黑树，是否需要扩容</li>
 </ol>
 <h4 id="ConcurrentHashMap为什么能保证线程安全？"><a href="#ConcurrentHashMap为什么能保证线程安全？" class="headerlink" title="ConcurrentHashMap为什么能保证线程安全？"></a>ConcurrentHashMap为什么能保证线程安全？</h4><p>添加元素时首先会判断容器是否为空，</p>
 <ul>
@@ -386,21 +558,80 @@
 <li>如果线程竞争激烈，使用一个数组来维护元素个数，如果要增加总的元素个数，则直接从数组中随机选择一个，再通过 CAS 实现原子递增，之后遍历数组中所有的值与baseCount累加。它的核心思想是引入了数组来实现对并发更新的负载。</li>
 </ul>
 <p>总结： ConcurrentHashMap 通过<strong>对数组头结点加锁</strong>和<strong>加CAS的初始化</strong>来保证线程安全的。</p>
-<h4 id="为什么-ConcurrentHashMap-不允许插入-null值？"><a href="#为什么-ConcurrentHashMap-不允许插入-null值？" class="headerlink" title="为什么 ConcurrentHashMap 不允许插入 null值？"></a>为什么 ConcurrentHashMap 不允许插入 null值？</h4><p><code>ConcurrentHashMap</code> 的 key 和 value 不能为 null 主要是为了避免二义性。null 是一个特殊的值，表示没有对象或没有引用。（如果你用 null 作为键，那么你就无法区分这个键是否存在于 <code>ConcurrentHashMap</code> 中，还是根本没有这个键。）同样，如果你用 null 作为值，那么你就无法区分这个值是否是真正存储<code>ConcurrentHashMap</code> 中的，还是因为找不到对应的键而返回的。</p>
-<p>拿 get 方法取值来说，返回的结果为 null 存在两种情况：</p>
-<ul>
-<li>值没有在集合中 ；</li>
-<li>值本身就是 null。</li>
-</ul>
-<p>这也就是二义性的由来。</p>
-<p>多线程环境下，存在一个线程操作该 <code>ConcurrentHashMap</code> 时，其他的线程将该 <code>ConcurrentHashMap</code> 修改的情况，所以无法通过 <code>containsKey(key)</code> 来判断否存在这个键值对，也就没办法解决二义性问题了。</p>
-<p>与此形成对比的是，<code>HashMap</code> 可以存储 null 的 key 和 value，但 null 作为键只能有一个，null 作为值可以有多个。如果传入 null 作为参数，就会返回 hash 值为 0 的位置的值。HashMap 的设计是给单线程使用的，所以如果取到 null（空） 值，我们可以通过HashMap 的 containsKey(key)方 法来区分这个 null（空） 值到底是插入值是 null（空），还是本就没有才返回的 null（空） 值。单线程环境下，不存在一个线程操作该 HashMap 时，其他的线程将该 <code>HashMap</code> 修改的情况，所以可以通过 <code>contains(key)</code>来做判断是否存在这个键值对，从而做相应的处理，也就不存在二义性问题。</p>
-<p>也就是说，多线程下无法正确判定键值对是否存在（存在其他线程修改的情况），单线程是可以的（不存在其他线程修改的情况）。</p>
-<p>如果你确实需要在 ConcurrentHashMap 中使用 null 的话，可以使用一个特殊的静态空对象来代替 null。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Object</span> <span class="variable">NULL</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br></pre></td></tr></table></figure>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h4 id="Java三大特性"><a href="#Java三大特性" class="headerlink" title="Java三大特性"></a>Java三大特性</h4><p><strong>封装</strong></p>
+<blockquote>
+<p>封装指的是属性和方法私有化，根据需要提供setter和getter方法来访问属性。即隐藏具体属性和实现细节，仅对外开放接口，控制程序中属性的访问级别。</p>
+<p>封装目的：增强安全性和简化编程，使用者不必在意具体实现细节，而只是通过外部接口即可访问类的成员与方法。</p>
+</blockquote>
+<p><strong>继承</strong></p>
+<blockquote>
+<p>在定义和实现一个类的时候，可以在一个已经存在的类的基础之上来进行，使用extends关键字实现继承；子类中可以加入若干新的内容，或修改原来的方法使之更适合特殊的需要，这就是继承。</p>
+<p>• 继承的出现减少了代码冗余，提高了代码的复用性。<br>• 继承的出现，更有利于功能的扩展。<br>• 继承的出现让类与类之间产生了的关系，为多态的使用提供了前提。</p>
+</blockquote>
+<p><strong>多态</strong></p>
+<blockquote>
+<p>多态就是在声明时使用父类，在实现或调用时使用具体的子类；即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态。</p>
+<p>在 Java 中的体现：父类的引用指向子类的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br></pre></td></tr></table></figure>
 
-<p>举个例子，现在有线程 T1 调用了 ConcurrentHashMap 的 containsKey(key) 方法，<br>我们期望返回的结果是 false，也就是说，T1 并没有往 ConcurrentHashMap 中 put null（空）值。<br>但是，恰恰出了个意外，在线程 T1 还没有得到返回结果之前，线程 T2 又调用了<br>ConcurrentHashMap 的 put() 方法，插入了一个 Key，并且存入的 Value 是 null（空） 值。那么，线程 T1 最终得到的返回结果就变成 true 了。</p>
-<h4 id="JDK新特性"><a href="#JDK新特性" class="headerlink" title="JDK新特性"></a>JDK新特性</h4><h5 id="JDK1-8的新特性-、"><a href="#JDK1-8的新特性-、" class="headerlink" title="JDK1.8的新特性:、"></a><strong>JDK1.8的新特性:、</strong></h5><ol>
+<p><strong>多态的条件：</strong></p>
+<p><strong>继承</strong>: 在多态中必须存在有继承关系的子类和父类。</p>
+<p><strong>方法重写</strong>: 子类对父类中某些方法进行重新定义,在调用这些方法时就会调用子类的方法。</p>
+<p><strong>向上转型</strong>: 在多态中需要将子类的引用赋给父类对象,只有这样该引用才能够具备技能调用父类的方法和子类的方法。</p>
+</blockquote>
+<blockquote>
+<p>好处：父类变量引用的子类对象不同，执行的方法就不同，实现动态绑定。代码编写更灵活、功能更强大，可维护性和扩展性更好了。<br>弊端：一个引用类型变量如果声明为父类的类型，但实际引用的是子类对象，那么该变量就不能再访问子类中添加的属性和方法。</p>
+</blockquote>
+<h4 id="抽象类接口什么不同"><a href="#抽象类接口什么不同" class="headerlink" title="抽象类接口什么不同"></a>抽象类接口什么不同</h4><p><strong>抽象类</strong>：在Java中被abstract关键字修饰的类称为抽象类，被abstract关键字修饰的方法称为抽象方法，抽象方法只有方法的声明，没有方法体。抽象类的特点：</p>
+<p>a、抽象类不能被实例化只能被继承；</p>
+<p>b、包含抽象方法的一定是抽象类，但是抽象类不一定含有抽象方法，抽象类中可以包含普通方法；</p>
+<p>c、抽象类中的抽象方法的修饰符只能为public或者protected（因为如果为private，则不能被子类继承，子类便无法实现该方法），默认为public；</p>
+<p>d、一个子类继承一个抽象类，则子类必须实现父类抽象方法，否则子类也必须定义为抽象类；</p>
+<p>e、抽象类可以包含属性、方法、构造方法，但是构造方法不能用于实例化，主要用途是被子类调用。</p>
+<p>*<strong>接口*：</strong>Java中接口使用interface关键字修饰，特点为:</p>
+<p>a、接口可以包含变量、方法；变量被隐式指定为public static final，方法被隐式指定为public abstract（JDK1.8之前）；</p>
+<p>b、接口支持多继承，即一个接口可以extends多个接口，间接的解决了Java中类的单继承问题；</p>
+<p>c、一个类可以实现多个接口；</p>
+<h5 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a><strong>相同点</strong></h5><p>（1）都不能被实例化 （2）接口的实现类或抽象类的子类都只有实现了接口或抽象类中的方法后才能实例化。</p>
+<h5 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a><strong>不同点</strong></h5><p>（1）接口只有定义，不能有方法的实现，java 1.8中可以定义default方法体，而抽象类可以有定义与实现（普通方法），方法可在抽象类中实现。</p>
+<p>（2）实现接口的关键字为implements，继承抽象类的关键字为extends。一个类可以实现多个接口，但一个类只能继承一个抽象类。所以，使用接口可以间接地实现多重继承。</p>
+<p>（3）接口强调特定功能的实现，而抽象类强调所属关系。</p>
+<h4 id="浅拷贝和深拷贝的区别"><a href="#浅拷贝和深拷贝的区别" class="headerlink" title="浅拷贝和深拷贝的区别"></a>浅拷贝和深拷贝的区别</h4><p>深拷贝和浅拷贝是只针对引用数据类型的</p>
+<p><strong>引用拷贝</strong>: 引用拷贝就是直接赋值，只在栈中创建一个新的引用，拷贝引用的地址，所以指向的是堆中同一个对象。</p>
+<p><strong>浅拷贝</strong>：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），这个对象有着原始对象属性值的一份精确拷贝。如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p>
+<p><strong>深拷贝</strong>：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。深拷贝会递归拷贝对象所有层级的对象属性和数组元素深拷贝。相比于浅拷贝速度较慢并且花销较大。</p>
+<p><img src="/./imgs/image-20231003111716166.png" alt="image-20231003111716166"></p>
+<img src="./imgs/image-20231003111721557.png" alt="image-20231003111721557" style="zoom:150%;" />
+
+
+
+<h4 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h4><p>序列化核心目的是为了解决网络通信之间的对象传输问题。<br>也就是说，如何把当前 JVM 进程里面的一个对象，跨网络传输到另外一个 JVM进程里面。<br>序列化：把内存里面的<strong>对象转化为字节流</strong>，以便用来<strong>实现存储或者传输</strong>。<br>反序列化：根据从<strong>文件或者网络上获取到的对象的字节流</strong>，根据字节流里面保存的<strong>对象描述信息和状态</strong>，重新构建一个新的对象。</p>
+<p><img src="/./imgs/image-20231003111810871.png" alt="image-20231003111810871"></p>
+<p>其次呢，序列化的前提是保证通信双方对于对象的可识别性，所以很多时候，我们会把对象先转化为通用的解析格式，比如 json、xml 等。然后再把他们转化为字节流进行网络传输，从而实现跨平台和跨语言的可识别性。</p>
+<h4 id="Java反射有了解吗？举几个Java反射的应用案例"><a href="#Java反射有了解吗？举几个Java反射的应用案例" class="headerlink" title="Java反射有了解吗？举几个Java反射的应用案例"></a>Java反射有了解吗？举几个Java反射的应用案例</h4><p>反射是java语言的一个特性，它允程序在运行时（注意不是编译的时候），获取任意一个类的成员变量、成员方法和属性,调用任意一个对象的方法和属性,，这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。</p>
+<ul>
+<li>获取任意类的名称、package信息、所有属性、方法、注解、类型、类加载器等</li>
+<li>获取任意对象的属性，并且能改变对象的属性</li>
+<li>调用任意对象的方法</li>
+<li>判断任意一个对象所属的类</li>
+<li>实例化任意一个类的对象</li>
+<li>通过反射我们可以实现动态装配，降低代码的耦合度,动态代理等。</li>
+</ul>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>可以增加程序的灵活性，在运行过程中可以动态堆类进行修改和操作</li>
+<li>提高代码复用率，比如动态代理</li>
+<li>可以在运行时轻松获取任意一个类的方法、属性、并且还能通过反射进行动态调用</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>使用反射后，可读性较差</li>
+<li>反射可以绕过一些限制访问的属性和方法，可能回导致一些安全性问题</li>
+<li>反射会涉及动态类型的解析，所以JVM无法对这些代码进行优化，导致性能要比非反射调用更低</li>
+</ul>
+<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><ul>
+<li>AOP动态代理的场景中，使用动态生成的代理类来提升代码复用性。</li>
+<li>IOC：组件扫描后，用反射来实例化bean对象等</li>
+</ul>
+<h3 id="JDK新特性"><a href="#JDK新特性" class="headerlink" title="JDK新特性"></a>JDK新特性</h3><h5 id="JDK1-8的新特性-、"><a href="#JDK1-8的新特性-、" class="headerlink" title="JDK1.8的新特性:、"></a><strong>JDK1.8的新特性:、</strong></h5><ol>
 <li><p>stream流</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strings = Arrays.asList(&quot;abc&quot;, &quot;def&quot;, &quot;gkh&quot;, &quot;abc&quot;);</span><br><span class="line">    //返回符合条件的stream</span><br><span class="line">    Stream&lt;String&gt; stringStream = strings.stream().filter(s -&gt; &quot;abc&quot;.equals(s));</span><br><span class="line">    //计算流符合条件的流的数量</span><br><span class="line">    long count = stringStream.count();</span><br><span class="line"></span><br><span class="line">    //forEach遍历-&gt;打印元素</span><br><span class="line">    strings.stream().forEach(System.out::println);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
@@ -422,7 +653,7 @@
 </ul>
 <h5 id="JDK9新特性"><a href="#JDK9新特性" class="headerlink" title="JDK9新特性"></a>JDK9新特性</h5><ol>
 <li><p>JShell，为 Java 提供了类似于 Python 的实时命令行交互工具。</p>
-<p><img src="/imgs/Java%E5%9F%BA%E7%A1%80/image-20231007094914235.png" alt="image-20231007094914235"></p>
+<p><img src="/./imgs/image-20231003111847441.png" alt="image-20231003111847441"></p>
 </li>
 <li><p>String 改为用byte[]存储。</p>
 </li>
