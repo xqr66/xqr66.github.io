@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="一个大三学生的简单个人博客" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>JVM |  xqr的博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="xqr的博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-JVM"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  JVM
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/04/19/JVM/" class="article-date">
+  <time datetime="2024-04-19T15:01:45.000Z" itemprop="datePublished">2024-04-19</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">13.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">48 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="JVM分区"><a href="#JVM分区" class="headerlink" title="JVM分区"></a>JVM分区</h3><h4 id="jvm堆的分区"><a href="#jvm堆的分区" class="headerlink" title="jvm堆的分区"></a>jvm堆的分区</h4><p>堆中有字符串常量池</p>
+<p>Java堆从GC的角度可以细分为新生代YoungGeneration（Eden区、From Survivor、To Survivor，空间比例8:1:1）和老年代OldGeneration（空间比例1:2）。</p>
+<p><img src="/./../imgs/JVM/v2-108fca6ca82b85d2d6f559d0d469c770_1440w.webp" alt="img"></p>
+<h4 id="jvm各种区域介绍"><a href="#jvm各种区域介绍" class="headerlink" title="jvm各种区域介绍"></a>jvm各种区域介绍</h4><p><strong>Java内存区域</strong></p>
+<p>Java的内存区域和内存模型是不一样的东西，内存区域是指 JVM 运行时将数据分区域存储，强调对内存空间的划分。</p>
+<p>Java内存区域主要由栈、堆、方法区组成</p>
+<p><strong>栈</strong>：每个线程有自己独立、不共享的虚拟机栈，由多个栈帧（每个方法运行时需要的内存）组成，其中存放参数、局部变量，返回地址等，每个线程只能有一个活动栈帧，对应当前正在执行的那个方法。</p>
+<p><strong>堆</strong>：多个线程共享同一个堆，通过new关键字构建的对象都需要使用堆内存，里面存放了实例对象、字符串常量池，类对象、静态变量（存放在_java_mirror后面）等。</p>
+<p><strong>方法区</strong>：保存在着被加载过的每一个类的信息，包括类的方法、构造器，成员方法，属性等，这些信息由<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%8A%A0%E8%BD%BD&spm=1001.2101.3001.7020">类加载</a>器在加载类时，从类的源文件中抽取出来；<strong>运行时常量池</strong>：当该类被加载时，它的常量池信息就会放入运行时常量池，并把里面的符号地址转换为真实地址。</p>
+<p><strong>程序计数器：</strong>每个线程都有一个独立的程序计数器，记录下一条JVM指令的执行地址</p>
+<p><strong>本地方法栈：</strong>调用本地方法（由C或者C++编写的底层的方法，与操作系统的底层API打交道）时给本地方法提供的内存空间</p>
+<p><img src="/./../imgs/JVM/image-20231003112352559.png" alt="image-20231003112352559"></p>
+<p><strong>直接内存：</strong>操作系统的内存，分配回收成本较高，读写性能高，不受JVM内存回收管理</p>
+<h3 id="JVM垃圾回收"><a href="#JVM垃圾回收" class="headerlink" title="JVM垃圾回收"></a>JVM垃圾回收</h3><h4 id="强引用、弱引用、软引用、虚引用的区别"><a href="#强引用、弱引用、软引用、虚引用的区别" class="headerlink" title="强引用、弱引用、软引用、虚引用的区别"></a>强引用、弱引用、软引用、虚引用的区别</h4><p>在Java中提供了四个级别的引用：<strong>强引用</strong>，<strong>软引用</strong>，<strong>弱引用</strong>和<strong>虚引用</strong>。在这四个引用类型中，只有强引用FinalReference类是包内可见，其他三种引用类型均为public，可以在应用程序中直接使用。引用类型的类结构如图所示。</p>
+<p><img src="/./../imgs/JVM/image-20231003111728261.png" alt="image-20231003111728261"></p>
+<h5 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a><strong>强引用</strong></h5><p>Java中默认声明的就是强引用，例如以下代码，如果M对象被回收了，会打印 finalize() 方法中的内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">M</span> <span class="variable">m</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">M</span>();  <span class="comment">//只要m还指向M对象，M对象就不会被回收</span></span><br><span class="line">        <span class="comment">// m = null;   //手动置null</span></span><br><span class="line">        System.gc();  <span class="comment">// 进行垃圾回收</span></span><br><span class="line">        System.in.read();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">M</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;对象被回收了...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="/./../imgs/JVM/v2-e5f1836efa6748c371bcd126823414f7_1440w-1696303052906-5.webp" alt="img"></p>
+<p>只要强引用存在，垃圾收集器将永远不会回收被引用的对象，哪怕<strong>内存不足</strong>时，JVM也会直接抛出OutOfMemoryError，<strong>不会去回收</strong>。如果想中断强引用与对象之间的联系，可以显示的将强引用赋值为null，这样一来，JVM就可以适时的回收对象了。例如上面的代码，将 m &#x3D; null; 注释放开时，运行结果如下：</p>
+<p><img src="/./../imgs/JVM/image-20231003111738987.png" alt="image-20231003111738987"></p>
+<h5 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a><strong>软引用</strong></h5><p>软引用是用来描述一些非必需但仍有用的对象。在内存足够的时候，软引用对象不会被回收，只有在垃圾回收后，<strong>内存仍然不足</strong>时，系统则<strong>会回收</strong>软引用对象，如果回收了软引用对象之后仍然没有足够的内存，才会抛出OutOfMemoryError。这种特性常常被用来实现<strong>缓存技术</strong>，比如网页缓存，图片缓存等。</p>
+<p>在 JDK1.2 之后，用 SoftReference 类来表示软引用。下面以一个例子来进一步说明强引用和软引用的区别。</p>
+<p>在运行下面的Java代码之前，需要先配置参数 -Xms2M -Xmx2M，将 JVM 的初始内存设为2M，最大可用内存为 2M。</p>
+<p>首先先来测试一下强引用，在限制了 JVM 内存的前提下，下面的代码运行正常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 当 new byte为 1M 时，程序运行正常</span></span><br><span class="line">        <span class="type">byte</span>[] buff1 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span> * <span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// byte[] buff2 = new byte[1024 * 1024 * 1];</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是如果我们再创建一个1M大小的 byte数组时，则内存不够使用，程序直接报错。因为强引用不会被回收。</p>
+<p><img src="/./../imgs/JVM/image-20231003111745645.png" alt="image-20231003111745645"></p>
+<p>接着来看一下软引用会有什么不一样，在下面的示例中先创建一个大小为 1M 的软引用对象，打印m的地址，然后进行垃圾回收，休眠500ms后打印m的地址。最后又创建了一个1M的字节数组，打印m的地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SoftReference&lt;<span class="type">byte</span>[]&gt; m = <span class="keyword">new</span> <span class="title class_">SoftReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>]);</span><br><span class="line"> </span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">        <span class="comment">// 再分配一个数组，heap将装不下，</span></span><br><span class="line">        <span class="comment">// 这时系统会进行垃圾回收，如果内存不够，会把软引用干掉</span></span><br><span class="line">        <span class="type">byte</span>[] b = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>*<span class="number">1</span>];</span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="/./../imgs/JVM/v2-210fffb5827e8aea4115430e5b373238_1440w-1696303070608-7.webp" alt="img"></p>
+<p>根据运行结果，我们可以看到，在内存不足的情况下，软引用才会被回收。</p>
+<h5 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a><strong>弱引用</strong></h5><p>弱引用的引用强度比软引用要更弱一些，<strong>无论内存是否足够</strong>，只要 JVM 开始进行垃圾回收，那些被弱引用关联的对象<strong>都会被回收</strong>。在 JDK1.2 之后，用 WeakReference 来表示弱引用。</p>
+<p>我们以与软引用同样的方式来测试一下弱引用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        WeakReference&lt;<span class="type">byte</span>[]&gt; m = <span class="keyword">new</span> <span class="title class_">WeakReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span> * <span class="number">1024</span>]);</span><br><span class="line"> </span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(m.get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="/./../imgs/JVM/image-20231003111756526.png" alt="image-20231003111756526"></p>
+<p>根据运行结果，可以发现垃圾回收后被弱引用关联的对象被回收了。</p>
+<p>在 Java 集合中有一种特殊的 Map 类型：<strong>WeakHashMap</strong>， 在这种 Map 中存放了键对象的弱引用，当一个键对象被垃圾回收，那么相应的值对象的引用会从 Map 中删除。WeakHashMap 能够节约存储空间，可用来缓存那些非必须存在的数据。</p>
+<h5 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a><strong>虚引用</strong></h5><p>虚引用是最弱的一种引用关系，如果一个对象仅持有虚引用，那么它就和没有任何引用一样，它随时可能会被回收。在 JDK1.2 之后，用 PhantomReference 类来表示，通过查看这个类的源码，发现它只有一个构造函数和一个 get() 方法，而且它的 get() 方法仅仅是返回一个null，也就是说将永远无法通过虚引用来获取对象。</p>
+<p>虚引用必须要和 ReferenceQueue 引用队列一起使用，主要配合ByteBuffer使用，在引用对象被回收时，会将虚引用入队，Reference Handler线程调用虚引用相关方法释放直接内存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PhantomReference</span>&lt;T&gt; <span class="keyword">extends</span> <span class="title class_">Reference</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PhantomReference</span><span class="params">(T referent, ReferenceQueue&lt;? <span class="built_in">super</span> T&gt; q)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(referent, q);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;Object&gt; LIST = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ReferenceQueue</span> <span class="variable">QUEUE</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceQueue</span>();</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        PhantomReference&lt;M&gt; m = <span class="keyword">new</span> <span class="title class_">PhantomReference</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">M</span>(), QUEUE);<span class="comment">//关联软引用对象和引用队列</span></span><br><span class="line"> 		<span class="comment">//当软引用所关联的byte数组被回收时，软引用会自己加入到queue中</span></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                LIST.add(<span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>*<span class="number">1024</span>]);</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    Thread.currentThread().interrupt();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(m.get());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(()-&gt;&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">Reference</span> <span class="variable">poll</span> <span class="operator">=</span> QUEUE.poll();</span><br><span class="line">                <span class="keyword">if</span>(poll != <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="comment">//获取queue中的无用的软引用对象，并移除</span></span><br><span class="line">                    System.out.println(<span class="string">&quot;虚引用对象：&quot;</span> + poll + <span class="string">&quot; 被jvm回收了&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">M</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">finalize</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;对象被回收了...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p><img src="/./../imgs/JVM/v2-db69836fc83d1e8d39f5088bc1a4b8a9_1440w-1696303085353-9.webp" alt="img"></p>
+<h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h4><p>JVM中的垃圾回收器通过可达性分析来探索所有存活的对象<br>扫描堆中的对象，看能否沿着GC Root对象为起点的引用链找到该对象，如果找不到，则表示可以回收</p>
+<h5 id="可以作为GC-Root的对象"><a href="#可以作为GC-Root的对象" class="headerlink" title="可以作为GC Root的对象"></a>可以作为GC Root的对象</h5><ul>
+<li>系统类System Class（Object、String等）</li>
+<li>本地方法栈中JNI（即一般说的Native方法）引用的对象</li>
+<li>所有被同步锁（synchronized关键字）持有的对象。</li>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
+</ul>
+<h4 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h4><p><strong>1.标记-清除算法</strong>：标记无用对象，然后进行清除回收。缺点：效率不高，无法清除垃圾碎片。</p>
+<ul>
+<li>该算法分为两个阶段，<strong>标记和清除</strong>。标记阶段标记所有需要回收的对象，清除阶段回收被标记的对象所占用的空间。该算法最大的问题就是内存碎片严重化，后续可能发生对象不能找到利用空间的问题。</li>
+</ul>
+<p><img src="/./../imgs/JVM/v2-7389d400dc04abb145a67fa86a662e33_1440w.webp" alt="img"></p>
+<p><strong>2.复制算法</strong>：按照容量划分二个大小相等的内存区域，当一块用完的时候将活着的对象复制到另一块上，然后再把已使用的内存空间一次清理掉。缺点：内存使用率不高，只有原来的一半。</p>
+<ul>
+<li>按内存容量将内存划分为等大小的两块。每次只使用其中一块，当这一块内存满后将尚存活的对象复制到另一块上去，把已使用的内存清掉。</li>
+</ul>
+<p><img src="/./../imgs/JVM/v2-20adb8ac4c5deb44fc27e30c8381281d_1440w.webp" alt="img"></p>
+<p><img src="/./../imgs/JVM/image-20240322203226141.png" alt="image-20240322203226141"></p>
+<p><strong>3.标记-整理算法</strong>：标记无用对象，让所有存活的对象都向一端移动，然后直接清除掉端边界以外的内存。</p>
+<ul>
+<li>标记后不是清理对象，而是将存活对象移向内存的一端。然后清除端边界外的对象。</li>
+</ul>
+<p><img src="/./../imgs/JVM/v2-cc722c4e5b289434d2181451f4fd154c_1440w.webp" alt="img"></p>
+<p><img src="/./../imgs/JVM/image-20240322203239717.png" alt="image-20240322203239717"></p>
+<p><strong>4.分代算法</strong>：根据对象存活周期的不同将内存划分为几块，一般是新生代和老年代，新生代基本采用复制算法，老年代采用标记整理算法。</p>
+<p>minor gc新生代的的垃圾收集动作，Minor GC 非常频繁，回收速度一般也比较快。</p>
+<p>full gc&#x2F;major gc 老年代的GC，Major GC 的速度一般会比 Minor GC 的慢 10 倍以上</p>
+<p>二 minorGC过程详解<br>1 在初始阶段，新创建的对象被分配到Eden区，survivor的两块空间都为空。</p>
+<p><img src="/./../imgs/JVM/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNTA2OA==,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<p>2 当Eden区满了的时候，minor garbage 被触发 。</p>
+<p><img src="/./../imgs/JVM/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNTA2OA==,size_16,color_FFFFFF,t_70-1711111900766-29.png" alt="img"></p>
+<p>3 经过扫描与标记，存活的对象被复制到S0，不存活的对象被回收， 并且存活的对象年龄都增大一岁。</p>
+<p><img src="/./../imgs/JVM/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNTA2OA==,size_16,color_FFFFFF,t_70-1711111908107-32.png" alt="在这里插入图片描述"></p>
+<p>4 在下一次的Minor GC中，Eden区的情况和上面一致，没有引用的对象被回收，存活的对象被复制到survivor区。当Eden 和 s0区空间满了，S0的所有的数据都被复制到S1，需要注意的是，在上次minor GC过程中移动到S0中的两个对象在复制到S1后其年龄要加1。此时Eden区S0区被清空，所有存活的数据都复制到了S1区，并且S1区存在着年龄不一样的对象，过程如下图所示：</p>
+<p><img src="/./../imgs/JVM/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNTA2OA==,size_16,color_FFFFFF,t_70-1711111915300-35.png" alt="在这里插入图片描述"></p>
+<p>5 再下一次MinorGC则重复这个过程，这一次survivor的两个区对换，存活的对象被复制到S0，存活的对象年龄加1，Eden区和另一个survivor区被清空。</p>
+<p><img src="/./../imgs/JVM/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNTA2OA==,size_16,color_FFFFFF,t_70-1711111922409-38.png" alt="在这里插入图片描述"></p>
+<p>6 再经过几次Minor GC之后，当存活对象的年龄达到一个阈值之后（-XX：MaxTenuringThreshold默认是15），就会被从年轻代Promotion到老年代。</p>
+<p><img src="/./../imgs/JVM/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNTA2OA==,size_16,color_FFFFFF,t_70-1711111929062-41.png" alt="在这里插入图片描述"></p>
+<p>7 随着MinorGC一次又一次的进行，不断会有新的对象被promote到老年代。</p>
+<p><img src="/./../imgs/JVM/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjYxNTA2OA==,size_16,color_FFFFFF,t_70-1711111935557-44.png" alt="在这里插入图片描述"></p>
+<p>8 上面基本上覆盖了整个年轻代所有的回收过程。最终，MajorGC将会在老年代发生，老年代的空间将会被清除和压缩(标记-清除或者标记整理)。</p>
+<ul>
+<li><p>从上面的过程可以看出，Eden区是连续的空间，且Survivor总有一个为空。经过一次GC和复制，一个Survivor中保存着当前还活着的对象，而Eden区和另一个Survivor区的内容都不再需要了，可以直接清空，到下一次GC时，两个Survivor的角色再互换。因此，这种方式分配内存和清理内存的效率都极高，这种垃圾回收的方式就是著名的“停止-复制（Stop-and-copy）”清理法（将Eden区和一个Survivor中仍然存活的对象拷贝到另一个Survivor中），这不代表着停止复制清理法很高效，其实，它也只在这种情况下（基于大部分对象存活周期很短的事实）高效，如果在老年代采用停止复制，则是非常不合适的。</p>
+</li>
+<li><p>老年代存储的对象比年轻代多得多，而且不乏大对象，对老年代进行内存清理时，如果使用停止-复制算法，则相当低效。一般，老年代用的算法是标记-整理算法，即：标记出仍然存活的对象（存在引用的），将所有存活的对象向一端移动，以保证内存的连续。在发生Minor GC时，虚拟机会检查每次晋升进入老年代的大小是否大于老年代的剩余空间大小，如果大于，则直接触发一次Full GC，否则，就查看是否设置了-XX:+HandlePromotionFailure（允许担保失败），如果允许，则只会进行MinorGC，此时可以容忍内存分配失败；<strong>如果不允许，则仍然进行Full GC（</strong>这代表着如果设置-XX:+Handle PromotionFailure，则触发MinorGC就会同时触发Full GC，哪怕老年代还有很多内存，所以，最好不要这样做）。</p>
+</li>
+</ul>
+<p>整体描述<br>大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s1(“To”)，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 -XX:MaxTenuringThreshold 来设置。经过这次GC后，Eden区和”From”区已经被清空。这个时候，“From”和”To”会交换他们的角色，也就是新的”To”就是上次GC前的“From”，新的”From”就是上次GC前的”To”。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，**”To”区被填满之后，会将所有对象移动到年老代**中。</p>
+<p>三 GC触发条件<br>Minor GC触发条件：Eden区满时</p>
+<p>Full GC触发条件：<br>（1）调用System.gc时，系统建议执行Full GC，但是不必然执行<br>（2）老年代空间不足<br>（3）方法区空间不足<br>（4）通过Minor GC后进入老年代的大小大于老年代的可用内存<br>（5）由Eden区、From Space区向To Space区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小。</p>
+<p><img src="/./../imgs/JVM/image-20231004144129340.png" alt="image-20231004144129340"></p>
+<p>新生代分为伊甸园和幸存区，幸存区由from space 与 to space 两块相等的内存区域组成。eden ：from ：to &#x3D; 8 : 1 : 1;</p>
+<p>新生代回收之后内存足够使用的话就不会扫描老年代，否则会扫描老年代。</p>
+<h4 id="年轻代怎么升级为老年代"><a href="#年轻代怎么升级为老年代" class="headerlink" title="年轻代怎么升级为老年代"></a>年轻代怎么升级为老年代</h4><h5 id="担保机制"><a href="#担保机制" class="headerlink" title="担保机制"></a>担保机制</h5><p>新生代内存不足的时候（当MinorGC时，如果存活对象过多，无法完全放入Survivor From区），可以通过担保分配的方式让存活对象直接分配进老年代。</p>
+<h5 id="大对象直接进入老年代"><a href="#大对象直接进入老年代" class="headerlink" title="大对象直接进入老年代"></a>大对象直接进入老年代</h5><p>-XX：PretenureSizeThreshould &#x3D; 3145728，可以设置超过3M的对象直接进入老年代</p>
+<h5 id="长期存活的对象"><a href="#长期存活的对象" class="headerlink" title="长期存活的对象"></a>长期存活的对象</h5><p>在年轻代的对象在minor GC后没有被淘汰年龄就会加1，年龄增加到一定程度就会晋升为老年代，这个晋升的年龄是可以设置的。</p>
+<h5 id="动态年龄判断"><a href="#动态年龄判断" class="headerlink" title="动态年龄判断"></a>动态年龄判断</h5><p>当survivor空间中相同年龄所有<strong>对象的大小总和****大于</strong>survivor空间的一半，年龄大于或等于该年龄的对象就会直接进入老年代，无需等到晋升年龄。</p>
+<h4 id="GC调优"><a href="#GC调优" class="headerlink" title="GC调优"></a>GC调优</h4><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6974281849031884830">JVM调优——GC 调优 - 掘金 (juejin.cn)</a></p>
+<h5 id="确定合适回收器"><a href="#确定合适回收器" class="headerlink" title="确定合适回收器"></a>确定合适回收器</h5><p>“低延迟”还是“高吞吐量”，选择合适的回收器CMS，G1，ZGC </p>
+<h5 id="降低GC次数，最快的GC是不发生GC"><a href="#降低GC次数，最快的GC是不发生GC" class="headerlink" title="降低GC次数，最快的GC是不发生GC"></a>降低GC次数，最快的GC是不发生GC</h5><p>尽量减少堆内存的使用，减少对象大小、避免数据冗余、排查是否存在内存泄漏</p>
+<h5 id="新生代调优"><a href="#新生代调优" class="headerlink" title="新生代调优"></a>新生代调优</h5><p>新生代的特点</p>
+<ul>
+<li>所有的new操作分配内存都是非常廉价的</li>
+<li>死亡对象回收零代价</li>
+<li>大部分对象用过即死（朝生夕死）</li>
+<li>MInor GC 所用时间远小于Full GC</li>
+</ul>
+<p><strong>选择合适新生代内存大小</strong></p>
+<ul>
+<li>新生代内存太小：频繁触发Minor GC，会STW，会使得吞吐量下降</li>
+<li>新生代内存太大：老年代内存占比有所降低，会更频繁地触发Full GC。而且触发Minor GC时，清理新生代所花费的时间会更长</li>
+<li>新生代内存设置为能容纳**[并发量*(请求-响应)]**的数据为宜</li>
+<li>幸存区大到能保留【当前活跃对象+需要晋升对象】</li>
+<li>晋升阈值配置得当，让长时间存活对象尽快晋升</li>
+</ul>
+<h5 id="老年代调优"><a href="#老年代调优" class="headerlink" title="老年代调优"></a>老年代调优</h5><p>如果fullGC频率不高，就挺适合的</p>
+<p>如果频繁发生fullGC，可以调高老年代空间占用比率，增大堆空间</p>
+<p>观察发生 Full GC 时老年代内存占用，将老年代内存预设调大 1&#x2F;4 ~ 1&#x2F;3<br>-XX:CMSInitiatingOccupancyFraction&#x3D;percent</p>
+<h4 id="GC调优实战"><a href="#GC调优实战" class="headerlink" title="GC调优实战"></a>GC调优实战</h4><h5 id="分析GC日志-GCEasy"><a href="#分析GC日志-GCEasy" class="headerlink" title="分析GC日志 - GCEasy"></a>分析GC日志 - GCEasy</h5><p>GCeasy是业界首款使用AI机器学习技术在线进行GC分析和诊断的工具。定位内存泄漏、GC延迟高的问题，提供JVM参数优化建议，支持在线的可视化工具图表展示。 官方网站：<a target="_blank" rel="noopener" href="https://gceasy.io/">https://gceasy.io/</a> </p>
+<p><img src="/./../imgs/JVM/1712369115106-34.png" alt="img"></p>
+<p>使用方法：</p>
+<p>1、选择文件，找到GC日志并上传</p>
+<p><img src="/./../imgs/JVM/1712369115050-28.png" alt="img"></p>
+<p>2、点击Analyze分析就可以看到报告，每个账号每个月能免费上传5个GC日志。</p>
+<p>建议部分：</p>
+<p><img src="/./../imgs/JVM/1712369115050-29.png" alt="img"></p>
+<p>内存情况：</p>
+<p><img src="/./../imgs/JVM/1712369115050-30.png" alt="img"></p>
+<p>GC关键性指标：</p>
+<p><img src="/./../imgs/JVM/1712369115050-31.png" alt="img"></p>
+<p>GC的趋势图：</p>
+<p><img src="/./../imgs/JVM/1712369115050-32.png" alt="img"></p>
+<p>引发GC的原因：</p>
+<p><img src="/./../imgs/JVM/1712369115050-33.png" alt="img"></p>
+<h4 id="垃圾收集器cms和g1比较"><a href="#垃圾收集器cms和g1比较" class="headerlink" title="垃圾收集器cms和g1比较"></a>垃圾收集器cms和g1比较</h4><h5 id="CMS（仅作用于老年代，基于标记-清除算法）"><a href="#CMS（仅作用于老年代，基于标记-清除算法）" class="headerlink" title="CMS（仅作用于老年代，基于标记-清除算法）"></a>CMS（仅作用于老年代，基于标记-清除算法）</h5><p>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。这是因为 CMS 收集器工作时，GC 工作线程与用户线程可以并发执行，以此来达到降低收集停顿时间的目的。</p>
+<ul>
+<li>初始标记（CMS initial mark）需要 Stop-the-world，标记一下 GC Roots 能直接关联到的对象，速度很快</li>
+<li>并发标记（CMS concurrent mark）进行 GC Roots Tracing 的过程</li>
+<li>重新标记（CMS remark）需要 Stop-the-world，为了修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始阶段稍长一些，但远比并发标记的时间短。</li>
+<li>并发清除（CMS concurrent sweep）</li>
+</ul>
+<p><img src="/./../imgs/JVM/59307b3ead7530e2f9fedaaf71f5608f.png" alt="img"></p>
+<p>CMS 收集器优点：并发收集、低停顿。</p>
+<p>CMS 收集器缺点：</p>
+<ul>
+<li>CMS 收集器对 CPU 资源非常敏感。</li>
+<li>CMS 收集器无法处理浮动垃圾（Floating Garbage）（CMS在 并发标记 时是并发的，GC 线程和用户线程并发执行，这个过程当然可能会因为线程的交替执行而导致新产生的垃圾（可回收对象，即浮动垃圾）没有被标记到；而 重新标记 只是对之前 并发标记 所获得的不可达对象的更正，所以是没有办法处理 “浮动垃圾” 的。）。</li>
+<li>CMS 收集器是基于标记-清除算法，该算法的缺点都有（内存碎片）。</li>
+<li>停顿时间是不可预期的。</li>
+</ul>
+<h5 id="G1-分为年轻代回收（复制算法），混合回收（年轻代与老年代（标记整理suan’fa）都会回收）"><a href="#G1-分为年轻代回收（复制算法），混合回收（年轻代与老年代（标记整理suan’fa）都会回收）" class="headerlink" title="G1(分为年轻代回收（复制算法），混合回收（年轻代与老年代（标记整理suan’fa）都会回收）)"></a>G1(分为年轻代回收（复制算法），混合回收（年轻代与老年代（标记整理suan’fa）都会回收）)</h5><ul>
+<li>G1 算法取消了堆中年轻代与老年代的物理划分，而是一个逻辑分代，但它仍然属于分代收集器。</li>
+<li>G1 算法将堆划分为若干个区域，称作 Region，</li>
+<li>同时注重**吞吐量（**Throughput）和**低延迟**（Low latency），默认的暂停目标是 200 ms</li>
+<li>G1 采用每次只清理一部分而不是全部的 Region 的增量式清理，由此来保证每次 GC 停顿时间不会过长。</li>
+<li>G1 算法允许通过 JVM 参数设置 Region 的大小，范围是 1～32MB，可以设置期望的最大 GC 停顿时间，根据这个停顿时间来制定回收计划，所以G1的垃圾<font color = gold>回收是可预期的</font>。</li>
+</ul>
+<img src="./../imgs/JVM/image-20231011213513010.png" alt="image-20231011213513010" style="zoom: 50%;" />
+
+<p><strong>G1垃圾回收器的垃圾回收方式分为两种。</strong></p>
+<ul>
+<li><strong>一就是YoungGC，主要回收的是年轻代Region中的垃圾，采用<font color = gold>复制算法</font></strong></li>
+<li><strong>第二种就是混合回收模式（Mix GC），这种回收模式会回收年轻代跟老年代中的所有垃圾，采用<font color = gold>标记-整理算法</font>。</strong></li>
+</ul>
+<p>G1 回收过程如下。</p>
+<ul>
+<li><strong>初始标记(Initial Marking)：</strong>这阶段仅仅只是<font color = gold>标记GC Roots能直接关联到的对象</font>，让下一阶段用户程序并发运行时，能在正确的可用的Region中创建新对象，这阶段需要<font color = gold>停顿线程(STW)</font>，但是<font color = gold>耗时很短</font>&gt;。而且是借用<font color = gold>进行Minor GC的时候同步完成的</font>&gt;，所以G1收集器在这个阶段实际并没有额外的停顿。</li>
+<li><strong>并发标记(Concurrent Marking)：</strong>从GC Roots开始对堆的对象进行<font color = gold>可达性分析</font>，并进行三色标记，标记开始时创建一个快照，记录当前所有对象，递归扫描整个堆里的对象图，找出存活的对象，（在此过程中新创建的对象会直接标记为黑色），这阶段<font color = gold>耗时较长</font>，但是可以<font color = gold>与用户程序并发执行,不会STW</font>。当对象图扫描完成以后，还要重新处理SATB记录下的在并发时有引用变动的对象，将这些对象放入STAB队列中。</li>
+<li><strong>最终标记(Final Marking)：</strong>对<font color = gold>用户线程做另一个短暂的暂停</font>，用于标记并发阶段结束后仍遗留下来的最后那少量的 SATB队列中的对象记录。</li>
+<li><strong>筛选回收(Live Data Counting and Evacuation)：</strong>负责更新 Region 的统计数据，对各个 Region 的回收价值和成本进行排序，优先对可回收空间较大的 Region 进行回收，即 garbage first，这也是 G1 名称的由来，根据用户所<font color = gold>期望的停顿时间来制定回收计划</font>。可以<font color = gold>自由选择多个Region来构成回收集</font>，然后把回收的那一部分Region中的存活对象复制到空的Region中，再对那些Region进行清空。</li>
+</ul>
+<p>除了并发标记外，其余过程都要 STW</p>
+<img src="./../imgs/JVM/20200608151109.png" alt="img" style="zoom:50%;" />
+
+<h5 id="年轻代回收详情（复制算法）"><a href="#年轻代回收详情（复制算法）" class="headerlink" title="年轻代回收详情（复制算法）"></a>年轻代回收详情（复制算法）</h5><p>年轻代回收<strong>只扫描年轻代对象（Eden + Survivor）</strong>，所以从GC Root到年轻代的对象或者年轻代对象引用了其他年轻代的对象都很容易扫描出来。</p>
+<p><img src="/./../imgs/JVM/1711165442927-26.png" alt="img"></p>
+<p>这里就存在一个问题，年轻代回收只扫描年轻代对象（Eden + Survivor），如果有老年代中的对象引用了年轻代中的对象，我们又如何知道呢？</p>
+<p><img src="/./../imgs/JVM/1711165442928-27.png" alt="img"></p>
+<p>比如上图中，E对象被对象引用了，那么显然在垃圾回收时E对象是不应该被回收的。</p>
+<p><strong>方案1：从GC Root开始，扫描所有对象，如果年轻代对象在引用链上，就标记为存活。</strong></p>
+<p><img src="/./../imgs/JVM/1711165442928-28.png" alt="img"></p>
+<p>重新扫描一遍GC Root关联的所有对象，包括老年代的。这个方案显然不可行，需要遍历引用链上所有对象，效率太低。</p>
+<p><strong>方案2：维护一个详细的表，记录哪个对象被哪个老年代引用了。在年轻代中被引用的对象，不进行回收。</strong></p>
+<p><img src="/./../imgs/JVM/1711165442928-29.png" alt="img"></p>
+<p>如上图中，通过引用详情表记录F和E对象分别被A和B对象引用了。问题：如果对象太多这张表会占用很大的内存空间。存在错标的情况</p>
+<p>方案2的第一次优化：只记录Region被哪些对象引用了。这种引用详情表称为记忆集 RememberedSet（简称RS或RSet）：是一种记录了从非收集区域对象引用收集区域对象的这些关系的数据结构。扫描时将记忆集中的对象也加入到GC Root中，就可以根据引用链判断哪些对象需要回收了。</p>
+<p>问题：如果区域中引用对象很多，还是占用很多内存。</p>
+<p><img src="/./../imgs/JVM/1711165442928-30.png" alt="img"></p>
+<p>方案2的第二次优化：将所有区域中的内存按一定大小划分成很多个块（每个块的大小为512kb），每个块进行编号。记忆集中只记录对块的引用关系。如果一个块中有多个对象，只需要引用一次，减少了内存开销。</p>
+<p><img src="/./../imgs/JVM/1711165442928-31.png" alt="img"></p>
+<p>每一个Region都拥有一个自己的卡表，如果产生了跨代引用（老年代引用年轻代），此时这个Region对应的卡表上就会将字节内容进行修改,用一个字节来代表区域内的一个512字节的块，JDK8源码中0代表被引用了称为脏卡。这样就可以标记出当前Region被老年代中的哪些部分引用了。那么要生成记忆集就比较简单了，只需要遍历整个卡表，找到所有脏卡。</p>
+<p><img src="/./../imgs/JVM/1711165442928-32.png" alt="img"></p>
+<p>那么怎么样去维护这个卡表呢？或者说怎么知道A对F引用了？</p>
+<p><strong>JVM使用写屏障（Write Barrier）技术</strong>，在执行引用关系建立的代码时，可以在代码前和代码后插入一段指令，从而维护卡表。</p>
+<p>记忆集中不会记录新生代到新生代的引用，同一个Region中的引用也不会记录。</p>
+<p><img src="/./../imgs/JVM/1711165442928-33.png" alt="img"></p>
+<p>记忆集的生成流程分为以下几个步骤：</p>
+<p>1、通过写屏障获得引用变更的信息。</p>
+<p>2、将引用关系记录到卡表中，并记录到一个脏卡队列中。</p>
+<p>3、JVM中会由Refinement 线程定期从脏卡队列中获取数据，生成记忆集。不直接写入记忆集的原因是避免过多线程并发访问记忆集。</p>
+<p><img src="/./../imgs/JVM/1711165442928-34.png" alt="img"></p>
+<h6 id="执行流程："><a href="#执行流程：" class="headerlink" title="执行流程："></a>执行流程：</h6><p>更详细的分析下年轻代回收的步骤，整个过程是STW的：</p>
+<p>1、Root扫描，将所有的静态变量、局部变量扫描出来。</p>
+<p>2、处理脏卡队列中的没有处理完的信息，更新记忆集的数据，此阶段完成后，记忆集中包含了所有老年代对当前Region的引用关系。</p>
+<p><img src="/./../imgs/JVM/1711165442929-35.png" alt="img"></p>
+<p>3、标记存活对象。记忆集中的对象会加入到GC Root对象集合中，在GC Root引用链上的对象也会被标记为存活对象。</p>
+<p>4、根据设定的最大停顿时间，选择本次收集的区域，称之为回收集合Collection Set。</p>
+<p><img src="/./../imgs/JVM/1711165442929-36.png" alt="img"></p>
+<p>5、复制对象：将标记出来的对象复制到新的区中，将年龄加1，如果年龄到达15则晋升到老年代。老的区域内存直接清空。</p>
+<p>6、处理软、弱、虚、终结器引用，以及JNI中的弱引用。</p>
+<p><img src="/./../imgs/JVM/1711165442929-37.png" alt="img"></p>
+<p><strong>G1年轻代回收核心技术</strong></p>
+<p><strong>1、卡表 Card Table</strong></p>
+<p>每一个Region都拥有一个自己的卡表，卡表是一个字节数组，如果产生了跨代引用（老年代引用年轻代），G1会将卡表上引用对象所在的位置字节内容进行修改为0, 称为脏卡。卡表的主要作用是生成记忆集。</p>
+<p>卡表会占用一定的内存空间，堆大小是1G时，卡表大小为1G &#x3D; 1024 MB &#x2F; 512 &#x3D; 2MB</p>
+<p><strong>2、记忆集 RememberedSet（简称RS或RSet）</strong></p>
+<p>每一个Region都拥有一个自己的记忆集，如果产生了跨代引用，记忆集中会记录引用对象所在的卡表位置。标记阶段将记忆集中的对象加入GC ROOT集合中一起扫描，就可以将被引用的对象标记为存活。</p>
+<p><strong>3、写屏障 Write Barrier</strong></p>
+<p>G1使用写屏障技术，在执行引用关系建立的代码执行后插入一段指令，完成卡表的维护工作。</p>
+<p>会损失一部分的性能，大约在5%~10%之间。</p>
+<h5 id="混合回收"><a href="#混合回收" class="headerlink" title="混合回收"></a>混合回收</h5><p>多次回收之后，会出现很多Old老年代区，此时总堆占有率达到阈值（默认45%）时会触发混合回收MixedGC。</p>
+<p>混合回收会由年轻代回收之后或者大对象分配之后触发，混合回收会回收 <strong>整个年轻代 + 部分老年代。</strong></p>
+<p>老年代很多时候会有大量对象，要标记出所有存活对象耗时较长，所以整个标记过程要尽量能做到和用户线程并行执行。</p>
+<h5 id="混合回收的步骤："><a href="#混合回收的步骤：" class="headerlink" title="混合回收的步骤："></a><strong>混合回收的步骤：</strong></h5><p>1、初始标记，STW，采用三色标记法标记从GC Root可直达的对象。</p>
+<p>2、并发标记，并发执行，对存活对象进行标记。</p>
+<p>3、最终标记，STW，处理SATB相关的对象标记。</p>
+<p>4、清理，STW，如果区域中没有任何存活对象就直接清理。</p>
+<p>5、使用标记整理算法，转移，将存活对象复制到别的区域。</p>
+<h6 id="初始标记"><a href="#初始标记" class="headerlink" title="初始标记"></a>初始标记</h6><p>初始标记会暂停所有用户线程，只标记从GC Root可直达的对象，所以停顿时间不会太长。采用三色标记法进行标记，三色标记法在原有双色标记（黑也就是1代表存活，白0代表可回收）增加了一种灰色，采用队列的方式保存标记为灰色的对象。</p>
+<p>黑色：存活，当前对象在GC Root引用链上，同时他引用的其他对象也都已经标记完成。</p>
+<p>灰色：待处理，当前对象在GC Root引用链上，他引用的其他对象还未标记完成。</p>
+<p>白色：可回收，不在GC Root引用链上。</p>
+<p>初始所有对象都是默认为白色，初始值为0：</p>
+<p><img src="/./../imgs/JVM/1711166313048-71.png" alt="img"></p>
+<p>三色标记中的黑色和白色是使用位图(bitmap)来实现的,比如8个字节使用1个bit来标识标记的内容，黑色为1，白色为0，灰色不会体现在位图中，会单独放入一个队列中。如果对象超过8个字节，仅仅使用第一个bit位处理。</p>
+<p><img src="/./../imgs/JVM/1711166313051-72.png" alt="img"></p>
+<p>将GC Root可以直到的对象D标记，D没有其他引用对象，所以直接标记为为黑色：</p>
+<p><img src="/./../imgs/JVM/1711166313052-73.png" alt="img"></p>
+<p>接下来将B对象标记，由于B关联了A和C，而A和C没有标记完成，所以B是待处理状态，将B送入灰色队列。</p>
+<p><img src="/./../imgs/JVM/1711166313052-74.png" alt="img"></p>
+<h6 id="并发标记"><a href="#并发标记" class="headerlink" title="并发标记"></a>并发标记</h6><p>接下来进入并发标记阶段，继续进行未完成的标记任务。此阶段和用户线程并发执行。</p>
+<p>从灰色队列中获取尚未完成标记的对象B。标记B关联的A和C对象，由于A对象并未引用其他对象，可以直接标记成黑色，而B也完成了所有引用对象的标记，也标记为黑色。</p>
+<p><img src="/./../imgs/JVM/1711166313053-75.png" alt="img"></p>
+<p>最后从队列获取C对象，标记为黑色，E也标记为黑色。所以剩余对象F就是白色，可回收。</p>
+<p><img src="/./../imgs/JVM/1711166313053-76.png" alt="img"></p>
+<p>三色标记存在一个比较严重的问题，由于用户线程可能同时在修改对象的引用关系，就会出现错标的情况，比如：</p>
+<p>这个案例中正常情况下，B和C都会被标记成黑色。但是在BC标记前，用户线程执行了 B.c &#x3D; null；将B到C的引用去除了。</p>
+<p><img src="/./../imgs/JVM/1711166313053-77.png" alt="img"></p>
+<p>同时执行了A.c &#x3D; c; 添加了A到C的引用。此时会出现严重问题，C是白色可回收一旦回收代码中再去使用对象会造成重大问题。</p>
+<p><img src="/./../imgs/JVM/1711166313053-78.png" alt="img"></p>
+<p>如果接着处理B：</p>
+<p><img src="/./../imgs/JVM/1711166313054-79.png" alt="img"></p>
+<p>B在GC引用链上，没有引用任何对象，所以B标记为黑色：</p>
+<p><img src="/./../imgs/JVM/1711166313054-80.png" alt="img"></p>
+<p>这样C虽然在引用链上，但是被回收了。</p>
+<p>G1为了解决这个问题，使用了<strong>SATB技术（Snapshot At The Beginning， 初始快照）</strong>。SATB技术是这样处理的：</p>
+<p><img src="/./../imgs/JVM/1711166313054-81.png" alt="img"></p>
+<p>1、标记开始时创建一个快照，记录当前所有对象，标记过程中新生成的对象直接标记为黑色。</p>
+<p><img src="/./../imgs/JVM/1711166313054-82.png" alt="img"></p>
+<p>2、采用前置写屏障技术，在引用赋值前比如B.c &#x3D; null之前，将之前引用的对象c放入SATB待处理队列中。SATB队列每个线程都有一个，最终会汇总到一个大的SATB队列中。</p>
+<p><img src="/./../imgs/JVM/1711166313054-83.png" alt="img"></p>
+<p>最终队列处理完之后，C和F就可以完成标记了。</p>
+<p><img src="/./../imgs/JVM/1711166313055-84.png" alt="img"></p>
+<p>SATB的缺点是在本轮清理时可能会将不存活的对象标记成存活对象，产生了一些所谓的浮动垃圾，等到下一轮清理时才能回收。比如图中的E对象。</p>
+<h5 id="ZGC垃圾回收器"><a href="#ZGC垃圾回收器" class="headerlink" title="ZGC垃圾回收器"></a>ZGC垃圾回收器</h5><p>ZGC 是一种可扩展的低延迟垃圾回收器。ZGC 在垃圾回收过程中，STW的时间不会超过一毫秒，适合需要低延迟的应用。支持几百兆到16TB 的堆大小，堆大小对STW的时间基本没有影响。 </p>
+<p>主要是使用了染色指针+ 读屏障来降低G1在转移对象时候的停顿时间</p>
+<p>ZGC（Garbage Collector）是一种在JVM中实现的低停顿时间垃圾回收器。其垃圾回收流程可以概括为以下几个关键阶段：</p>
+<ol>
+<li><strong>初始标记阶段（Initial Mark）：</strong>与G1垃圾回收器一样，初始标记阶段是一个短暂的STW阶段，目的是标记出根对象直接引用的对象，标记的过程是并发执行的，所以这个阶段的停顿时间很短。</li>
+<li><strong>并发标记阶段（Concurrent Mark）：</strong>在这个阶段，ZGC并发地标记出所有可达的对象，包括从根对象出发的引用链上的对象，这个过程是与应用程序的执行同时进行的，因此对停顿时间的影响很小。</li>
+<li><strong>再标记阶段（Remark）：</strong>如果在并发标记阶段有新的对象被创建或有对象被回收，ZGC可能需要进行一次短暂的STW再标记。这个阶段的停顿时间一般不超过1毫秒。在这个阶段，ZGC会修正并发标记阶段可能由于并发引起的标记不一致。</li>
+<li><strong>并发转移准备（Concurrent Prepare for Relocate）：</strong>在这个阶段ZGC进行整堆扫描，确定收集哪些Region，并将这些Region组成重分配集（Relocation Set）。与G1收集器不同，ZGC的重分配集扫描所有的Region，而不是计算最有价值回收的Region，由于染色指针的存在，扫描过程会很快。这个过程并不是为了计算最优的回收集，而是为了确定存活对象将被复制到其他Region。此阶段还涉及到JDK12支持的类卸载和弱引用的处理。</li>
+<li><strong>初始转移阶段（Initial Relocation）：</strong>这是ZGC垃圾回收的核心阶段之一，ZGC并发地将重分配集中的存活对象复制到新的Region。为了记录从旧对象到新对象的转移关系，ZGC需要为重分配集中的每个Region维护一个转发表（Forward Table）。<br>ZGC收集器能仅从引用上就明确得知一个对象是否处于重分配集之中，如果用户线程此时并发访问了位于重分配集中的对象，这次访问将会被预置的内存屏障所截获，然后立即根据Region上的转发表记录将访问转发到新复制的对象上，并同时修正更新该引用的值，使其直接指向新对象，ZGC将这种行为称为指针的“自愈”（Self-Healing）能力<br>ZGC的染色指针因为“自愈”（Self-Healing）能力，所以只有第一次访问旧对象会变慢，。 一旦重分配集中某个Region的存活对象都复制完毕后，这个Region就可以立即释放用于新对象的分配，但是转发表还得留着不能释放掉，因为可能还有访问在使用这个转发表。</li>
+<li><strong>并发转移阶段（Concurrent Relocation）：</strong>并发转移阶段的工作就是修正堆中指向重分配集中旧对象的所有引用，也可以直接认为就是真正进行对象引用修复的一个步骤，从这一点来看shenandoah的并发引用更新阶段是一样的。但是ZGC并不需要马上完成这个操作（因为有指针自愈的特性），ZGC把并发重映射阶段要做的工作巧妙的合并到<strong>下一次垃圾收集循环</strong>中的并发标记阶段中去完成，这样做的好处是节省遍历对象图的开销。一旦所有指针修复，新旧对象的引用关系<strong>转发表</strong>就可以释放了。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 低停顿</td>
+<td>ZGC以低停顿为首要目标，几乎所有垃圾回收过程都是并发的，只有短暂的STW。</td>
+</tr>
+<tr>
+<td>2. 高吞吐量</td>
+<td>ZGC在吞吐量方面取得了显著进展，超越了G1，接近Parallel Scavenge。</td>
+</tr>
+<tr>
+<td>3. 内存小</td>
+<td>没有写屏障和卡表等额外的数据结构，收集过程中额外耗费的内存较小。</td>
+</tr>
+<tr>
+<td>4. 局部内存分配</td>
+<td>在多核处理器的某些架构下，优先在当前线程所处的处理器的本地内存上分配对象。</td>
+</tr>
+<tr>
+<td>5. 并发停顿</td>
+<td>并发停顿非常短暂，大部分过程都是与应用线程并发执行。</td>
+</tr>
+<tr>
+<td>6. 无分代</td>
+<td>没有引入分代的概念，简化了内存管理的复杂性。</td>
+</tr>
+<tr>
+<td>7. 无内存碎片</td>
+<td>采用并发的标记-整理算法，没有内存碎片问题。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>缺点</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 浮动垃圾</td>
+<td>承受的对象分配速率不会太高，产生浮动垃圾，难以及时回收。</td>
+</tr>
+<tr>
+<td>2. 执行时间较长</td>
+<td>停顿时间短，但整个垃圾回收过程的执行时间可能较长。</td>
+</tr>
+<tr>
+<td>3. 无分代概念</td>
+<td>没有分代概念，可能导致朝生夕死的对象无法及时回收。</td>
+</tr>
+<tr>
+<td>4. 平台限制</td>
+<td>目前仅在Linux&#x2F;x64上可用，可能限制了在其他平台的应用。</td>
+</tr>
+</tbody></table>
+<h3 id="JVM运行、加载过程"><a href="#JVM运行、加载过程" class="headerlink" title="JVM运行、加载过程"></a>JVM运行、加载过程</h3><h4 id="静态变量的加载过程"><a href="#静态变量的加载过程" class="headerlink" title="静态变量的加载过程"></a>静态变量的加载过程</h4><p>连接的准备阶段</p>
+<p><img src="/./../imgs/JVM/image-20231006121550663.png" alt="image-20231006121550663"></p>
+<h4 id="Java运行一个程序的过程？"><a href="#Java运行一个程序的过程？" class="headerlink" title="Java运行一个程序的过程？"></a>Java运行一个程序的过程？</h4><ol>
+<li><strong>编译阶段</strong></li>
+</ol>
+<p>Java 代码首先需要被编译器编译，Java 编译器首先检查语法和语义的错误，然后将源码转换成字节码。编译生成的字节码被存储在一个或多个 .class 文件中，这些文件可以直接在 JVM 上运行或在网络上传输。</p>
+<ol start="2">
+<li><strong>运行阶段</strong></li>
+</ol>
+<p><strong>Java 代码的运行分为三个阶段：装载、链接和初始化。</strong></p>
+<p>- 装载：Java 虚拟机装载字节码，通常从 ClassPath 路径中获取，并检查字节码的正确性和合法性。</p>
+<p>- 链接：在链接阶段，Java 虚拟机将其装载的类型与所依赖的类型链接起来，生成实际的可执行代码，主要包括验证、准备、解析三个阶段：</p>
+<ul>
+<li>验证：Java 虚拟机对字节码进行验证，以确保其符合规范和安全标准。验证阶段检查字节码中包含的元数据和字节码是否符合规范和安全标准。</li>
+<li>准备：Java 虚拟机为类变量分配存储空间，并将其初始化为标准初始值。</li>
+<li>解析：Java 虚拟机在准备阶段对常量池进行了解析，以确定每个符号对应的目标，这个过程称为解析。</li>
+</ul>
+<p>- 初始化：在初始化阶段，Java 虚拟机按照程序设定的顺序执行类构造器，以完成类的初始化。类构造器是由编译器自动生成的，它们负责将静态变量初始化并执行静态语句块中的代码。</p>
+<p>在初始化阶段完成后，Java 虚拟机就开始执行字节码指令了，在这个阶段，Java 虚拟机通过解释器将字节码转换为机器码，并开始执行代码逻辑，完成 Java 代码的运行和执行。</p>
+<p>总结</p>
+<p><img src="/./../imgs/JVM/1711175338351-118.png" alt="img"></p>
+<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><h5 id="类加载时JVM的区域"><a href="#类加载时JVM的区域" class="headerlink" title="类加载时JVM的区域"></a>类加载时JVM的区域</h5><p><img src="/./../imgs/JVM/image-20231006115620436.png" alt="image-20231006115620436"></p>
+<p>类对象 xxx.class放在堆中， 存放instanceKlass的镜像指针，instanceKlass的中包含类的所有信息</p>
+<h5 id="类加载器-1"><a href="#类加载器-1" class="headerlink" title="类加载器"></a>类加载器</h5><p>1.启动类加载器（Bootstrap ClassLoader）加载核心类</p>
+<p>2.扩展类加载器（Extension ClassLoader）加载扩展类</p>
+<p>3.应用程序类加载器（Application ClassLoader）加载应用classpath中的类</p>
+<p>4.自定义类加载器，重写findClass方法。</p>
+<p><img src="/./../imgs/JVM/image-20231010185648889.png" alt="image-20231010185648889"></p>
+<h4 id="（类的加载机制）双亲委派机制是什么？怎么打破？"><a href="#（类的加载机制）双亲委派机制是什么？怎么打破？" class="headerlink" title="（类的加载机制）双亲委派机制是什么？怎么打破？"></a>（类的加载机制）双亲委派机制是什么？怎么打破？</h4><h5 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h5><p>当一个Hello.class这样的文件要被加载时。不考虑我们自定义类加载器，首先会在AppClassLoader中检查是否加载过，如果有那就无需再加载了。如果没有，那么会拿到父加载器，然后调用父加载器的loadClass方法。父类中同理也会先检查自己是否已经加载过，如果没有再往上。注意这个类似递归的过程，直到到达Bootstrap classLoader之前，都是在检查是否加载过，并不会选择自己去加载。直到BootstrapClassLoader，已经没有父加载器了，这时候开始考虑自己是否能加载了，如果自己无法加载，会下沉到子加载器去加载，一直到最底层，如果没有任何加载器能加载，就会抛出ClassNotFoundException。</p>
+<h5 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h5><ol>
+<li><p>保证类加载的安全性</p>
+<p>通过双亲委派机制，让顶层的类加载器去加载核心类，避免恶意代码替换JDK中的核心类库（比如Java.lang.String），确保核心类库的完整性和安全性。</p>
+</li>
+<li><p>避免重复加载</p>
+<p>可以避免同一个类被多次记载，上层的类加载器如果记载过类，就会直接返回该类，避免重复加载造成资源浪费，</p>
+</li>
+</ol>
+<h5 id="怎么打破"><a href="#怎么打破" class="headerlink" title="怎么打破"></a>怎么打破</h5><p><img src="/./../imgs/JVM/image-20231010192356056.png" alt="image-20231010192356056"></p>
+<ul>
+<li><p>ClassLoader中包含了4个核心方法，对Java程序员来说，打破双亲委派机制的唯一方法就是实现自定义类加载器重写loadClass方法，将其中的双亲委派机制代码去掉。</p>
+<p><img src="/./../imgs/JVM/1711175083796-113.png" alt="img"></p>
+</li>
+</ul>
+<h5 id="为什么要打破"><a href="#为什么要打破" class="headerlink" title="为什么要打破"></a>为什么要打破</h5><p><strong>用双亲委派也存在一定的局限性</strong>，</p>
+<p>在加载核心类库时，如果需要使用用户代码，双亲委派流程就无法满足；</p>
+<p>比如在使用JDBC时， 利用DriverManager.getConnection获取连接时，就会存在这样的问题。</p>
+<p>DriverManager是由根类加载器Bootstrap加载的，在加载DriverManager时，会执行其静态方法，加载初始驱动程序，也就是Driver接口的实现类；但是这些实现类基本都是第三方厂商提供的，根据双亲委派原则，第三方的类应该是由ApplicationClassLoader来加载</p>
+<h4 id="什么情况下会报ClassNotFound的异常？"><a href="#什么情况下会报ClassNotFound的异常？" class="headerlink" title="什么情况下会报ClassNotFound的异常？"></a>什么情况下会报ClassNotFound的异常？</h4><p>当应用程序运行的过程中尝试使用类加载器去加载Class文件的时候，如果没有在classpath中查找到指定的类，就会抛出ClassNotFoundException。一般情况下，当我们使用Class.forName()或者ClassLoader.loadClass以及使用ClassLoader.findSystemClass()在运行时加载类的时候，如果类没有被找到，那么就会导致JVM抛出ClassNotFoundException。</p>
+<h4 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h4><ul>
+<li>默认无参构造</li>
+<li>自动拆装箱</li>
+<li>for-each</li>
+<li>泛型擦除（比如在list集合中put和get都把泛型当作Object）</li>
+<li>可变参数</li>
+<li>枚举类</li>
+<li>重写桥接（子类重写父类方法的返回值可以是父类方法返回值的子类， 通过一个桥接方法来调用子类的重写方法）</li>
+</ul>
+<h4 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h4><p> 内存泄漏（memory leak）：在Java中如果不再使用一个对象，但是该对象依然在GC ROOT的引用链上，这个对象就不会被垃圾回收器回收，这种情况就称之为内存泄漏</p>
+<p> 少量的内存泄漏可以容忍，但是如果发生持续的内存泄漏，就像滚雪球雪球越滚越大，不管有多大的内存迟早会被消耗完，最终导致的结果就是内存溢出。                </p>
+<p><img src="/./../imgs/JVM/1711161957517-1.png" alt="img"></p>
+<p>解决内存泄漏问题总共分为四个步骤，其中前两个步骤是最核心的：</p>
+<p><img src="/./../imgs/JVM/image-20240323104729041.png" alt="image-20240323104729041"></p>
+<h5 id="发现问题-–-堆内存状况的对比"><a href="#发现问题-–-堆内存状况的对比" class="headerlink" title="发现问题 – 堆内存状况的对比"></a>发现问题 – 堆内存状况的对比</h5><p><strong>正常情况</strong></p>
+<p><img src="/./../imgs/JVM/1711162227058-8.png" alt="img"></p>
+<ul>
+<li>处理业务时会出现上下起伏，业务对象频繁创建内存会升高，触发MinorGC之后内存会降下来。</li>
+<li>手动执行FULL GC之后，内存大小会骤降，而且每次降完之后的大小是接近的。</li>
+<li>长时间观察内存曲线应该是在一个范围内。</li>
+</ul>
+<p><strong>出现内存泄漏</strong></p>
+<p><img src="/./../imgs/JVM/1711162227058-9.png" alt="img"></p>
+<ul>
+<li>处于持续增长的情况，即使Minor GC也不能把大部分对象回收</li>
+<li>手动FULL GC之后的内存量每一次都在增长</li>
+<li>长时间观察内存曲线持续增长</li>
+</ul>
+<p>生成方式有两种</p>
+<p>1、内存溢出时自动生成，添加生成内存快照的Java虚拟机参数：</p>
+<p>​    -XX:+HeapDumpOnOutOfMemoryError：发生OutOfMemoryError错误时，自动生成hprof内存快照文件。</p>
+<p>​    -XX:HeapDumpPath&#x3D;<path>：指定hprof文件的输出路径。</p>
+<p><img src="/./../imgs/JVM/1711162274734-14.png" alt="img"></p>
+<p>发生oom之后，就会生成内存快照文件：</p>
+<p><img src="/./../imgs/JVM/1711162274735-15.png" alt="img"></p>
+<p>2、导出运行中系统的内存快照，比较简单的方式有两种，注意只需要导出标记为存活的对象：</p>
+<p>通过JDK自带的jmap命令导出，格式为：</p>
+<p>​      jmap -dump:live,format&#x3D;b,file&#x3D;文件路径和文件名 进程ID</p>
+<p>通过arthas的heapdump命令导出，格式为：</p>
+<p>​      heapdump –live  文件路径和文件名 </p>
+<p><img src="/./../imgs/JVM/1711162274735-16.png" alt="img"></p>
+<p>诊断 – <strong>MAT</strong>定位问题</p>
+<p>使用MAT打开hprof文件，并选择内存泄漏检测功能，MAT会自行根据内存快照中保存的数据分析内存泄漏的根源。</p>
+<p><img src="/./../imgs/JVM/1711162274735-17.png" alt="img"></p>
+<p><strong>修复问题</strong></p>
+<p>修复内存溢出问题的要具体问题具体分析，问题总共可以分成三类：</p>
+<ul>
+<li>代码中的内存泄漏，由于代码的不合理写法存在隐患，导致内存泄漏</li>
+<li>并发引起内存溢出 - 参数不当,由于参数设置不当，比如堆内存设置过小，导致并发量增加之后超过堆内存的上限。解决方案：设置合理参数</li>
+<li>并发引起内存溢出 – 设计不当，系统的方案设计不当，比如：<ul>
+<li>从数据库获取超大数据量的数据</li>
+<li>线程池设计不当</li>
+<li>生产者-消费者模型，消费者消费性能问题</li>
+</ul>
+</li>
+</ul>
+<p>​      解决方案：优化设计方案</p>
+<h4 id="常见JVM参数"><a href="#常见JVM参数" class="headerlink" title="常见JVM参数"></a>常见JVM参数</h4><h5 id="一、堆内存相关配置"><a href="#一、堆内存相关配置" class="headerlink" title="一、堆内存相关配置"></a>一、<strong>堆内存相关配置</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">设置堆初始值</span><br><span class="line">指令<span class="number">1</span>：-Xms2g</span><br><span class="line">指令<span class="number">2</span>：-XX:InitialHeapSize=2048m</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">设置堆区最大值</span><br><span class="line">指令<span class="number">1</span>：`-Xmx2g` </span><br><span class="line">指令<span class="number">2</span>： -XX:MaxHeapSize=2048m</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">新生代内存配置</span><br><span class="line">指令<span class="number">1</span>：-Xmn512m</span><br><span class="line">指令<span class="number">2</span>：-XX:MaxNewSize=512m</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">缩小堆内存的时机</span><br><span class="line">-XX:MaxHeapFreeRatio=<span class="number">70</span><span class="comment">//堆内存使用率大于70时扩张堆内存，xms=xmx时该参数无效，默认值70</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">扩张堆内存的时机</span><br><span class="line">-XX:MinHeapFreeRatio=<span class="number">40</span><span class="comment">//堆内存使用率小于40时缩减堆内存，xms=xmx时该参数无效，默认值40</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>个survivor区和Eden区大小比率</span><br><span class="line">指令：-XX:SurvivorRatio=<span class="number">6</span>  <span class="comment">//S区和Eden区占新生代比率为1:6,两个S区2:6</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">新生代和老年代的占比</span><br><span class="line">-XX:NewRatio=<span class="number">4</span>  <span class="comment">//表示新生代:老年代 = 1:4 即老年代占整个堆的4/5；默认值=2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="二、方法区内存配置常用参数"><a href="#二、方法区内存配置常用参数" class="headerlink" title="二、方法区内存配置常用参数"></a><strong>二、方法区内存配置常用参数</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">初始化的Metaspace大小，</span><br><span class="line">-XX:MetaspaceSize ：</span><br><span class="line"></span><br><span class="line">Metaspace最大值</span><br><span class="line">-XX:MaxMetaspaceSize</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="三、线程栈内存配置常用参数"><a href="#三、线程栈内存配置常用参数" class="headerlink" title="三、线程栈内存配置常用参数"></a><strong>三、线程栈内存配置</strong>常用参数</h5><p>每个线程栈最大值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">指令<span class="number">1</span>：-Xss256k</span><br><span class="line"></span><br><span class="line">指令<span class="number">2</span>：-XX:ThreadStackSize=256k</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<p>栈设置太大，会导致线程创建减少。</p>
+<p>栈设置小，会导致深入不够，深度的递归会导致栈溢出。</p>
+<p>建议栈深度设置在3000-5000</p>
+<h5 id="四、配置垃圾收集器"><a href="#四、配置垃圾收集器" class="headerlink" title="四、配置垃圾收集器"></a><strong>四、配置垃圾收集器</strong></h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">Serial垃圾收集器（新生代）</span><br><span class="line">开启：-XX:+UseSerialGC</span><br><span class="line">关闭：-XX:-UseSerialGC</span><br><span class="line"><span class="comment">//新生代使用Serial  老年代则使用SerialOld</span></span><br><span class="line"></span><br><span class="line">ParNew垃圾收集器（新生代）</span><br><span class="line">开启 -XX:+UseParNewGC</span><br><span class="line">关闭 -XX:-UseParNewGC</span><br><span class="line"><span class="comment">//新生代使用功能ParNew 老年代则使用功能CMS</span></span><br><span class="line"></span><br><span class="line">Parallel Scavenge收集器（新生代）</span><br><span class="line">开启 -XX:+UseParallelOldGC</span><br><span class="line">关闭 -XX:-UseParallelOldGC</span><br><span class="line"><span class="comment">//新生代使用功能Parallel Scavenge 老年代将会使用Parallel Old收集器</span></span><br><span class="line"></span><br><span class="line">ParallelOl垃圾收集器（老年代）</span><br><span class="line">开启 -XX:+UseParallelGC</span><br><span class="line">关闭 -XX:-UseParallelGC</span><br><span class="line"><span class="comment">//新生代使用功能Parallel Scavenge 老年代将会使用Parallel Old收集器</span></span><br><span class="line"></span><br><span class="line">CMS垃圾收集器（老年代）</span><br><span class="line">开启 -XX:+UseConcMarkSweepGC</span><br><span class="line">关闭 -XX:-UseConcMarkSweepGC</span><br><span class="line"></span><br><span class="line">G1垃圾收集器</span><br><span class="line">开启 -XX:+UseG1GC</span><br><span class="line">关闭 -XX:-UseG1GC</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="五、GC策略配置"><a href="#五、GC策略配置" class="headerlink" title="五、GC策略配置"></a><strong>五、GC策略配置</strong></h5><p><strong>GC并行执行线程数</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-XX:ParallelGCThreads=<span class="number">16</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>新生代可容纳的最大对象</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:PretenureSizeThreshold=<span class="number">1000000</span> <span class="comment">//大于此值的对象直接会分配到老年代，设置为0则没有限制。</span></span><br><span class="line">    <span class="comment">//避免在Eden区和Survivor区发生大量的内存复制，该参数只对Serial和ParNew收集器有效，Parallel Scavenge并不认识该参数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>进入老年代的GC年龄</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">进入老年代最小的GC年龄</span><br><span class="line">-XX:InitialTenuringThreshol=<span class="number">7</span> <span class="comment">//年轻代对象转换为老年代对象最小年龄值，默认值7，对象在坚持过一次Minor GC之后，年龄就加1，每个对象在坚持过一次Minor GC之后，年龄就增加1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">进入老年代最大的GC年龄</span><br><span class="line">-XX:MaxTenuringThreshold=<span class="number">15</span> <span class="comment">//年轻代对象转换为老年代对象最大年龄值，默认值15</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="六、GC日志信息配置"><a href="#六、GC日志信息配置" class="headerlink" title="六、GC日志信息配置"></a><strong>六、GC日志信息配置</strong></h5><p><strong>配置GC文件路径</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Xloggc:/data/gclog/gc.log<span class="comment">//固定路径名称生成</span></span><br><span class="line">-Xloggc:/home/GCEASY/gc-%t.log <span class="comment">//根据时间生成</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>滚动生成日志</strong></p>
+<p>日志文件达到一定大小后，生成另一个文件。须配置Xloggc</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">开启 -XX:+UseGCLogFileRotation</span><br><span class="line">关闭 -XX:-UseGCLogFileRotation</span><br><span class="line"></span><br><span class="line">-XX:NumberOfGCLogFiles=<span class="number">4</span>   <span class="comment">//滚动GC日志文件数，默认0，不滚动</span></span><br><span class="line">-XX:GCLogFileSize=100k  <span class="comment">//GC文件滚动大小，需配置UseGCLogFileRotation，设置为0表示仅通过jcmd命令触发</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>打印详细的GC日志</strong></p>
+<p>打印GC的详细日志，并且在程序运行结束是会打印出JVM的内存占用情况</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启 -XX:+PrintGCDetails</span><br><span class="line">关闭 -XX:-PrintGCDetails</span><br></pre></td></tr></table></figure>
+
+<p><strong>打印应用暂停时间</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启 -XX:+PrintGCApplicationStoppedTime</span><br><span class="line">关闭 -XX:-PrintGCApplicationStoppedTime</span><br></pre></td></tr></table></figure>
+
+<p><strong>每次GC完成后，打印出JVM堆内存每个区域的使用情况</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启 -XX:+PrintHeapAtGC</span><br><span class="line">关闭 -XX:-PrintHeapAtGC</span><br></pre></td></tr></table></figure>
+
+<p><strong>打印存活实例年龄信息</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启 -XX:+PrintTenuringDistribution</span><br><span class="line">关闭 -XX:-PrintTenuringDistribution</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="七、条件触发配置"><a href="#七、条件触发配置" class="headerlink" title="七、条件触发配置"></a><strong>七、条件触发配置</strong></h5><p><strong>OutOfMemory异常时输出文件</strong></p>
+<p>抛出内存溢出错误时导出堆信息到指定文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">开启 -XX:+HeapDumpOnOutOfMemoryError</span><br><span class="line">关闭 -XX:-HeapDumpOnOutOfMemoryError</span><br><span class="line"><span class="comment">//可以通过jinfo -flag [+|-]HeapDumpOnOutOfMemoryError &lt;pid&gt; 或 jinfo -flag HeapDumpOnOutOfMemoryError=&lt;value&gt; &lt;pid&gt; 来动态开启或设置值</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-XX:HeapDumpPath=/data/dump/jvm.dump<span class="comment">//设置文件路径</span></span><br><span class="line"><span class="comment">//当HeapDumpOnOutOfMemoryError开启的时候，dump文件的保存路径，默认为工作目录下的</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在Full GC时生成dump文件</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-XX:+HeapDumpBeforeFullGC       <span class="comment">//实现在Full GC前dump</span></span><br><span class="line">-XX:+HeapDumpAfterFullGC        <span class="comment">//实现在Full GC后dump。</span></span><br><span class="line">-XX:HeapDumpPath=e:\dump        <span class="comment">//设置Dump保存的路径</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_OPTS=<span class="string">&quot;-XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=/data/dump/jvm.dump&quot;</span></span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+<p><strong>查看JVM所有参数</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -XX:+PrintFlagsInitial</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="九、常用启动参数"><a href="#九、常用启动参数" class="headerlink" title="九、常用启动参数"></a><strong>九、常用启动参数</strong></h5><p><strong>1、设置堆内大小</strong></p>
+<p>设置堆内存大小，Xms 最小内存，Xmx最大内存，不设置默认为物理机内存的四分之一。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Xms2g   -Xmx2g`     </span><br></pre></td></tr></table></figure>
+
+<p><strong>2、GC日志参数</strong></p>
+<p>生成GC滚动日志记录 ，当需要对GC排查问题时候需要对此日志分析。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+UseGCLogFileRotation  -XX:+PrintHeapAtGC -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M    -Xloggc:/opt/ard-user-gc-%t.log </span><br><span class="line">-Xloggc:/opt/app/ard-user/ard-user-gc-%t.log   设置日志目录和日志名称</span><br><span class="line">-XX:+UseGCLogFileRotation           开启滚动生成日志</span><br><span class="line">-XX:NumberOfGCLogFiles=5            滚动GC日志文件数，默认0，不滚动</span><br><span class="line">-XX:GCLogFileSize=20M               GC文件滚动大小，需开启UseGCLogFileRotation</span><br><span class="line">-XX:+PrintGCDetails                 开启记录GC日志详细信息（包括GC类型、各个操作使用的时间）,并且在程序运行结束打印出JVM的内存占用情况</span><br><span class="line">-XX:+ PrintGCDateStamps             记录系统的GC时间           </span><br><span class="line">-XX:+PrintGCCause                   产生GC的原因(默认开启)</span><br></pre></td></tr></table></figure>
+
+<p><strong>3、异常时记录内存日志</strong></p>
+<p>抛出内存溢出错误时导出堆信息到指定文件，内存溢出时需要对此日志进行分析</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=/data/dump/jvm.dump</span><br><span class="line">HeapDumpOnOutOfMemoryError  异常后打印堆内存信息</span><br><span class="line">HeapDumpPath                生成的堆内存日志的路径</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="十、各种场景的参数设置方式"><a href="#十、各种场景的参数设置方式" class="headerlink" title="十、各种场景的参数设置方式"></a><strong>十、各种场景的参数设置方式</strong></h5><p><strong>Idea</strong></p>
+<p><img src="/./../imgs/JVM/v2-d78c1b323328416df15ae0d49f782edd_1440w.webp" alt="img"></p>
+<p><img src="/./../imgs/JVM/v2-542d3d81b989240197ba520b9fa9ff29_1440w.webp" alt="img"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/04/19/JVM/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/04/19/Java%E5%9F%BA%E7%A1%80/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Java基础
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/04/19/MySQL/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">MySQL</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2016-2024
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="xqr的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
