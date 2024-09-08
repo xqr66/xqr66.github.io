@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="记录我的学习点滴" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>实习常用操作总结 |  rxq的博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="rxq的博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-实习常用操作总结"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  实习常用操作总结
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/06/10/%E5%AE%9E%E4%B9%A0%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2024-06-10T12:22:12.000Z" itemprop="datePublished">2024-06-10</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">3 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p>本人在此文档中总结沉淀一些在实习过程中，开发常见的操作</p>
+<h3 id="本地Fat环境Test启动"><a href="#本地Fat环境Test启动" class="headerlink" title="本地Fat环境Test启动"></a>本地Fat环境Test启动</h3><p>⚠️本质上可以看做是连入fat环境的单元测试，适合自测，必须要extends BaseTest</p>
+<ul>
+<li>设置堆大小：在设置中设置堆大小为1500，原本的堆太小会报OOM</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722047433846-4625bdf6-42ae-4e0d-be84-b49a4b04baaa.png" alt="img"></p>
+<ul>
+<li>网络设置：<strong>连上staff网络，并关闭VPN，否则在加载时会出现网络握手失败的问题</strong></li>
+<li><strong>test类继承BaseTest，其中会有启动的参数等，可以直接连接到Fat环境，可以自己mock数据，主要测试代码逻辑问题、最后以debug运行，就可以自测</strong></li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048218237-acc76ab7-645a-4981-a8ea-5c2071e399d5.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048168525-cf0f5f5a-3de5-4ba4-be00-b01726b345d6.png" alt="img"></p>
+<h3 id="本地起服务"><a href="#本地起服务" class="headerlink" title="本地起服务"></a>本地起服务</h3><p>本地启动服务后你的电脑就相当于fat的一台服务器，可以接收到fat环境的请求，利用白小兔工具进行debug</p>
+<p>在README文件中，拷贝启动参数，最后一行是给你的机器打一个tag，比如现在tag就是rabbit，方便后续指定请求达到你机器上</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791713602-dcf13a27-c1e0-497c-97bf-8ebc899b4c58.png" alt="img"></p>
+<p>在启动类，edit configuration</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791749524-63d50c92-6d85-45ec-ae2c-807ec52ad03f.png" alt="img"></p>
+<p>找到add VM options，不同版本idea位置可能不同</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791824668-fdee3f2a-26f7-46be-a5d8-d512c96a803c.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791872896-3a3a0e4f-8912-45b7-8978-f2edae4e4a0b.png" alt="img"></p>
+<p>⚠️⚠️⚠️网络配置：在连接staff网络后，不要连接哈奇士VPN，否则可能报错</p>
+<p>此时，可以debug启动服务</p>
+<h3 id="白小兔远程调用："><a href="#白小兔远程调用：" class="headerlink" title="白小兔远程调用："></a>白小兔远程调用：</h3><p>进入白小兔后，选择要调用服务、接口、方法，自己组装参数后可以远程调用接口的方法，并获得返回结果</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792234651-fbacfa19-383f-42cf-8395-d06e692dfe4d.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792267317-2ea6e607-b1a2-4d4f-91f6-f3be1a93e013.png" alt="img"></p>
+<p>我们可以利用本地起服务+白小兔，很方便进行dubug，在其他信息选择有rabbit TAG的机器，也就是我们本地启动的机器，</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792380295-531d98e2-22a1-4cff-b130-244e4f2c87c8.png" alt="img"></p>
+<p>然后再发请求，就能本地debug</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792514000-6ee8f898-f203-4886-9479-5e75cd32b419.png" alt="img"></p>
+<h3 id="接口yapi、网关配置"><a href="#接口yapi、网关配置" class="headerlink" title="接口yapi、网关配置"></a>接口yapi、网关配置</h3><ul>
+<li>对外提供的接口需要再yapi中配置好请求、响应参数、action等</li>
+</ul>
+<p>可以参考其他人的接口进行配置</p>
+<p><a target="_blank" rel="noopener" href="https://yapi.hellobike.cn/project/4554/interface/api/343725">https://yapi.hellobike.cn/project/4554/interface/api/343725</a></p>
+<p><strong>需要关注接口路径，也就是action</strong></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048679701-1c055e3b-3a63-4a20-9310-3ab4c971a611.png" alt="img"></p>
+<p>接着，去网关平台配置该action调用的接口方法，注意这里有三个网关，分别对应用户、后台、BosApp，按照接口使用者去对应的网关配置</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048763301-e4281f73-e6d3-41ba-95ea-f14b5e879990.png" alt="img"></p>
+<p>进入对应网关先进入后端服务列表，点击加锁，搜索服务，点击编辑后，添加自己的接口并发布</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048942074-51ff552b-4f2b-4879-be31-af9ebd3bf1db.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049010061-0a2ae2ac-a7a3-4cec-a5f6-c9cff3e63ef3.png" alt="img"></p>
+<p>接着到用户端接口列表添加接口方法与action之间的映射关系，至此已完成</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049133552-d4010351-6988-4b93-8a3d-235c9545c355.png" alt="img"></p>
+<h3 id="接口打包Jar提供给其他平台使用"><a href="#接口打包Jar提供给其他平台使用" class="headerlink" title="接口打包Jar提供给其他平台使用"></a>接口打包Jar提供给其他平台使用</h3><p>若其他服务调用我们接口是采用导包的形式引入，则我们需要变更服务的版本号</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049268018-c9f2973b-e116-413b-8bc3-10645fe46c61.png" alt="img"></p>
+<p>并在atlas上面发布新包,注意分支尽量选择ATLAS&#x2F;FAT_COMMON避免发生包覆盖、冲突</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049510802-c3930118-954e-4c3c-b0d3-9aa44b034169.png" alt="img"></p>
+<p>可在全局历史中查看包发布情况</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049642888-9f15960f-5c9d-4c45-b358-07a1765acecf.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721890640037-66a83665-8df3-42c1-a0cd-47c2c15b1203.png" alt="img"></p>
+<p>读取配置</p>
+<ol>
+<li>直接使用SpringBoot的@Value注解读取，格式为”${key:default}”, 其中key为你配置的key，default为默认值</li>
+</ol>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723779806921-5b761fcd-9c7d-4130-bee7-b990a8408a30.png" alt="img"></p>
+<ol>
+<li>在ApolloConfigUtils.java中配置开关和默认值</li>
+</ol>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1711354981244-8816a0cb-4ea3-4d87-815b-c6172e883359.png" alt="img"></p>
+<p>再通过ApolloConfigUtils获取开关的具体值</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1711357329619-8d52819b-5c06-409e-96cd-335da4ce3a70.png" alt="img"></p>
+<h3 id="apoll配置开关"><a href="#apoll配置开关" class="headerlink" title="apoll配置开关"></a>apoll配置开关</h3><p>进入atlas对应服务下配置中心，选择合适环境fat、uat、pre、pro，编辑application配置文件</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721890576283-b76510a6-cc98-4d5c-9d8a-b15253f4aa11.png" alt="img"></p>
+<p>添加配置，可以配置boolean、json等多种类型，</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721890640037-66a83665-8df3-42c1-a0cd-47c2c15b1203.png" alt="img"></p>
+<p>读取配置，直接使用SpringBoot的@Value注解读取，格式为”${key:default}”, 其中key为你配置的key，default为默认值</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723779806921-5b761fcd-9c7d-4130-bee7-b990a8408a30.png" alt="img"></p>
+<h3 id="诺亚配置灰度规则"><a href="#诺亚配置灰度规则" class="headerlink" title="诺亚配置灰度规则"></a>诺亚配置灰度规则</h3><p>到admin平台场景注册下新增场景</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722050039311-5c52df97-d01a-4c65-9ead-07a465fe8091.png" alt="img"></p>
+<p>接着到场景灰度配置找到刚刚注册的场景，配置灰度城市规则，这里可能需要找坤哥申请一下城市列表权限</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722050119583-49f22431-71a0-46b1-81f5-63c735697512.png" alt="img"></p>
+<h3 id="分库分表下查记录"><a href="#分库分表下查记录" class="headerlink" title="分库分表下查记录"></a>分库分表下查记录</h3><p>由于数据量大，分库分表后我们要查一条记录，需要知道记录在哪个库、哪个表</p>
+<ul>
+<li><strong>推荐方式：直接在智能存储平台逻辑库表查询，不需要查分库分表</strong></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://hdbs.hellobike.cn/#/workbench?key=bos_task_center_sharding_sharding&sidebar=dbtree">https://hdbs.hellobike.cn/#/workbench?key=bos_task_center_sharding_sharding&amp;sidebar=dbtree</a></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723794103520-1d3ba6bd-9cc5-48f9-90d5-7e308526e577.png" alt="img"></p>
+<ul>
+<li>老方式：在admin平台查询库、表号</li>
+</ul>
+<p>1使用分库分表工具：<a target="_blank" rel="noopener" href="https://fat-admin.hellobike.cn/#/beacon/testZhou">https://fat-admin.hellobike.cn/#/beacon/testZhou</a><br>a输入taskGuid 找到分库分表的位置<br>b数据库编号是7，表编号是23</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1712842169114-4187e5c8-935d-40e5-aa61-806b0b4c3e93.webp" alt="img"></p>
+<p>2在数据库中查询想要的数据</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1712842446202-e9359b3c-a275-470a-8f16-8f783c5dc02d.webp" alt="img"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/06/10/%E5%AE%9E%E4%B9%A0%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/07/20/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            实习收获
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Optional使用分析</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2016-2024
+        <i class="ri-heart-fill heart_icon"></i> RXQ
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="rxq的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>

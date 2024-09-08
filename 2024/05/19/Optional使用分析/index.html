@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="记录我的学习点滴" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Optional使用分析 |  rxq的博客</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    <link rel="alternate" href="/atom.xml" title="rxq的博客" type="application/atom+xml">
+</head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Optional使用分析"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Optional使用分析
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/" class="article-date">
+  <time datetime="2024-05-19T14:01:12.000Z" itemprop="datePublished">2024-05-19</time>
+</a>   
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="使用背景"><a href="#使用背景" class="headerlink" title="使用背景"></a>使用背景</h1><p>Optional主要用于优雅处理处理一系列的判空、避免三目运算符NPE问题。</p>
+<p>三目运算符NPE问题：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/757443">《新版Java开发手册》提到的三目运算符的空指针问题到底是个怎么回事？-阿里云开发者社区</a></p>
+<p>一系列判空伪代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="type">Address</span> <span class="variable">address</span> <span class="operator">=</span> p.getAddress();</span><br><span class="line">    <span class="keyword">if</span> (address != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">Province</span> <span class="variable">province</span> <span class="operator">=</span> sddress.getProvince();</span><br><span class="line">        System.out.println(province.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NoSuchElementException</span>(); <span class="comment">//如果没找到就抛错</span></span><br></pre></td></tr></table></figure>
+
+<p>如果使用Optional：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Optional.ofNullable(<span class="keyword">new</span> <span class="title class_">Person</span>)</span><br><span class="line">.map(p -&gt; p.getAddress())</span><br><span class="line">.map(a -&gt; a.getProvince())</span><br><span class="line">.map(p -&gt; p.getName())</span><br><span class="line">.orElseThrow(NoSuchElementException::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，如果用了 Optional，代码里不需要判空的操作，即使 address 、province 为空的话，也不会产生空指针错误，这就是 Optional 带来的好处！</p>
+<h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><p>关于Optional，Java 语言架构师 Brian Goetz 是这么说的：</p>
+<p>Our intention was to provide a limited mechanism for library method return types where there needed to be a clear way to represent “no result”, and using null for such was overwhelmingly likely to cause errors.</p>
+<p>意思就是：Optional 可以给返回结果提供了一个表示无结果的值，而不是返回 null。</p>
+<p>简单理解下，Optional 其实就是一个壳，里面放着原先的值，至于这个值是不是 null 另说，反正拿到的这个壳肯定不是 null。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795015942-3df3bf9f-5eb9-4e54-a9d2-f9946d6401c7.png" alt="img"></p>
+<p>我认为 Optional 的好处在于可以简化平日里一系列判断 null 的操作，使得用起来的时候看着不需要判断 null，纵享丝滑，表现出来好像用 Optional 就不需要关心空指针的情况。</p>
+<p>而事实上是 Optional 在替我们负重前行，该有的判断它替我们完成了，而且用了 Optional 最后拿结果的时候还是小心的，盲目 get 一样会抛错。</p>
+<p>在使用的时候，一直有个疑问：</p>
+<ul>
+<li>如果在 <code>p.getAddress()</code> 时拿不到值的话，你说是会继续执行<code>map(a -&gt; a.getProvince())</code> 还是直接跳到 <code>orElseThrow</code>? </li>
+<li>或者反过来如果 <code>map(p -&gt; p.getName())</code> 不为空，你说 <code>orElseThrow</code> 这个方法会不会执行？</li>
+</ul>
+<p>接下来就来看下源码，看看 Optional 的实现机制。</p>
+<h1 id="Optional-源码"><a href="#Optional-源码" class="headerlink" title="Optional 源码"></a>Optional 源码</h1><p>Optional 的代码十分简短且简单，如果去掉注释，我估计就100来行。</p>
+<h4 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016155-27ce1696-28e3-4b9c-b8bc-14bd67a72940.png" alt="img"></p>
+<p>符合前面提到的：Optional 就是个壳，里面的 value 才是正主。并且内置了一个 EMPTY 对象，用来替换当 value 为 null 时候的壳。</p>
+<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p>现在看下上面演示的 map 方法，看看它的内部实现是如何让我们不需要做非空判断的。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016146-15811be1-7b4c-4072-bc23-c93238464eaf.png" alt="img"></p>
+<p>可以看到很简单，没几行代码，我把方法中的两个调用实现都贴上去，这样对着看应该会更清晰：</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016237-8a889bba-ae8c-45f1-9904-602d23b81bee.png" alt="img"></p>
+<ul>
+<li>先判断 value 是否为空，如果是空的话说明真正要是值是空的，此时直接返回一个 <code>empty()</code>，直接返回事先创建的空 Optional 。</li>
+<li>如果 value 不为空，那说明值是存在的，因此调用 mapper (就是上面我们写的 p.getAddress 之类的)来操作一波这个 value，并且用 <code>Optional.ofNullable</code> 包了一层，这个方法内部也看到了，如果 value 是空的话，也是返回空 Optional，否则就利用 of 包裹 value 成 Optional 返回。</li>
+</ul>
+<p><strong>因此，不论Optional 里面到底有没有值，map 都能处理！如果你是空，我就返回空 Optional ，如果你有值，就包裹成 Optional 返回，反正不论怎样，调用 map 的返回值都会是一个 Optional，而不是 null，所以执行时不会产生空指针的情况。</strong></p>
+<p>还记得上面的提问吗？结合 map 的源码，现在来回答下上面的问题，看注释：</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016175-99da5f17-596c-4d0f-b31d-dde2c073e422.png" alt="img"></p>
+<p>截个 <code>orElseThrow</code> 的实现，就是判断下 value ，如果是 null 就抛错。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016411-40312e9a-24db-4a94-b1e0-f0c96eb063c4.png" alt="img"></p>
+<p>结合源码我们知道了答案：即使 <code>Optional.ofNullable</code> 返回的是空 Optional ，下面的 map 逻辑还是会执行，不会因为中间得到空值而直接跳到<code>orElseThrow</code>执行，这和我们平日知晓的 if else 逻辑不太一样，不为空<code>orElseThrow</code>也一样会执行，就是判断 <code>value!= null</code>然后直接返回 value 的值了。</p>
+<h4 id="orElseGet-VS-orElse"><a href="#orElseGet-VS-orElse" class="headerlink" title="orElseGet VS orElse"></a>orElseGet VS orElse</h4><p>Optional 里有 orElseGet  和 orElse 这两个看起来挺相似的方法，都是处理当值为 null 时的兜底逻辑。在一些文章上看到说用 orElseGet 不要用 orElse ，因为在 Optional 有值时候 orElse 仍然会调用方法，所以后者性能比较差。其实从上面分析我们知道不论 Optional 是否有值，orElse 和 orElseGet  都会被执行，所以是怎么回事呢？</p>
+<p>看下这个代码：</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016607-e62bb674-8403-425b-9422-ad867ba7bb88.png" alt="img"></p>
+<p>这样看来 orElse 确实性能会差</p>
+<p>看下源码。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016546-941ddc02-f238-425e-bb31-e3e92e32c708.png" alt="img"></p>
+<p>可以看到两者的入参不同，一个就是普通参数，一个是 Supplier。我们已经得知不论<code>Optional.ofNullable</code> 返回的是否是空 Optional，下面的逻辑还是会执行，所以 orElse 和 orElseGet 这两个方法无论如何都会执行。</p>
+<p>因此 orElse(createYes()) 会被执行，在参数入栈之前，执行了 createYes 方法得到结果，然后入栈，而 orElseGet 的参数是 Supplier，所以直接入栈，然后在调用 other.get 的时候，createYes 方法才会被触发执行，这就是两者的区别之处。</p>
+<p>所以才会造成上面表现出的性能问题，也不是有些文章说的 Optional 有值 orElse 也会被执行而 orElseGet 不会执行这样不准确的说法。</p>
+<h4 id="of-VS-ofNullable"><a href="#of-VS-ofNullable" class="headerlink" title="of VS ofNullable"></a>of VS ofNullable</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016593-ea666b16-96c3-4e04-8425-79730008ff9c.png" alt="img"></p>
+<h4 id="isPresent-VS-ifPresent-Consumer-consumer"><a href="#isPresent-VS-ifPresent-Consumer-consumer" class="headerlink" title="isPresent() VS ifPresent(Consumer&lt;? super T&gt; consumer)"></a>isPresent() VS ifPresent(Consumer&lt;? super T&gt; consumer)</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016667-f3b5f96f-51ae-43fd-9a2b-826a513d0512.png" alt="img"></p>
+<h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><p>这个方法要小心，如果没做好判断，直接调用，当是空 Optional 时会抛错的。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016758-03896d9f-468e-466b-88b5-e98a0415a0a5.png" alt="img"></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37840993/article/details/116120837">JAVA 中的Optional类理解、学习与使用_java的optional类-CSDN博客</a></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2024/06/10/%E5%AE%9E%E4%B9%A0%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            实习常用操作总结
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2024/05/19/%E4%BC%98%E9%9B%85%E8%BF%81%E7%A7%BB%E8%80%81%E6%8E%A5%E5%8F%A3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">优雅迁移老接口</div>
+      </a>
+    
+  </nav>
+
+  
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2016-2024
+        <i class="ri-heart-fill heart_icon"></i> RXQ
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="rxq的博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://juejin.cn/user/3468338628928339">我的掘金</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+ 
+<script src="/js/clickLove.js"></script>
+ 
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="86"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=66"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
