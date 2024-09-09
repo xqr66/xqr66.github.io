@@ -83,7 +83,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">4.3k</span>
+            <span class="post-count">4.5k</span>
         </span>
     </span>
 
@@ -137,7 +137,7 @@
 <p>但是第一条记录中缺失了scheduleInWorkOrder，所以为null</p>
 <p>com.easybike.bikebos.taskcreate.kafka.taskmetric.sender.ScheduleNewWorkOrderSender.mergeScheduleWorkOrder(ScheduleNewWorkOrderSender.java:387就出现空指针异常</p>
 <p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721115262132-0a17ef3f-aca6-4424-a413-e3cc72bfeda4-1725769913940-13.png" alt="img"></p>
-<h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>查询数据库中数据：</p>
+<p>查询数据库中数据：</p>
 <p>发现该缺失scheduleInWorkOrder的记录在数据库中是完整的，只是查询结果中缺失了，初步预估与网络波动或者数据库缓存有关，导致了查询数据缺失（此预估有误）。</p>
 <p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721197869794-f08a78bd-3bf5-4226-be7d-5426df1eb3e5-1725769913940-12.png" alt="img"></p>
 <p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721198287569-76669774-e539-4af7-ad74-ef58b518478d-1725769913940-14.png" alt="img"></p>
@@ -168,6 +168,11 @@
 <h4 id="预期解决："><a href="#预期解决：" class="headerlink" title="预期解决："></a>预期解决：</h4><p>在使用前加强非空校验，如果scheduleInWorkOrder为Null就走之前else中的逻辑。</p>
 <p>因为与之前的一键关锁相关，目前待定解决</p>
 <p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721134342124-665a9813-8fc0-4c2b-ba3b-3825deb45f35-1725769913940-22.png" alt="img"></p>
+<h4 id="后续跟进："><a href="#后续跟进：" class="headerlink" title="后续跟进："></a>后续跟进：</h4><p>在后续架构升级后，不存在该问题，且直接改动原有逻辑改动量大，存在风险，所以采用临时的补偿机制。</p>
+<ul>
+<li>在使用前进行非空校验，并且记录生成工单失败的bikeNo，后续发送延时消息，重新调该发工单接口，补偿工单</li>
+<li>在前端做进度条，提醒运维人员一键关锁中，请耐心等待。</li>
+</ul>
 <h4 id="一些思考与感悟"><a href="#一些思考与感悟" class="headerlink" title="一些思考与感悟"></a>一些思考与感悟</h4><ul>
 <li><p>经过此次排查，深刻的意识到理解业务流程，是开发、排查问题的基础，只有了解了整体业务，才能将整个流程串联起来，预测出现问题的原因。</p>
 </li>
@@ -381,45 +386,34 @@
 <li>并没有改善，依然有峰刺</li>
 </ul>
 <h2 id="五-跟进排查"><a href="#五-跟进排查" class="headerlink" title="五. 跟进排查"></a>五. 跟进排查</h2><h3 id="5-1-问题分析"><a href="#5-1-问题分析" class="headerlink" title="5.1 问题分析"></a>5.1 问题分析</h3><ul>
-<li><p>首先，CPU上升的曲线是和算法推送阈值强相关的</p>
-</li>
-<li><p>CPU升高和算法阈值推送是肯定有关的</p>
-</li>
-<li><p>但是新的功能上线之后，按道理来说应该拦住了很多读流量</p>
-</li>
-<li><p>按照原先的猜想，CPU升高是因为缓存批量过期导致的读流量较大</p>
-</li>
-<li><p>现在根据监控来看是不匹配的，CPU依然升高，DDL QPS没有明显下降</p>
-</li>
-<li><p>MySQL DBA 范超，开启监控，查看CPU主要消耗</p>
-</li>
-<li><p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1690992696473-61c27679-1275-4276-bf1c-b9ad43f88d11-1725769913941-38.png" alt="img"></p>
-</li>
-<li><p>跟阈值更新相关的insert和update语句各占了30+%</p>
-</li>
-<li><p>分析</p>
-</li>
-<li><p>通过和范超沟通，慢SQL确实存在，不过CPU占用依然比较小，对CPU影响比较大的还是算法阈值的插入和更新</p>
-</li>
-<li><p>这样的话，算法阈值推送就是这么多，我们必须进行插入和更新</p>
-</li>
-<li><p>但是这里需要注意一点，并不是DB CPU一直升高，问题是有<strong>峰刺</strong></p>
-</li>
-<li><p>和范超沟通下来有几种解决方案</p>
-</li>
-<li><p>限流，将流量打平</p>
-</li>
-<li><p>其实不稳定因素主要是峰刺，解决峰刺即可</p>
-</li>
-<li><p>升级架构</p>
-</li>
-<li><p>DB升配</p>
-</li>
-<li><p>分库分表</p>
-</li>
+<li>首先，CPU上升的曲线是和算法推送阈值强相关的</li>
+<li>CPU升高和算法阈值推送是肯定有关的</li>
+<li>但是新的功能上线之后，按道理来说应该拦住了很多读流量</li>
+<li>按照原先的猜想，CPU升高是因为缓存批量过期导致的读流量较大</li>
+<li>现在根据监控来看是不匹配的，CPU依然升高，DDL QPS没有明显下降</li>
+<li>MySQL DBA 超哥，开启监控，查看CPU主要消耗</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1690992696473-61c27679-1275-4276-bf1c-b9ad43f88d11-1725769913941-38.png" alt="img"></p>
+<ul>
+<li>跟阈值更新相关的insert和update语句各占了30+%</li>
+</ul>
+<p>分析</p>
+<ul>
+<li>通过和范超沟通，慢SQL确实存在，不过CPU占用依然比较小，对CPU影响比较大的还是算法阈值的插入和更新</li>
+<li>这样的话，算法阈值推送就是这么多，我们必须进行插入和更新</li>
+<li>但是这里需要注意一点，并不是DB CPU一直升高，问题是有<strong>峰刺</strong></li>
+</ul>
+<p>和范超沟通下来有几种解决方案</p>
+<ul>
+<li>限流，将流量打平</li>
+<li>其实不稳定因素主要是峰刺，解决峰刺即可</li>
+<li>升级架构</li>
+<li>DB升配</li>
+<li>分库分表</li>
 </ul>
 <h3 id="5-2-问题解决"><a href="#5-2-问题解决" class="headerlink" title="5.2 问题解决"></a>5.2 问题解决</h3><ul>
 <li>采用RateLimiter限流，将流量打平</li>
+<li>本周联系DB经过分析后，修改和增加索引。目前CPU峰刺已经显著消除。思考：在迭代过程中，新的功能（特别是流量大的）需要新的查询条件，需要check下DB中是否存在相应索引，现有索引是否适用，是否需要新增或调整，要在发布上线之前调整好索引</li>
 </ul>
 <h2 id="六-问题总结"><a href="#六-问题总结" class="headerlink" title="六. 问题总结"></a>六. 问题总结</h2><ul>
 <li><p>这个问题的排查和解决其实非常有意思</p>
