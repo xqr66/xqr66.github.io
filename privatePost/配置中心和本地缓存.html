@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Optional使用分析 |  Xiuqing Ran&#39;s Code Journal</title>
+      <title>配置中心与本地缓存了解 |  Xiuqing Ran&#39;s Code Journal</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,8 +56,8 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Optional使用分析"
-  class="article article-type-post"
+  id="page-"
+  class="article article-type-page"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
@@ -67,100 +67,53 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Optional使用分析
+  配置中心与本地缓存了解
 </h1>
  
 
       
     </header>
-     
-    <div class="article-meta">
-      <a href="/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/" class="article-date">
-  <time datetime="2024-05-19T14:01:12.000Z" itemprop="datePublished">2024-05-19</time>
-</a>   
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1.4k</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">5 min</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
-  
+       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="使用背景"><a href="#使用背景" class="headerlink" title="使用背景"></a>使用背景</h1><p>Optional主要用于优雅处理处理一系列的判空、避免三目运算符NPE问题。</p>
-<p>三目运算符NPE问题：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/757443">《新版Java开发手册》提到的三目运算符的空指针问题到底是个怎么回事？-阿里云开发者社区</a></p>
-<p>一系列判空伪代码:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="type">Address</span> <span class="variable">address</span> <span class="operator">=</span> p.getAddress();</span><br><span class="line">    <span class="keyword">if</span> (address != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">Province</span> <span class="variable">province</span> <span class="operator">=</span> sddress.getProvince();</span><br><span class="line">        System.out.println(province.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NoSuchElementException</span>(); <span class="comment">//如果没找到就抛错</span></span><br></pre></td></tr></table></figure>
-
-<p>如果使用Optional：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Optional.ofNullable(<span class="keyword">new</span> <span class="title class_">Person</span>)</span><br><span class="line">.map(p -&gt; p.getAddress())</span><br><span class="line">.map(a -&gt; a.getProvince())</span><br><span class="line">.map(p -&gt; p.getName())</span><br><span class="line">.orElseThrow(NoSuchElementException::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，如果用了 Optional，代码里不需要判空的操作，即使 address 、province 为空的话，也不会产生空指针错误，这就是 Optional 带来的好处！</p>
-<h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><p>关于Optional，Java 语言架构师 Brian Goetz 是这么说的：</p>
-<p>Our intention was to provide a limited mechanism for library method return types where there needed to be a clear way to represent “no result”, and using null for such was overwhelmingly likely to cause errors.</p>
-<p>意思就是：Optional 可以给返回结果提供了一个表示无结果的值，而不是返回 null。</p>
-<p>简单理解下，Optional 其实就是一个壳，里面放着原先的值，至于这个值是不是 null 另说，反正拿到的这个壳肯定不是 null。</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795015942-3df3bf9f-5eb9-4e54-a9d2-f9946d6401c7.png" alt="img"></p>
-<p>我认为 Optional 的好处在于可以简化平日里一系列判断 null 的操作，使得用起来的时候看着不需要判断 null，纵享丝滑，表现出来好像用 Optional 就不需要关心空指针的情况。</p>
-<p>而事实上是 Optional 在替我们负重前行，该有的判断它替我们完成了，而且用了 Optional 最后拿结果的时候还是小心的，盲目 get 一样会抛错。</p>
-<p>在使用的时候，一直有个疑问：</p>
-<ul>
-<li>如果在 <code>p.getAddress()</code> 时拿不到值的话，你说是会继续执行<code>map(a -&gt; a.getProvince())</code> 还是直接跳到 <code>orElseThrow</code>? </li>
-<li>或者反过来如果 <code>map(p -&gt; p.getName())</code> 不为空，你说 <code>orElseThrow</code> 这个方法会不会执行？</li>
+  <h1 id="了解apoll配置平台、"><a href="#了解apoll配置平台、" class="headerlink" title="了解apoll配置平台、"></a>了解apoll配置平台、</h1><ul>
+<li><p>apoll是什么：携程开源的维服务配置管理中心。</p>
+</li>
+<li><p>使用场景：微服务通常一个服务会部署多台机器，当需要更改配置时，需要对每一台机器进行配置修改和发布，因此需要集中化管理配置，能够动态修改配置。</p>
+</li>
+<li><p>特点：</p>
+</li>
+<li><p>热发布</p>
+</li>
+<li><p>配置数据存储在数据库</p>
+</li>
+<li><p>服务端和客户端之间维持长连接，服务端主动推送配置的变更，客户端每隔一段时间会主动拉取服务端的配置作为兜底策略防止服务端推送失败</p>
+</li>
+<li><p>使用本地缓存，若配置未发生变化不需要重新拉取配置</p>
+</li>
+<li><p>版本发布管理</p>
+</li>
+<li><p>支持回滚操作</p>
+</li>
+<li><p>灰度发布</p>
+</li>
+<li><p>指发布后先在部分机器进行验证</p>
+</li>
+<li><p>与springcloud config配置中心对比：</p>
+</li>
 </ul>
-<p>接下来就来看下源码，看看 Optional 的实现机制。</p>
-<h1 id="Optional-源码"><a href="#Optional-源码" class="headerlink" title="Optional 源码"></a>Optional 源码</h1><p>Optional 的代码十分简短且简单，如果去掉注释，我估计就100来行。</p>
-<h4 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016155-27ce1696-28e3-4b9c-b8bc-14bd67a72940.png" alt="img"></p>
-<p>符合前面提到的：Optional 就是个壳，里面的 value 才是正主。并且内置了一个 EMPTY 对象，用来替换当 value 为 null 时候的壳。</p>
-<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p>现在看下上面演示的 map 方法，看看它的内部实现是如何让我们不需要做非空判断的。</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016146-15811be1-7b4c-4072-bc23-c93238464eaf.png" alt="img"></p>
-<p>可以看到很简单，没几行代码，我把方法中的两个调用实现都贴上去，这样对着看应该会更清晰：</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016237-8a889bba-ae8c-45f1-9904-602d23b81bee.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1719756714410-e47f9b06-bf0d-4633-92de-c023016d11df.png" alt="img"></p>
 <ul>
-<li>先判断 value 是否为空，如果是空的话说明真正要是值是空的，此时直接返回一个 <code>empty()</code>，直接返回事先创建的空 Optional 。</li>
-<li>如果 value 不为空，那说明值是存在的，因此调用 mapper (就是上面我们写的 p.getAddress 之类的)来操作一波这个 value，并且用 <code>Optional.ofNullable</code> 包了一层，这个方法内部也看到了，如果 value 是空的话，也是返回空 Optional，否则就利用 of 包裹 value 成 Optional 返回。</li>
+<li>整体架构：采用Eureka作为服务注册发现中心，使用数据库存储配置，可对配置进行分布式读写</li>
 </ul>
-<p><strong>因此，不论Optional 里面到底有没有值，map 都能处理！如果你是空，我就返回空 Optional ，如果你有值，就包裹成 Optional 返回，反正不论怎样，调用 map 的返回值都会是一个 Optional，而不是 null，所以执行时不会产生空指针的情况。</strong></p>
-<p>还记得上面的提问吗？结合 map 的源码，现在来回答下上面的问题，看注释：</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016175-99da5f17-596c-4d0f-b31d-dde2c073e422.png" alt="img"></p>
-<p>截个 <code>orElseThrow</code> 的实现，就是判断下 value ，如果是 null 就抛错。</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016411-40312e9a-24db-4a94-b1e0-f0c96eb063c4.png" alt="img"></p>
-<p>结合源码我们知道了答案：即使 <code>Optional.ofNullable</code> 返回的是空 Optional ，下面的 map 逻辑还是会执行，不会因为中间得到空值而直接跳到<code>orElseThrow</code>执行，这和我们平日知晓的 if else 逻辑不太一样，不为空<code>orElseThrow</code>也一样会执行，就是判断 <code>value!= null</code>然后直接返回 value 的值了。</p>
-<h4 id="orElseGet-VS-orElse"><a href="#orElseGet-VS-orElse" class="headerlink" title="orElseGet VS orElse"></a>orElseGet VS orElse</h4><p>Optional 里有 orElseGet  和 orElse 这两个看起来挺相似的方法，都是处理当值为 null 时的兜底逻辑。在一些文章上看到说用 orElseGet 不要用 orElse ，因为在 Optional 有值时候 orElse 仍然会调用方法，所以后者性能比较差。其实从上面分析我们知道不论 Optional 是否有值，orElse 和 orElseGet  都会被执行，所以是怎么回事呢？</p>
-<p>看下这个代码：</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016607-e62bb674-8403-425b-9422-ad867ba7bb88.png" alt="img"></p>
-<p>这样看来 orElse 确实性能会差</p>
-<p>看下源码。</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016546-941ddc02-f238-425e-bb31-e3e92e32c708.png" alt="img"></p>
-<p>可以看到两者的入参不同，一个就是普通参数，一个是 Supplier。我们已经得知不论<code>Optional.ofNullable</code> 返回的是否是空 Optional，下面的逻辑还是会执行，所以 orElse 和 orElseGet 这两个方法无论如何都会执行。</p>
-<p>因此 orElse(createYes()) 会被执行，在参数入栈之前，执行了 createYes 方法得到结果，然后入栈，而 orElseGet 的参数是 Supplier，所以直接入栈，然后在调用 other.get 的时候，createYes 方法才会被触发执行，这就是两者的区别之处。</p>
-<p>所以才会造成上面表现出的性能问题，也不是有些文章说的 Optional 有值 orElse 也会被执行而 orElseGet 不会执行这样不准确的说法。</p>
-<h4 id="of-VS-ofNullable"><a href="#of-VS-ofNullable" class="headerlink" title="of VS ofNullable"></a>of VS ofNullable</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016593-ea666b16-96c3-4e04-8425-79730008ff9c.png" alt="img"></p>
-<h4 id="isPresent-VS-ifPresent-Consumer-consumer"><a href="#isPresent-VS-ifPresent-Consumer-consumer" class="headerlink" title="isPresent() VS ifPresent(Consumer&lt;? super T&gt; consumer)"></a>isPresent() VS ifPresent(Consumer&lt;? super T&gt; consumer)</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016667-f3b5f96f-51ae-43fd-9a2b-826a513d0512.png" alt="img"></p>
-<h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><p>这个方法要小心，如果没做好判断，直接调用，当是空 Optional 时会抛错的。</p>
-<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016758-03896d9f-468e-466b-88b5-e98a0415a0a5.png" alt="img"></p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37840993/article/details/116120837">JAVA 中的Optional类理解、学习与使用_java的optional类-CSDN博客</a></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1719757379090-1f8fa726-ac34-4a28-a5c0-1be441fa3f82.png" alt="img"></p>
+<h1 id="DPP本地缓存："><a href="#DPP本地缓存：" class="headerlink" title="DPP本地缓存："></a>DPP本地缓存：</h1><p>通过本次SDK的更新，我理解了从诺亚配置新建 到 BOS端使用配置的全流程，在看这块代码时，我理解了之前的dpp推送原理，即本地缓存，将那些读多写少的数据，批量推送到OSS，再下载到本地缓冲中，避免每次都查数据库，在更新更新数据库时，会通过注解感知这个数据操作，并触发推送逻辑，实时更新本地缓存，但是直接写SQL操作数据库时，需要手动推dpp才能更新，可能会造成短期的数据不一致。</p>
+<p><strong>推送系统流程图：</strong></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1724900293369-81825248-6481-4bb6-96c0-6371ab76116f.png" alt="img"></p>
+<p><strong>时序图：</strong></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1724900698487-ac64d809-0fe1-459c-8d16-76cc9e22c2d0.png" alt="img"></p>
+<p>数据流：</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1724901645216-4769686a-c565-40f8-803d-3d5ec6b94b0b-1725770731094-5.png" alt="1724901645216-4769686a-c565-40f8-803d-3d5ec6b94b0b"></p>
  
       <!-- reward -->
       
@@ -231,7 +184,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/privatePost/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%92%8C%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -240,37 +193,9 @@
   </div>
 
    
-  <nav class="article-nav">
-    
-      <a href="/2024/06/10/%E5%AE%9E%E4%B9%A0%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            实习常用操作总结
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2024/05/19/%E4%BC%98%E9%9B%85%E8%BF%81%E7%A7%BB%E8%80%81%E6%8E%A5%E5%8F%A3/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">优雅迁移老接口</div>
-      </a>
-    
-  </nav>
-
   
    
   
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
 </article>
 
 </section>
@@ -279,7 +204,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2023-2024
+        2023-2025
         <i class="ri-heart-fill heart_icon"></i> RXQ
       </li>
     </ul>
@@ -401,22 +326,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

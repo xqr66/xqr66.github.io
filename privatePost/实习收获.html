@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Archives: 2024/7 |  Xiuqing Ran&#39;s Code Journal</title>
+      <title>实习收获 |  Xiuqing Ran&#39;s Code Journal</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,59 +55,176 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="page-"
+  class="article article-type-page"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">2024/7</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2024" class="archive-year">2024</a>
-    </div>
-    <div class="archives">
-      
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/07/20/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/" class="archive-article-date">
-  <time datetime="2024-07-20T14:05:45.000Z" itemprop="datePublished">07/20</time>
-</a>
+    <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/07/20/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/"
-    >实习收获</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  实习收获
+</h1>
  
 
-    </header>
-    
-    
-  </div>
-</article>
       
+    </header>
+       
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="遇到的问题与收获："><a href="#遇到的问题与收获：" class="headerlink" title="遇到的问题与收获："></a>遇到的问题与收获：</h3><ul>
+<li>在灰度时，尽量不要和老代码耦合在一起，尽量独立抽取成一个方法，这样方便后续灰度出现问题时回切老代码、在灰度没问题时删除老代码</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722044736197-bc0a4651-e744-4f8c-8fdf-9e1404955d8b.png" alt="img"></p>
+<ul>
+<li>方法符合单一职责，可以抽取出公共的方法，尽量避免重复代码</li>
+<li>在发消息时，由于共享平台改成实时处理，需要保证在发消息前已更新好数据库，可以添加延迟时间，避免造成数据覆盖问题</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722044844459-c6803b2b-ca0e-479b-beb3-33053c5448aa.png" alt="img"></p>
+<ul>
+<li>在变更时，需要额外关注各个字段的含义是否发生变化，避免出现取错字段等低级错误</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722045162196-91c1fb62-11c2-41eb-88f3-984e8f28428a.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">老逻辑RewardAmt取taskDo中的TaskAwardPrice字段</span><br></pre></td></tr></table></figure>
+
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722045204989-03909b95-53b8-4c92-a65c-56c0d09c1478.png" alt="img"></p>
+<p>新逻辑RewardAmt要取record中的Reward字段</p>
+<ul>
+<li>对不同的情况，采用不同的日志级别，方便从日志中观测严重的漏洞</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722045854058-95137228-4a02-45f7-b145-e489bd6cd3e6.png" alt="img"></p>
+<ul>
+<li>在接受消息队列中间件消息时，一定要做幂等处理避免重复消费、数据覆盖等情况</li>
+<li>调用其他平台接口时，一定做好健壮性保障</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722046204887-28bc3e2e-1e78-49f7-b75d-6aae8d71ae7c.png" alt="img"></p>
+<ul>
+<li>在Iface中，请求入参选择用对象来接收，方便在参数上添加限制</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722047228440-1973da46-242f-460e-af0e-1608451becaf.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722047243996-5b284643-b2cb-49cc-ab70-72d80f9f2d77.png" alt="img"></p>
+<h3 id="防腐层妙用"><a href="#防腐层妙用" class="headerlink" title="防腐层妙用"></a>防腐层妙用</h3><p>个人认为防腐层可以看做是对远程调用的一种代理，在其中对远程调用进行增强，使用时，我们不直接远程调用，而是面向这种代理关系来调用。</p>
+<p><strong>关键作用：</strong></p>
+<ol>
+<li><strong>隔离变化</strong>：</li>
+</ol>
+<ul>
+<li>远程调用的服务可能会频繁变化，而这些变化可能会对内部系统造成负面影响。防腐层通过隔离这些变化，减少了对内部系统的直接影响。简单来说就是在外部服务变化时，我们只需要变更对应的防腐层就行，如果没有防腐层就需要到全部使用外部服务的地方都做变更。</li>
+</ul>
+<ol>
+<li><strong>模型转换</strong>：</li>
+</ol>
+<ul>
+<li>不同系统之间的数据模型往往不一致。防腐层负责将外部数据模型转换为内部数据模型，确保系统间的数据交互顺畅。</li>
+</ul>
+<ol>
+<li><strong>数据验证和清理</strong>：</li>
+</ol>
+<ul>
+<li>防腐层可以在数据进入内部系统之前进行验证和清理，包括数据判空校验、数据过滤等，确保数据的质量和一致性。</li>
+</ul>
+<ol>
+<li><strong>异常处理：</strong></li>
+</ol>
+<ul>
+<li>防腐层可以在远程调用时对异常进行处理记录，避免远程调用失败造成整个方法都失败。</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/image-20240908123737897.png" alt="image-20240908123737897"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
       
     </div>
-  </div>
-  
-  
+    
 
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/privatePost/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
   
+   
+  
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
     <ul>
       <li>
         Copyrights &copy;
-        2023-2024
+        2023-2025
         <i class="ri-heart-fill heart_icon"></i> RXQ
       </li>
     </ul>

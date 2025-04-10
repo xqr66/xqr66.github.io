@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>实习常用操作总结 |  Xiuqing Ran&#39;s Code Journal</title>
+      <title>Optional使用分析 |  Xiuqing Ran&#39;s Code Journal</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -56,8 +56,8 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-实习常用操作总结"
-  class="article article-type-post"
+  id="page-"
+  class="article article-type-page"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
@@ -67,130 +67,69 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  实习常用操作总结
+  Optional使用分析
 </h1>
  
 
       
     </header>
-     
-    <div class="article-meta">
-      <a href="/2024/06/10/%E5%AE%9E%E4%B9%A0%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" class="article-date">
-  <time datetime="2024-06-10T12:22:12.000Z" itemprop="datePublished">2024-06-10</time>
-</a>   
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">1k</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">3 min</span>
-        </span>
-    </span>
-</div>
- 
-    </div>
-      
-    <div class="tocbot"></div>
-
-
-
-
-  
+       
     <div class="article-entry" itemprop="articleBody">
        
-  <p>本人在此文档中总结沉淀一些在实习过程中，开发常见的操作</p>
-<h3 id="本地Fat环境Test启动"><a href="#本地Fat环境Test启动" class="headerlink" title="本地Fat环境Test启动"></a>本地Fat环境Test启动</h3><p>⚠️本质上可以看做是连入fat环境的单元测试，适合自测，必须要extends BaseTest</p>
+  <h1 id="使用背景"><a href="#使用背景" class="headerlink" title="使用背景"></a>使用背景</h1><p>Optional主要用于优雅处理处理一系列的判空、避免三目运算符NPE问题。</p>
+<p>三目运算符NPE问题：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/757443">《新版Java开发手册》提到的三目运算符的空指针问题到底是个怎么回事？-阿里云开发者社区</a></p>
+<p>一系列判空伪代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="keyword">if</span> (p != <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="type">Address</span> <span class="variable">address</span> <span class="operator">=</span> p.getAddress();</span><br><span class="line">    <span class="keyword">if</span> (address != <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="type">Province</span> <span class="variable">province</span> <span class="operator">=</span> sddress.getProvince();</span><br><span class="line">        System.out.println(province.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NoSuchElementException</span>(); <span class="comment">//如果没找到就抛错</span></span><br></pre></td></tr></table></figure>
+
+<p>如果使用Optional：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Optional.ofNullable(<span class="keyword">new</span> <span class="title class_">Person</span>)</span><br><span class="line">.map(p -&gt; p.getAddress())</span><br><span class="line">.map(a -&gt; a.getProvince())</span><br><span class="line">.map(p -&gt; p.getName())</span><br><span class="line">.orElseThrow(NoSuchElementException::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，如果用了 Optional，代码里不需要判空的操作，即使 address 、province 为空的话，也不会产生空指针错误，这就是 Optional 带来的好处！</p>
+<h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><p>关于Optional，Java 语言架构师 Brian Goetz 是这么说的：</p>
+<p>Our intention was to provide a limited mechanism for library method return types where there needed to be a clear way to represent “no result”, and using null for such was overwhelmingly likely to cause errors.</p>
+<p>意思就是：Optional 可以给返回结果提供了一个表示无结果的值，而不是返回 null。</p>
+<p>简单理解下，Optional 其实就是一个壳，里面放着原先的值，至于这个值是不是 null 另说，反正拿到的这个壳肯定不是 null。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795015942-3df3bf9f-5eb9-4e54-a9d2-f9946d6401c7.png" alt="img"></p>
+<p>我认为 Optional 的好处在于可以简化平日里一系列判断 null 的操作，使得用起来的时候看着不需要判断 null，纵享丝滑，表现出来好像用 Optional 就不需要关心空指针的情况。</p>
+<p>而事实上是 Optional 在替我们负重前行，该有的判断它替我们完成了，而且用了 Optional 最后拿结果的时候还是小心的，盲目 get 一样会抛错。</p>
+<p>在使用的时候，一直有个疑问：</p>
 <ul>
-<li>设置堆大小：在设置中设置堆大小为1500，原本的堆太小会报OOM</li>
+<li>如果在 <code>p.getAddress()</code> 时拿不到值的话，你说是会继续执行<code>map(a -&gt; a.getProvince())</code> 还是直接跳到 <code>orElseThrow</code>? </li>
+<li>或者反过来如果 <code>map(p -&gt; p.getName())</code> 不为空，你说 <code>orElseThrow</code> 这个方法会不会执行？</li>
 </ul>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722047433846-4625bdf6-42ae-4e0d-be84-b49a4b04baaa.png" alt="img"></p>
+<p>接下来就来看下源码，看看 Optional 的实现机制。</p>
+<h1 id="Optional-源码"><a href="#Optional-源码" class="headerlink" title="Optional 源码"></a>Optional 源码</h1><p>Optional 的代码十分简短且简单，如果去掉注释，我估计就100来行。</p>
+<h4 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016155-27ce1696-28e3-4b9c-b8bc-14bd67a72940.png" alt="img"></p>
+<p>符合前面提到的：Optional 就是个壳，里面的 value 才是正主。并且内置了一个 EMPTY 对象，用来替换当 value 为 null 时候的壳。</p>
+<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p>现在看下上面演示的 map 方法，看看它的内部实现是如何让我们不需要做非空判断的。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016146-15811be1-7b4c-4072-bc23-c93238464eaf.png" alt="img"></p>
+<p>可以看到很简单，没几行代码，我把方法中的两个调用实现都贴上去，这样对着看应该会更清晰：</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016237-8a889bba-ae8c-45f1-9904-602d23b81bee.png" alt="img"></p>
 <ul>
-<li>网络设置：<strong>连上staff网络，并关闭VPN，否则在加载时会出现网络握手失败的问题</strong></li>
-<li><strong>test类继承BaseTest，其中会有启动的参数等，可以直接连接到Fat环境，可以自己mock数据，主要测试代码逻辑问题、最后以debug运行，就可以自测</strong></li>
+<li>先判断 value 是否为空，如果是空的话说明真正要是值是空的，此时直接返回一个 <code>empty()</code>，直接返回事先创建的空 Optional 。</li>
+<li>如果 value 不为空，那说明值是存在的，因此调用 mapper (就是上面我们写的 p.getAddress 之类的)来操作一波这个 value，并且用 <code>Optional.ofNullable</code> 包了一层，这个方法内部也看到了，如果 value 是空的话，也是返回空 Optional，否则就利用 of 包裹 value 成 Optional 返回。</li>
 </ul>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048218237-acc76ab7-645a-4981-a8ea-5c2071e399d5.png" alt="img"></p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048168525-cf0f5f5a-3de5-4ba4-be00-b01726b345d6.png" alt="img"></p>
-<h3 id="本地起服务"><a href="#本地起服务" class="headerlink" title="本地起服务"></a>本地起服务</h3><p>本地启动服务后你的电脑就相当于fat的一台服务器，可以接收到fat环境的请求，利用白小兔工具进行debug</p>
-<p>在README文件中，拷贝启动参数，最后一行是给你的机器打一个tag，比如现在tag就是rabbit，方便后续指定请求达到你机器上</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791713602-dcf13a27-c1e0-497c-97bf-8ebc899b4c58.png" alt="img"></p>
-<p>在启动类，edit configuration</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791749524-63d50c92-6d85-45ec-ae2c-807ec52ad03f.png" alt="img"></p>
-<p>找到add VM options，不同版本idea位置可能不同</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791824668-fdee3f2a-26f7-46be-a5d8-d512c96a803c.png" alt="img"></p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723791872896-3a3a0e4f-8912-45b7-8978-f2edae4e4a0b.png" alt="img"></p>
-<p>⚠️⚠️⚠️网络配置：在连接staff网络后，不要连接哈奇士VPN，否则可能报错</p>
-<p>此时，可以debug启动服务</p>
-<h3 id="白小兔远程调用："><a href="#白小兔远程调用：" class="headerlink" title="白小兔远程调用："></a>白小兔远程调用：</h3><p>进入白小兔后，选择要调用服务、接口、方法，自己组装参数后可以远程调用接口的方法，并获得返回结果</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792234651-fbacfa19-383f-42cf-8395-d06e692dfe4d.png" alt="img"></p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792267317-2ea6e607-b1a2-4d4f-91f6-f3be1a93e013.png" alt="img"></p>
-<p>我们可以利用本地起服务+白小兔，很方便进行dubug，在其他信息选择有rabbit TAG的机器，也就是我们本地启动的机器，</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792380295-531d98e2-22a1-4cff-b130-244e4f2c87c8.png" alt="img"></p>
-<p>然后再发请求，就能本地debug</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723792514000-6ee8f898-f203-4886-9479-5e75cd32b419.png" alt="img"></p>
-<h3 id="接口yapi、网关配置"><a href="#接口yapi、网关配置" class="headerlink" title="接口yapi、网关配置"></a>接口yapi、网关配置</h3><ul>
-<li>对外提供的接口需要再yapi中配置好请求、响应参数、action等</li>
-</ul>
-<p>可以参考其他人的接口进行配置</p>
-<p><a target="_blank" rel="noopener" href="https://yapi.hellobike.cn/project/4554/interface/api/343725">https://yapi.hellobike.cn/project/4554/interface/api/343725</a></p>
-<p><strong>需要关注接口路径，也就是action</strong></p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048679701-1c055e3b-3a63-4a20-9310-3ab4c971a611.png" alt="img"></p>
-<p>接着，去网关平台配置该action调用的接口方法，注意这里有三个网关，分别对应用户、后台、BosApp，按照接口使用者去对应的网关配置</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048763301-e4281f73-e6d3-41ba-95ea-f14b5e879990.png" alt="img"></p>
-<p>进入对应网关先进入后端服务列表，点击加锁，搜索服务，点击编辑后，添加自己的接口并发布</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722048942074-51ff552b-4f2b-4879-be31-af9ebd3bf1db.png" alt="img"></p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049010061-0a2ae2ac-a7a3-4cec-a5f6-c9cff3e63ef3.png" alt="img"></p>
-<p>接着到用户端接口列表添加接口方法与action之间的映射关系，至此已完成</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049133552-d4010351-6988-4b93-8a3d-235c9545c355.png" alt="img"></p>
-<h3 id="接口打包Jar提供给其他平台使用"><a href="#接口打包Jar提供给其他平台使用" class="headerlink" title="接口打包Jar提供给其他平台使用"></a>接口打包Jar提供给其他平台使用</h3><p>若其他服务调用我们接口是采用导包的形式引入，则我们需要变更服务的版本号</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049268018-c9f2973b-e116-413b-8bc3-10645fe46c61.png" alt="img"></p>
-<p>并在atlas上面发布新包,注意分支尽量选择ATLAS&#x2F;FAT_COMMON避免发生包覆盖、冲突</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049510802-c3930118-954e-4c3c-b0d3-9aa44b034169.png" alt="img"></p>
-<p>可在全局历史中查看包发布情况</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722049642888-9f15960f-5c9d-4c45-b358-07a1765acecf.png" alt="img"></p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721890640037-66a83665-8df3-42c1-a0cd-47c2c15b1203.png" alt="img"></p>
-<p>读取配置</p>
-<ol>
-<li>直接使用SpringBoot的@Value注解读取，格式为”${key:default}”, 其中key为你配置的key，default为默认值</li>
-</ol>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723779806921-5b761fcd-9c7d-4130-bee7-b990a8408a30.png" alt="img"></p>
-<ol>
-<li>在ApolloConfigUtils.java中配置开关和默认值</li>
-</ol>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1711354981244-8816a0cb-4ea3-4d87-815b-c6172e883359.png" alt="img"></p>
-<p>再通过ApolloConfigUtils获取开关的具体值</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1711357329619-8d52819b-5c06-409e-96cd-335da4ce3a70.png" alt="img"></p>
-<h3 id="apoll配置开关"><a href="#apoll配置开关" class="headerlink" title="apoll配置开关"></a>apoll配置开关</h3><p>进入atlas对应服务下配置中心，选择合适环境fat、uat、pre、pro，编辑application配置文件</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721890576283-b76510a6-cc98-4d5c-9d8a-b15253f4aa11.png" alt="img"></p>
-<p>添加配置，可以配置boolean、json等多种类型，</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721890640037-66a83665-8df3-42c1-a0cd-47c2c15b1203.png" alt="img"></p>
-<p>读取配置，直接使用SpringBoot的@Value注解读取，格式为”${key:default}”, 其中key为你配置的key，default为默认值</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723779806921-5b761fcd-9c7d-4130-bee7-b990a8408a30.png" alt="img"></p>
-<h3 id="诺亚配置灰度规则"><a href="#诺亚配置灰度规则" class="headerlink" title="诺亚配置灰度规则"></a>诺亚配置灰度规则</h3><p>到admin平台场景注册下新增场景</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722050039311-5c52df97-d01a-4c65-9ead-07a465fe8091.png" alt="img"></p>
-<p>接着到场景灰度配置找到刚刚注册的场景，配置灰度城市规则，这里可能需要找坤哥申请一下城市列表权限</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722050119583-49f22431-71a0-46b1-81f5-63c735697512.png" alt="img"></p>
-<h3 id="分库分表下查记录"><a href="#分库分表下查记录" class="headerlink" title="分库分表下查记录"></a>分库分表下查记录</h3><p>由于数据量大，分库分表后我们要查一条记录，需要知道记录在哪个库、哪个表</p>
-<ul>
-<li><strong>推荐方式：直接在智能存储平台逻辑库表查询，不需要查分库分表</strong></li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://hdbs.hellobike.cn/#/workbench?key=bos_task_center_sharding_sharding&sidebar=dbtree">https://hdbs.hellobike.cn/#/workbench?key=bos_task_center_sharding_sharding&amp;sidebar=dbtree</a></p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1723794103520-1d3ba6bd-9cc5-48f9-90d5-7e308526e577.png" alt="img"></p>
-<ul>
-<li>老方式：在admin平台查询库、表号</li>
-</ul>
-<p>1使用分库分表工具：<a target="_blank" rel="noopener" href="https://fat-admin.hellobike.cn/#/beacon/testZhou">https://fat-admin.hellobike.cn/#/beacon/testZhou</a><br>a输入taskGuid 找到分库分表的位置<br>b数据库编号是7，表编号是23</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1712842169114-4187e5c8-935d-40e5-aa61-806b0b4c3e93.webp" alt="img"></p>
-<p>2在数据库中查询想要的数据</p>
-<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1712842446202-e9359b3c-a275-470a-8f16-8f783c5dc02d.webp" alt="img"></p>
+<p><strong>因此，不论Optional 里面到底有没有值，map 都能处理！如果你是空，我就返回空 Optional ，如果你有值，就包裹成 Optional 返回，反正不论怎样，调用 map 的返回值都会是一个 Optional，而不是 null，所以执行时不会产生空指针的情况。</strong></p>
+<p>还记得上面的提问吗？结合 map 的源码，现在来回答下上面的问题，看注释：</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016175-99da5f17-596c-4d0f-b31d-dde2c073e422.png" alt="img"></p>
+<p>截个 <code>orElseThrow</code> 的实现，就是判断下 value ，如果是 null 就抛错。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016411-40312e9a-24db-4a94-b1e0-f0c96eb063c4.png" alt="img"></p>
+<p>结合源码我们知道了答案：即使 <code>Optional.ofNullable</code> 返回的是空 Optional ，下面的 map 逻辑还是会执行，不会因为中间得到空值而直接跳到<code>orElseThrow</code>执行，这和我们平日知晓的 if else 逻辑不太一样，不为空<code>orElseThrow</code>也一样会执行，就是判断 <code>value!= null</code>然后直接返回 value 的值了。</p>
+<h4 id="orElseGet-VS-orElse"><a href="#orElseGet-VS-orElse" class="headerlink" title="orElseGet VS orElse"></a>orElseGet VS orElse</h4><p>Optional 里有 orElseGet  和 orElse 这两个看起来挺相似的方法，都是处理当值为 null 时的兜底逻辑。在一些文章上看到说用 orElseGet 不要用 orElse ，因为在 Optional 有值时候 orElse 仍然会调用方法，所以后者性能比较差。其实从上面分析我们知道不论 Optional 是否有值，orElse 和 orElseGet  都会被执行，所以是怎么回事呢？</p>
+<p>看下这个代码：</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016607-e62bb674-8403-425b-9422-ad867ba7bb88.png" alt="img"></p>
+<p>这样看来 orElse 确实性能会差</p>
+<p>看下源码。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016546-941ddc02-f238-425e-bb31-e3e92e32c708.png" alt="img"></p>
+<p>可以看到两者的入参不同，一个就是普通参数，一个是 Supplier。我们已经得知不论<code>Optional.ofNullable</code> 返回的是否是空 Optional，下面的逻辑还是会执行，所以 orElse 和 orElseGet 这两个方法无论如何都会执行。</p>
+<p>因此 orElse(createYes()) 会被执行，在参数入栈之前，执行了 createYes 方法得到结果，然后入栈，而 orElseGet 的参数是 Supplier，所以直接入栈，然后在调用 other.get 的时候，createYes 方法才会被触发执行，这就是两者的区别之处。</p>
+<p>所以才会造成上面表现出的性能问题，也不是有些文章说的 Optional 有值 orElse 也会被执行而 orElseGet 不会执行这样不准确的说法。</p>
+<h4 id="of-VS-ofNullable"><a href="#of-VS-ofNullable" class="headerlink" title="of VS ofNullable"></a>of VS ofNullable</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016593-ea666b16-96c3-4e04-8425-79730008ff9c.png" alt="img"></p>
+<h4 id="isPresent-VS-ifPresent-Consumer-consumer"><a href="#isPresent-VS-ifPresent-Consumer-consumer" class="headerlink" title="isPresent() VS ifPresent(Consumer&lt;? super T&gt; consumer)"></a>isPresent() VS ifPresent(Consumer&lt;? super T&gt; consumer)</h4><p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016667-f3b5f96f-51ae-43fd-9a2b-826a513d0512.png" alt="img"></p>
+<h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><p>这个方法要小心，如果没做好判断，直接调用，当是空 Optional 时会抛错的。</p>
+<p><img src="/./../../imgs/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/1723795016758-03896d9f-468e-466b-88b5-e98a0415a0a5.png" alt="img"></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37840993/article/details/116120837">JAVA 中的Optional类理解、学习与使用_java的optional类-CSDN博客</a></p>
  
       <!-- reward -->
       
@@ -261,7 +200,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/06/10/%E5%AE%9E%E4%B9%A0%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/privatePost/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -270,37 +209,9 @@
   </div>
 
    
-  <nav class="article-nav">
-    
-      <a href="/2024/07/20/%E5%AE%9E%E4%B9%A0%E6%94%B6%E8%8E%B7/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            实习收获
-          
-        </div>
-      </a>
-    
-    
-      <a href="/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Optional使用分析</div>
-      </a>
-    
-  </nav>
-
   
    
   
-   
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
-    <div id="twikoo" class="twikoo"></div>
-    <script>
-        twikoo.init({
-            envId: ""
-        })
-    </script>
- 
 </article>
 
 </section>
@@ -309,7 +220,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2023-2024
+        2023-2025
         <i class="ri-heart-fill heart_icon"></i> RXQ
       </li>
     </ul>
@@ -431,22 +342,6 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
- 
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  tocbot.init({
-    tocSelector: ".tocbot",
-    contentSelector: ".article-entry",
-    headingSelector: "h1, h2, h3, h4, h5, h6",
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer: "main",
-    positionFixedSelector: ".tocbot",
-    positionFixedClass: "is-position-fixed",
-    fixedSidebarOffset: "auto",
-  });
-</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

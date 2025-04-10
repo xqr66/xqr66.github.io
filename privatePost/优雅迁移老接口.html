@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Archives: 2024/5 |  Xiuqing Ran&#39;s Code Journal</title>
+      <title>优雅迁移老接口 |  Xiuqing Ran&#39;s Code Journal</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -55,101 +55,131 @@
       
     <main class="content on">
       <section class="outer">
-  
-  
-  <article class="articles">
+  <article
+  id="page-"
+  class="article article-type-page"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-    
-    <h1 class="page-type-title">2024/5</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2024" class="archive-year">2024</a>
-    </div>
-    <div class="archives">
-      
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/" class="archive-article-date">
-  <time datetime="2024-05-19T14:01:12.000Z" itemprop="datePublished">05/19</time>
-</a>
+    <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/05/19/Optional%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90/"
-    >Optional使用分析</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  优雅迁移老接口
+</h1>
  
 
-    </header>
-    
-    
-  </div>
-</article>
       
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/19/%E4%BC%98%E9%9B%85%E8%BF%81%E7%A7%BB%E8%80%81%E6%8E%A5%E5%8F%A3/" class="archive-article-date">
-  <time datetime="2024-05-19T14:01:12.000Z" itemprop="datePublished">05/19</time>
-</a>
+    </header>
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/05/19/%E4%BC%98%E9%9B%85%E8%BF%81%E7%A7%BB%E8%80%81%E6%8E%A5%E5%8F%A3/"
-    >优雅迁移老接口</a> 
-</h2>
- 
-
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2024/05/19/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%92%8C%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/" class="archive-article-date">
-  <time datetime="2024-05-19T14:01:12.000Z" itemprop="datePublished">05/19</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/2024/05/19/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E5%92%8C%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/"
-    >配置中心与本地缓存了解</a> 
-</h2>
+  <h1 id="API服务车基接口迁移"><a href="#API服务车基接口迁移" class="headerlink" title="API服务车基接口迁移"></a>API服务车基接口迁移</h1><p>此处为语雀内容卡片，点击链接查看：<a target="_blank" rel="noopener" href="https://hellobike.yuque.com/qnwdg4/ppgvq0/vgkfa4g5xgrhig76">https://hellobike.yuque.com/qnwdg4/ppgvq0/vgkfa4g5xgrhig76</a></p>
+<h3 id="基本流程："><a href="#基本流程：" class="headerlink" title="基本流程："></a>基本流程：</h3><p>用两个开关来控制数据比对和新接口切换</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1721975978979-8e61417c-7573-43c0-929c-91031648cdc3.jpeg" alt="1721975978979-8e61417c-7573-43c0-929c-91031648cdc3"></p>
+<h3 id="开关设置"><a href="#开关设置" class="headerlink" title="开关设置"></a>开关设置</h3><p>开关采用的是Json格式，其中包含两个集合，分别是要进行数据比对的接口、要进行接口切换的接口</p>
+<p>相比于直接使用两个Boolean类型的开关，使用Json的优势：</p>
+<ul>
+<li>仅需要一个配置，集中管理开关情况</li>
+<li>对各个方法都可以单独的进行数据比对、接口迁移的开关，只需要在Josn的对应集合中添加&#x2F;删除接口名</li>
+</ul>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722672491456-a14501b4-cf5a-4710-94c5-9e3c82bf62f2.png" alt="img"></p>
+<p>将读取到的Json转化为对象，其中包含两个Set，方便判断是否存在xxx接口</p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/1722672785285-dcd898a1-7838-49e3-a128-6a0e9288def7.png" alt="img"></p>
+<p><img src="/./../../imgs/%E6%A8%A1%E6%9D%BF%20-%20%E5%89%AF%E6%9C%AC/image-20240908124059153.png" alt="image-20240908124059153"></p>
  
-
-    </header>
-    
-    
-  </div>
-</article>
+      <!-- reward -->
       
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
       
     </div>
-  </div>
-  
-  
+    
 
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/privatePost/%E4%BC%98%E9%9B%85%E8%BF%81%E7%A7%BB%E8%80%81%E6%8E%A5%E5%8F%A3.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
   
+   
+  
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
     <ul>
       <li>
         Copyrights &copy;
-        2023-2024
+        2023-2025
         <i class="ri-heart-fill heart_icon"></i> RXQ
       </li>
     </ul>
